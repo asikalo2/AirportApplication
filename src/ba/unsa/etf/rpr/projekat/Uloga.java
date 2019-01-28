@@ -1,4 +1,4 @@
 package ba.unsa.etf.rpr.projekat;
 
-public class Putnici {
+public class Uloga {
 }
