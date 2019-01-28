@@ -1,4 +1,4 @@
 package ba.unsa.etf.rpr.projekat;
 
-public class Uloga {
+public class User {
 }

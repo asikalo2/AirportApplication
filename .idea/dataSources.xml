@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="DataSourceManagerImpl" format="xml" multifile-model="true">
-    <data-source source="LOCAL" name="Aerodrom" uuid="61172443-da07-4f95-920b-c537d3577aaf">
+    <data-source source="LOCAL" name="Airport" uuid="788b26fe-617e-4267-9bd9-201cbe3fccb6">
       <driver-ref>sqlite.xerial</driver-ref>
       <synchronize>true</synchronize>
       <jdbc-driver>org.sqlite.JDBC</jdbc-driver>
-      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../rpr-projekat\Aerodrom</jdbc-url>
+      <jdbc-url>jdbc:sqlite:$PROJECT_DIR$/../rpr-projekat\Airport</jdbc-url>
       <driver-properties>
         <property name="enable_load_extension" value="true" />
       </driver-properties>
