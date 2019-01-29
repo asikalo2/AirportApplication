@@ -48,7 +48,7 @@ public class AirportDAO {
         }
         instance = null;
     }
-
+/*
     public ObservableList<Passenger> getPassengers() {
         ArrayList<Passenger> res = new ArrayList<>();
         try {
@@ -73,6 +73,113 @@ public class AirportDAO {
         }
         return null;
     }
+*/
+
+    private int highestIdAirline() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from airline_companies");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int highestIdAirplane() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from planes");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int highestIdFlights() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from flights");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int highestIdFlightTypes() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from flight_types");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int highestIdLuggage() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from luggages");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int highestIdPassenger() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from passengers");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int highestIdRole() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from roles");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+    private int highestIdUser() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from users");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
+
 
     private Boolean doesAirlineExist(int id) {
         try {
@@ -186,7 +293,6 @@ public class AirportDAO {
         return false;
     }
 
-    @Override
     public void deleteFlight(Flight flight) {
 
         try {
@@ -275,14 +381,14 @@ public class AirportDAO {
         }
     }
 
-    @Override
+
     public void addPassenger(Passenger passenger) {
 
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO passengers(id, name, flight) VALUES(?,?,?)");
             stmt.setInt(1, passenger.getId());
             stmt.setString(2, passenger.getName());
-            stmt.setString(3, passenger.getFlight().getId());
+            stmt.setInt(3, passenger.getFlight().getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -291,9 +397,10 @@ public class AirportDAO {
 
     }
 
-    @Override
     public void changePassenger(Passenger passenger) {
-        try {PreparedStatement stmt = conn.prepareStatement("UPDATE passengers SET id=?, name=? WHERE id=?");
+        try {
+
+            PreparedStatement stmt = conn.prepareStatement("UPDATE passengers SET id=?, name=? WHERE id=?");
 
             stmt.setInt(1, passenger.getId());
             stmt.setString(2, passenger.getName());
@@ -306,19 +413,6 @@ public class AirportDAO {
         }
 
     }
-
-    @Override
-    public void deletePassenger(Passenger passenger) {
-        try {
-            PreparedStatement stmt = conn.prepareStatement("DELETE FROM passengers WHERE id=?");
-            stmt.setInt(1, passenger.getId());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-
-    }
-
 
     public void close() {
         try {
