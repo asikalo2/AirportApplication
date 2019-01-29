@@ -5,16 +5,16 @@ public class Airplane {
     private Airline airline;
     private String manufacturer;
     private String type;
-    private int number_of_seats;
+    private int numberOfSeats;
 
     public Airplane(){}
 
-    public Airplane(int id, Airline airline, String manufacturer, String type, int number_of_seats) {
+    public Airplane(int id, Airline airline, String manufacturer, String type, int numberOfSeats) {
         this.id = id;
         this.airline = airline;
         this.manufacturer = manufacturer;
         this.type = type;
-        this.number_of_seats = number_of_seats;
+        this.numberOfSeats = numberOfSeats;
     }
 
     public int getId() {
@@ -41,12 +41,12 @@ public class Airplane {
         this.type = type;
     }
 
-    public int getNumber_of_seats() {
-        return number_of_seats;
+    public int getNumberOfSeats() {
+        return numberOfSeats;
     }
 
-    public void setNumber_of_seats(int number_of_seats) {
-        this.number_of_seats = number_of_seats;
+    public void setNumberOfSeats(int numberOfSeats) {
+        this.numberOfSeats = numberOfSeats;
     }
 
     public Airline getAirline() {

@@ -2,7 +2,6 @@ package ba.unsa.etf.rpr.projekat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
-import javafx.scene.control.DatePicker;
 
 import java.sql.*;
 import java.time.Instant;
@@ -82,6 +81,34 @@ public class AirportDAO {
         return null;
     }
 
+    public Airplane getPlaneById(int id){
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement("select * from planes join airline_companies " +
+                    "on planes.airline_company=airline_companies.id where planes.id = ?");
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            Airline airline = new Airline();
+            Airplane airplane = new Airplane();
+
+            while (rs.next()) {
+                airplane.setId(id);
+                airline.setId(rs.getInt(2));
+                airline.setName(rs.getString(7));
+                airline.setCode(rs.getString(8));
+                airplane.setAirline(airline);
+                airplane.setManufacturer(rs.getString(3));
+                airplane.setType(rs.getString(4));
+                airplane.setNumberOfSeats(rs.getInt(5));
+            }
+            return airplane;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public ObservableList<FlightType> getFlightTypes() {
         ArrayList<FlightType> res = new ArrayList<>();
         try {
@@ -97,23 +124,13 @@ public class AirportDAO {
         }
         return null;
     }
-    /*
-    public ObservableList<Flight> getFlights(ArrayList<Airplane> airplanes) {
+/*
+    public ObservableList<Flight> getFlights() {
         int i = 0;
         ArrayList<Flight> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from (select * from flights " +
-                    "join airline_companies, planes, flight_types, roles, users on \n" +
-                    "flights.airplane=planes.id and \n" +
-                    "planes.airline=airline_companies.id and \n" +
-                    "flights.flightType=flightType.id) join mjesto on\n" +
-                    "mjesto_prebivalista=mjesto.id;");
-
-            for(i=0; i<airplanes.size(); i++){
-                if(airplanes.get(i).getId().equals())
-            }
-                    ResultSet rs = stmt.executeQuery();
-            }
+            PreparedStatement stmt = conn.prepareStatement("select * from flights");
+            ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Airline airline = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3));
                 Airplane airplane = new Airplane(rs.getInt(1), airline, rs.getString(3),
@@ -125,9 +142,10 @@ public class AirportDAO {
                 LocalDate endOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
                         rs.getString(13))).atZone(ZoneId.systemDefault()).toLocalDate();
                 FlightType flightType = new FlightType(rs.getInt(1), rs.getString(2));
-                Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
-                startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
-                res.add(flight);
+                Flight flight = new Flight(rs.getInt(1), airplane, rs.getString(2),
+                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
+                res.add(flight)
+
             }
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
@@ -178,7 +196,7 @@ public class AirportDAO {
         ArrayList<Airplane> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from (select * from planes join airline_companies a " +
-                    "on planes.airline_company = a.id");
+                    "on planes.airline_company = a.id)");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Airline airline = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3));

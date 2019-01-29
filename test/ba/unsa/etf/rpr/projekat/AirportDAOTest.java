@@ -15,4 +15,12 @@ public class AirportDAOTest {
         assertEquals(2, 2);
         // Za sada samo ispis da vidim da li radi
     }
+
+    @Test
+    void getPlaneById() {
+        dao = new AirportDAO();
+        Airplane plane = dao.getPlaneById(1);
+        assertEquals(plane.getId(), 1);
+        assertEquals(plane.getAirline().getName(), "Lufthansa");
+    }
 }
