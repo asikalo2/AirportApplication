@@ -23,7 +23,7 @@ public class AirportDAO {
         conn = null;
 
         try {
-            String url = "jdbc:sqlite:AirportDB.db";
+            String url = "jdbc:sqlite:resources/AirportDB.db";
             conn = DriverManager.getConnection(url);
 
         } catch (SQLException ex) {
@@ -97,8 +97,9 @@ public class AirportDAO {
         }
         return null;
     }
-/*
-    public ObservableList<Flight> getFlights() {
+    /*
+    public ObservableList<Flight> getFlights(ArrayList<Airplane> airplanes) {
+        int i = 0;
         ArrayList<Flight> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from (select * from flights " +
@@ -107,7 +108,12 @@ public class AirportDAO {
                     "planes.airline=airline_companies.id and \n" +
                     "flights.flightType=flightType.id) join mjesto on\n" +
                     "mjesto_prebivalista=mjesto.id;");
-            ResultSet rs = stmt.executeQuery();
+
+            for(i=0; i<airplanes.size(); i++){
+                if(airplanes.get(i).getId().equals())
+            }
+                    ResultSet rs = stmt.executeQuery();
+            }
             while (rs.next()) {
                 Airline airline = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3));
                 Airplane airplane = new Airplane(rs.getInt(1), airline, rs.getString(3),
@@ -128,8 +134,8 @@ public class AirportDAO {
             ex.printStackTrace();
         }
         return null;
-    }
-
+    }*/
+/*
     public ObservableList<Luggage> getLuggages() {
         ArrayList<Luggage> res = new ArrayList<>();
         try {
@@ -154,7 +160,7 @@ public class AirportDAO {
         ArrayList<User> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from (select * from users join roles r " +
-                    "on users.role = r.id");
+                    "on users.role = r.id)");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Role ro = new Role(rs.getInt(1), rs.getString(2));
@@ -524,7 +530,8 @@ public class AirportDAO {
         }
     }
 
-    public void addPassenger(Passenger passenger) {
+    public void addPassenger(Passenger passenger)
+    {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO passengers(id, name, flight) VALUES(?,?,?)");
             stmt.setInt(1, passenger.getId());

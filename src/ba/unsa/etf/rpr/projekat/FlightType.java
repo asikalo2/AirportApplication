@@ -11,6 +11,10 @@ public class FlightType {
         this.name = name;
     }
 
+    public String toString() {
+        return this.id + " " + this.name;
+    }
+
     public int getId() {
         return id;
     }
