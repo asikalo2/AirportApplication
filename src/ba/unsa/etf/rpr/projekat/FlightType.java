@@ -4,6 +4,8 @@ public class FlightType {
     private int id;
     private String name;
 
+    public FlightType(){}
+
     public int getId() {
         return id;
     }

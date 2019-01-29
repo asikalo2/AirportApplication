@@ -3,7 +3,9 @@ package ba.unsa.etf.rpr.projekat;
 public class Passenger {
     private int id;
     private String name;
-    private int flight;
+    private Flight flight;
+
+    public Passenger(){}
 
     public int getId() {
         return id;
@@ -21,11 +23,11 @@ public class Passenger {
         this.name = name;
     }
 
-    public int getFlight() {
+    public Flight getFlight() {
         return flight;
     }
 
-    public void setFlight(int flight) {
+    public void setFlight(Flight flight) {
         this.flight = flight;
     }
 }

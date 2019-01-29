@@ -3,7 +3,11 @@ package ba.unsa.etf.rpr.projekat;
 public class User {
     private int id;
     private String name;
-    private int role;
+    private Role role;
+
+
+    public User() {
+    }
 
     public int getId() {
         return id;
@@ -21,11 +25,11 @@ public class User {
         this.name = name;
     }
 
-    public int getRole() {
+    public Role getRole() {
         return role;
     }
 
-    public void setRole(int role) {
+    public void setRole(Role role) {
         this.role = role;
     }
 }

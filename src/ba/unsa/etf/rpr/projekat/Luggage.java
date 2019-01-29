@@ -2,7 +2,9 @@ package ba.unsa.etf.rpr.projekat;
 
 public class Luggage {
     private int id;
-    private int passenger;
+    private Passenger passenger;
+
+    public Luggage(){}
 
     public int getId() {
         return id;
@@ -12,11 +14,11 @@ public class Luggage {
         this.id = id;
     }
 
-    public int getPassenger() {
+    public Passenger getPassenger() {
         return passenger;
     }
 
-    public void setPassenger(int passenger) {
+    public void setPassenger(Passenger passenger) {
         this.passenger = passenger;
     }
 }

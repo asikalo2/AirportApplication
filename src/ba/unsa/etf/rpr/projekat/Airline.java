@@ -5,6 +5,8 @@ public class Airline {
     private String name;
     private String code;
 
+    public Airline(){}
+
     public int getId() {
         return id;
     }

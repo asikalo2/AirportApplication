@@ -2,10 +2,12 @@ package ba.unsa.etf.rpr.projekat;
 
 public class Airplane {
     private int id;
-    private int airline;
+    private Airline airline;
     private String manufacturer;
     private String type;
     private int number_of_seats;
+
+    public Airplane(){}
 
     public int getId() {
         return id;
@@ -13,14 +15,6 @@ public class Airplane {
 
     public void setId(int id) {
         this.id = id;
-    }
-
-    public int getAirline() {
-        return airline;
-    }
-
-    public void setAirline(int airline) {
-        this.airline = airline;
     }
 
     public String getManufacturer() {
@@ -45,5 +39,13 @@ public class Airplane {
 
     public void setNumber_of_seats(int number_of_seats) {
         this.number_of_seats = number_of_seats;
+    }
+
+    public Airline getAirline() {
+        return airline;
+    }
+
+    public void setAirline(Airline airline) {
+        this.airline = airline;
     }
 }
