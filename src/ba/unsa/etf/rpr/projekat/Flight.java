@@ -14,6 +14,17 @@ public class Flight {
     public Flight(){
     }
 
+    public Flight(int id, Airplane airplane, String code, DatePicker startOfUsingTheRunway,
+                  DatePicker endOfUsingTheRunway, FlightType flightType, User user) {
+        this.id = id;
+        this.airplane = airplane;
+        this.code = code;
+        this.startOfUsingTheRunway = startOfUsingTheRunway;
+        this.endOfUsingTheRunway = endOfUsingTheRunway;
+        this.flightType = flightType;
+        this.user = user;
+    }
+
     public int getId() {
         return id;
     }

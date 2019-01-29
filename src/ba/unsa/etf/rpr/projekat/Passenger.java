@@ -7,6 +7,12 @@ public class Passenger {
 
     public Passenger(){}
 
+    public Passenger(int id, String name, Flight flight) {
+        this.id = id;
+        this.name = name;
+        this.flight = flight;
+    }
+
     public int getId() {
         return id;
     }

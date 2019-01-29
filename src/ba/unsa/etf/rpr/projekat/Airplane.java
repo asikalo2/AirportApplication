@@ -9,6 +9,14 @@ public class Airplane {
 
     public Airplane(){}
 
+    public Airplane(int id, Airline airline, String manufacturer, String type, int number_of_seats) {
+        this.id = id;
+        this.airline = airline;
+        this.manufacturer = manufacturer;
+        this.type = type;
+        this.number_of_seats = number_of_seats;
+    }
+
     public int getId() {
         return id;
     }

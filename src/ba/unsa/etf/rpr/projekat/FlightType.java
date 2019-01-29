@@ -6,6 +6,11 @@ public class FlightType {
 
     public FlightType(){}
 
+    public FlightType(int id, String name) {
+        this.id = id;
+        this.name = name;
+    }
+
     public int getId() {
         return id;
     }

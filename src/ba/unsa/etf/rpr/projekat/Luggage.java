@@ -6,6 +6,11 @@ public class Luggage {
 
     public Luggage(){}
 
+    public Luggage(int id, Passenger passenger) {
+        this.id = id;
+        this.passenger = passenger;
+    }
+
     public int getId() {
         return id;
     }
