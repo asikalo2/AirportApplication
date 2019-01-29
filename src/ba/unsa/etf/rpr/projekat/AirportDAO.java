@@ -545,7 +545,7 @@ public class AirportDAO {
             stmt.setInt(1, passenger.getId());
             stmt.setString(2, passenger.getName());
             stmt.setInt(3, passenger.getFlight().getId());
-            stmt.setInt(4, passenger.getId());
+          //  stmt.setInt(4, passenger.getId());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
