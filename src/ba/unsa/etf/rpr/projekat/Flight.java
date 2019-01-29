@@ -2,20 +2,22 @@ package ba.unsa.etf.rpr.projekat;
 
 import javafx.scene.control.DatePicker;
 
+import java.time.LocalDate;
+
 public class Flight {
     private int id;
     private Airplane airplane;
     private String code;
-    private DatePicker startOfUsingTheRunway;
-    private DatePicker endOfUsingTheRunway;;
+    private LocalDate startOfUsingTheRunway;
+    private LocalDate endOfUsingTheRunway;
     private FlightType flightType;
     private User user;
 
     public Flight(){
     }
 
-    public Flight(int id, Airplane airplane, String code, DatePicker startOfUsingTheRunway,
-                  DatePicker endOfUsingTheRunway, FlightType flightType, User user) {
+    public Flight(int id, Airplane airplane, String code, LocalDate startOfUsingTheRunway,
+                  LocalDate endOfUsingTheRunway, FlightType flightType, User user) {
         this.id = id;
         this.airplane = airplane;
         this.code = code;
@@ -42,19 +44,19 @@ public class Flight {
         this.code = code;
     }
 
-    public DatePicker getStartOfUsingTheRunway() {
+    public LocalDate getStartOfUsingTheRunway() {
         return startOfUsingTheRunway;
     }
 
-    public void setStartOfUsingTheRunway(DatePicker startOfUsingTheRunway) {
+    public void setStartOfUsingTheRunway(LocalDate startOfUsingTheRunway) {
         this.startOfUsingTheRunway = startOfUsingTheRunway;
     }
 
-    public DatePicker getEndOfUsingTheRunway() {
+    public LocalDate getEndOfUsingTheRunway() {
         return endOfUsingTheRunway;
     }
 
-    public void setEndOfUsingTheRunway(DatePicker endOfUsingTheRunway) {
+    public void setEndOfUsingTheRunway(LocalDate endOfUsingTheRunway) {
         this.endOfUsingTheRunway = endOfUsingTheRunway;
     }
 
