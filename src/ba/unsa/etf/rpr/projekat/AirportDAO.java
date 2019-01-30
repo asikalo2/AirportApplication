@@ -25,7 +25,7 @@ public class AirportDAO {
         conn = null;
 
         try {
-            String url = "jdbc:sqlite:resources/AirportDB.db";
+            String url = "jdbc:sqlite:AirportDB.db";
             conn = DriverManager.getConnection(url);
 
         } catch (SQLException ex) {
@@ -154,7 +154,6 @@ public class AirportDAO {
     }
 
     public ObservableList<Flight> getFlights() {
-        int i = 0;
         ArrayList<Flight> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types on " +
@@ -265,39 +264,26 @@ public class AirportDAO {
         }
         return null;
     }
-/*
+
     public ObservableList<Passenger> getPassengers() {
         ArrayList<Passenger> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from (select * from vozilo join proizvodjac, vlasnik, mjesto on \n" +
-                    "vozilo.proizvodjac=proizvodjac.id and \n" +
-                    "vozilo.vlasnik=vlasnik.id and \n" +
-                    "vlasnik.mjesto_rodjenja=mjesto.id) join mjesto on\n" +
-                    "mjesto_prebivalista=mjesto.id;");
-
-            PreparedStatement stmt = conn.prepareStatement("select * from (select * from passengers join flights, " +
-                    "airline_companies, planes, flight_types, flights, luggages, roles, users on " +
-                    "passengers.flight = flights.id and \n" +
-                    "f");
+            PreparedStatement stmt = conn.prepareStatement("select * from passengers");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Airline airline = new Airline();
-                Airplane airplane = new Airplane();
-                FlightType flightType = new FlightType();
-                Luggage luggage = new Luggage();
-                Role role = new Role();
-                User user = new User();
-                Flight flight = new Flight(rs.getInt(3));
-                Passenger passenger = new Passenger(rs.getInt(1), rs.getString(2),
-                        flight);
+                Image img = new Image(new ByteArrayInputStream(rs.getBytes(4)));
+                Flight flight = getFlightById(rs.getInt(3));
+                Passenger passenger = new Passenger(rs.getInt(1),rs.getString(2), flight,
+                        img);
                 res.add(passenger);
+
             }
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
-    }*/
+    }
 
     private int highestIdAirline() {
         try {
