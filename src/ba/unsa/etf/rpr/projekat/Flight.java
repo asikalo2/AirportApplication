@@ -6,8 +6,8 @@ import java.time.LocalDate;
 
 public class Flight {
     private int id;
-    private Airplane airplane;
     private String code;
+    private Airplane airplane;
     private LocalDate startOfUsingTheRunway;
     private LocalDate endOfUsingTheRunway;
     private FlightType flightType;
@@ -16,7 +16,7 @@ public class Flight {
     public Flight(){
     }
 
-    public Flight(int id, Airplane airplane, String code, LocalDate startOfUsingTheRunway,
+    public Flight(int id, String code, Airplane airplane, LocalDate startOfUsingTheRunway,
                   LocalDate endOfUsingTheRunway, FlightType flightType, User user) {
         this.id = id;
         this.airplane = airplane;

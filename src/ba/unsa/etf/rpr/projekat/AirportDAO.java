@@ -3,6 +3,7 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 
+import javax.jws.soap.SOAPBinding;
 import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -113,7 +114,7 @@ public class AirportDAO {
 
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from users join roles " +
-                    "on users.role = roles.id; where planes.id = ?");
+                    "on users.role = roles.id where users.id = ?");
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -175,27 +176,25 @@ public class AirportDAO {
         }
         return null;
     }
-/*
+
     public ObservableList<Flight> getFlights() {
         int i = 0;
         ArrayList<Flight> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from flights");
+            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types on " +
+                    "flights.flight_type=flight_types.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Airline airline = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3));
-                Airplane airplane = new Airplane(rs.getInt(1), airline, rs.getString(3),
-                        rs.getString(4), rs.getInt(5));
-                Role role = new Role(rs.getInt(1), rs.getString(2));
-                User user = new User(rs.getInt(1), rs.getString(2), role);
+                Airplane airplane = getPlaneById(rs.getInt(3));
+                User user = getUserById(rs.getInt(7));
                 LocalDate startOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
-                        rs.getString(13))).atZone(ZoneId.systemDefault()).toLocalDate();
+                        rs.getString(4))).atZone(ZoneId.systemDefault()).toLocalDate();
                 LocalDate endOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
-                        rs.getString(13))).atZone(ZoneId.systemDefault()).toLocalDate();
-                FlightType flightType = new FlightType(rs.getInt(1), rs.getString(2));
-                Flight flight = new Flight(rs.getInt(1), airplane, rs.getString(2),
+                        rs.getString(5))).atZone(ZoneId.systemDefault()).toLocalDate();
+                FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
+                Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
                         startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
-                res.add(flight)
+                res.add(flight);
 
             }
             return FXCollections.observableArrayList(res);
@@ -203,15 +202,12 @@ public class AirportDAO {
             ex.printStackTrace();
         }
         return null;
-    }*/
+    }
 /*
     public ObservableList<Luggage> getLuggages() {
         ArrayList<Luggage> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from (select * from luggages join passengers p," +
-                    "" +
-                    "" +
-                    "on luggages.passenger = p.id");
+            PreparedStatement stmt = conn.prepareStatement("select * from                     "on luggages.passenger = p.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Passenger p = new Passenger(rs.getInt(2), rs.getString());
@@ -599,19 +595,105 @@ public class AirportDAO {
         }
     }
 
-    public void addPassenger(Passenger passenger)
+    public void addUser(User user)
     {
         try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO passengers(id, name, flight) VALUES(?,?,?)");
-            stmt.setInt(1, passenger.getId());
-            stmt.setString(2, passenger.getName());
-            stmt.setInt(3, passenger.getFlight().getId());
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO users(id, name, role) VALUES(?,?,?)");
+            stmt.setInt(1, user.getId());
+            stmt.setString(2, user.getName());
+            stmt.setInt(3, user.getRole().getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
 
+    public void addAirplane(Airplane airplane)
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO planes(id, airline_company," +
+                    "supplier, type, seats) VALUES(?,?,?,?,?)");
+            stmt.setInt(1, airplane.getId());
+            stmt.setInt(2, airplane.getAirline().getId());
+            stmt.setString(3, airplane.getManufacturer());
+            stmt.setString(4, airplane.getType());
+            stmt.setInt(5, airplane.getNumberOfSeats());
 
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addAirline(Airline airline)
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO airline_companies(id, name, code) VALUES(?,?,?)");
+            stmt.setInt(1, airline.getId());
+            stmt.setString(2, airline.getName());
+            stmt.setString(3, airline.getCode());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addLuggage(Luggage luggage)
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO luggages(id, passenger) VALUES(?,?)");
+            stmt.setInt(1, luggage.getId());
+            stmt.setInt(2, luggage.getPassenger().getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addFlightType(FlightType flightType)
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO flight_types(id, name) " +
+                    "VALUES(?,?)");
+            stmt.setInt(1, flightType.getId());
+            stmt.setString(2, flightType.getName());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addFlight(Flight flight)
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO flights (id,flight_number, plane, " +
+                    "runway_occupy_start, runway_occupy_end,flight_type,reg_user VALUES(?,?,?,?,?,?,?)");
+            stmt.setInt(1, flight.getId());
+            stmt.setString(2, flight.getCode());
+            stmt.setInt(3, flight.getAirplane().getId());
+            stmt.setString(4, String.valueOf(flight.getStartOfUsingTheRunway().atStartOfDay(
+                    ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setString(5, String.valueOf(flight.getEndOfUsingTheRunway().atStartOfDay(
+                    ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setInt(6, flight.getFlightType().getId());
+            stmt.setInt(7, flight.getUser().getId());
+
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addRole(Role role)
+    {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO roles(id, name) VALUES(?,?)");
+            stmt.setInt(1, role.getId());
+            stmt.setString(2, role.getName());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void changePassenger(Passenger passenger) {
@@ -623,6 +705,30 @@ public class AirportDAO {
             stmt.setInt(3, passenger.getFlight().getId());
           //  stmt.setInt(4, passenger.getId());
 
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+
+    }
+
+    public void addPassenger(Passenger passenger) {
+       /* if (vlasnik.getMjestoRodjenja().getId() == 0) {
+            vlasnik.getMjestoRodjenja().setId(dajNajveciIdMjesta() + 1);
+            dodajMjesto(vlasnik.getMjestoRodjenja());
+        }
+        if (vlasnik.getMjestoPrebivalista().getId() == 0) {
+            vlasnik.getMjestoPrebivalista().setId(dajNajveciIdMjesta() + 1);
+            dodajMjesto(vlasnik.getMjestoPrebivalista());
+        }*/
+        //vlasnik.setId(dajNajveciIdVlasnika()+1);
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO passengers(id, name, flight, qr_code) \n" +
+                    "VALUES(?,?,?,?)");
+            stmt.setInt(1, passenger.getId());
+            stmt.setString(2, passenger.getName());
+            stmt.setInt(3, passenger.getFlight().getId());
+            stmt.setBytes(4, Utils.getByteArrayFromImage(passenger.getQrCode()));
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
