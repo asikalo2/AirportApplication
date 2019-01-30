@@ -49,11 +49,14 @@
                     </ToolBar>
                     <TableView fx:id="tableFlights" style="-fx-aligmnent: CENTER;">
                         <columns>
-                            <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
-                            <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
-                            <TableColumn fx:id="nazivModela1" prefWidth="200.0" text="Model"/>
-                            <TableColumn fx:id="brojSasijeColumn1" prefWidth="150.0" text="Broj Sasije"/>
-                            <TableColumn fx:id="brojRegColumn1" prefWidth="150.0" text="Registracija"/>
+                            <TableColumn fx:id="idFlight" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="airplaneFlight" prefWidth="180.0" text="Airplane"/>
+                            <TableColumn fx:id="codeFlight" prefWidth="200.0" text="Code"/>
+                            <TableColumn fx:id="startOfUsingTheRunwayFlight" prefWidth="150.0"
+                                         text="Start of using the runway"/>
+                            <TableColumn fx:id="endOfUsingTheRunwayFlight" prefWidth="150.0"
+                                         text="End of using the runway"/>
+                            <TableColumn fx:id="userFlight" prefWidth="150.0" text="User"/>
                         </columns>
                     </TableView>
                 </VBox>
@@ -72,11 +75,17 @@
                     </ToolBar>
                     <TableView fx:id="tabelaAirplanes" style="-fx-aligmnent: CENTER;">
                         <columns>
-                            <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
-                            <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
-                            <TableColumn fx:id="nazivModela1" prefWidth="200.0" text="Model"/>
-                            <TableColumn fx:id="brojSasijeColumn1" prefWidth="150.0" text="Broj Sasije"/>
-                            <TableColumn fx:id="brojRegColumn1" prefWidth="150.0" text="Registracija"/>
+
+                            private int id;
+                            private Airline airline;
+                            private String manufacturer;
+                            private String type;
+                            private int numberOfSeats;
+                            <TableColumn fx:id="idAirplane" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="airlineAirplane" prefWidth="180.0" text="Airline"/>
+                            <TableColumn fx:id="manufacturerAirplane" prefWidth="180.0" text="Manufacturer"/>
+                            <TableColumn fx:id="typeAirplane" prefWidth="200.0" text="Type"/>
+                            <TableColumn fx:id="numberOfSeatsAirplane" prefWidth="150.0" text="Number of seats"/>
                         </columns>
                     </TableView>
                 </VBox>
@@ -96,17 +105,14 @@
                     </ToolBar>
                     <TableView fx:id="tabelePassenger" style="-fx-aligmnent: CENTER;">
                         <columns>
-                            <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
-                            <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
-                            <TableColumn fx:id="nazivModela1" prefWidth="200.0" text="Model"/>
-                            <TableColumn fx:id="brojSasijeColumn1" prefWidth="150.0" text="Broj Sasije"/>
-                            <TableColumn fx:id="brojRegColumn1" prefWidth="150.0" text="Registracija"/>
+                            <TableColumn fx:id="idPassenger" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="namePassenger" prefWidth="180.0" text="Name"/>
                         </columns>
                     </TableView>
                 </VBox>
             </Tab>
 
-            <Tab text="Airlines" fx:id="airlinesTab">
+            <Tab text="Airlines" fx:id="airlineTab">
                 <VBox>
                     <ToolBar>
                         <items>
@@ -120,16 +126,75 @@
                     </ToolBar>
                     <TableView fx:id="tableAirline" style="-fx-aligmnent: CENTER;">
                         <columns>
-                            <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
-                            <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
-                            <TableColumn fx:id="nazivModela1" prefWidth="200.0" text="Model"/>
-                            <TableColumn fx:id="brojSasijeColumn1" prefWidth="150.0" text="Broj Sasije"/>
-                            <TableColumn fx:id="brojRegColumn1" prefWidth="150.0" text="Registracija"/>
+                            <TableColumn fx:id="idAirline" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="nameAirline" prefWidth="180.0" text="Name"/>
+                            <TableColumn fx:id="codeAirline" prefWidth="200.0" text="Code"/>
                         </columns>
                     </TableView>
                 </VBox>
             </Tab>
 
+            <Tab text="Flight Types" fx:id="flightTypeTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddFlightType" onAction="#addFlightType" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveFlightType" onAction="#removeFlightType" minWidth="50"/>
+                                <Button fx:id="tbEditFlightType" onAction="#editFlightType" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableFlightType" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idFT" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="nameFT" prefWidth="180.0" text="Flight type name"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Luggages" fx:id="luggageTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddLuggage" onAction="#addLuggage" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveLuggage" onAction="#removeLuggage" minWidth="50"/>
+                                <Button fx:id="tbEditLuggage" onAction="#editLuggage" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableLuggage" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idLuggage" prefWidth="50.0" text="Id"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Roles" fx:id="rolesTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddRole" onAction="#addRole" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveRole" onAction="#removeRole" minWidth="50"/>
+                                <Button fx:id="tbEditRole" onAction="#editRole" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableRole" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idRole" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="nameRole" prefWidth="180.0" text="Name"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
         </tabs>
     </TabPane>
 </VBox>
