@@ -2,8 +2,10 @@ package ba.unsa.etf.rpr.projekat;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.scene.image.Image;
 
 import javax.jws.soap.SOAPBinding;
+import java.io.ByteArrayInputStream;
 import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDate;
@@ -135,32 +137,6 @@ public class AirportDAO {
         return null;
     }
 
-  /*  public Passenger getPassengerById(int id){
-
-        try {
-            PreparedStatement stmt = conn.prepareStatement("select * from passengers join flights f " +
-                    "on passengers.flight = f.idairline_companies where passengers.id = ?");
-
-            stmt.setInt(1, id);
-            ResultSet rs = stmt.executeQuery();
-            Passenger passenger = new Passenger();
-            Flight flight = new Flight();
-
-            while (rs.next()) {
-                passenger.setId(id);
-                flight.setId(rs.getInt(2));
-                flight.setName(rs.getString(7));
-                flight.setCode(rs.getString(8));
-                passenger.setName(rs.getString(2));
-                passenger.setFlight(flight);
-            }
-            return passenger;
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }*/
-
     public ObservableList<FlightType> getFlightTypes() {
         ArrayList<FlightType> res = new ArrayList<>();
         try {
@@ -203,23 +179,55 @@ public class AirportDAO {
         }
         return null;
     }
-/*
+
+    public Flight getFlightById(int id){
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types on " +
+                    "flights.flight_type=flight_types.id where id=?");
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Airplane airplane = getPlaneById(rs.getInt(3));
+                User user = getUserById(rs.getInt(7));
+                LocalDate startOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
+                        rs.getString(4))).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDate endOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
+                        rs.getString(5))).atZone(ZoneId.systemDefault()).toLocalDate();
+                FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
+                Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
+                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
+                return flight;
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+
     public ObservableList<Luggage> getLuggages() {
         ArrayList<Luggage> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from                     "on luggages.passenger = p.id");
+            PreparedStatement stmt = conn.prepareStatement("select * from luggages join passengers p " +
+                    "on luggages.passenger = p.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Passenger p = new Passenger(rs.getInt(2), rs.getString());
-                Luggage l = new Luggage(rs.getInt(1), p);
-                res.add(l);
+                Image img = new Image(new ByteArrayInputStream(rs.getBytes(6)));
+                Flight flight = getFlightById(rs.getInt(5));
+                Passenger passenger = new Passenger(rs.getInt(3), rs.getString(4), flight,
+                        img);
+                Luggage luggage = new Luggage(rs.getInt(1), passenger);
+                res.add(luggage);
             }
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
-    }*/
+    }
 
     public ObservableList<User> getUsers() {
         ArrayList<User> res = new ArrayList<>();
