@@ -698,18 +698,109 @@ public class AirportDAO {
 
     public void changePassenger(Passenger passenger) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE passengers SET id=?, name=? WHERE id=?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE passengers SET id=?, name=?, flight=?," +
+                    "qr_code=? WHERE id=?");
 
-            stmt.setInt(1, passenger.getId());
-            stmt.setString(2, passenger.getName());
-            stmt.setInt(3, passenger.getFlight().getId());
-          //  stmt.setInt(4, passenger.getId());
+                stmt.setInt(1, passenger.getId());
+                stmt.setString(2, passenger.getName());
+                stmt.setInt(3, passenger.getFlight().getId());
+                stmt.setBytes(4, Utils.getByteArrayFromImage(passenger.getQrCode()));
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+    }
 
+    public void changeAirplane(Airplane airplane) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE planes SET id=?, airline_company=?," +
+                    "supplier=?, type=?, seats=? WHERE id=?");
+
+            stmt.setInt(1, airplane.getId());
+            stmt.setInt(2, airplane.getAirline().getId());
+            stmt.setString(3, airplane.getManufacturer());
+            stmt.setString(4, airplane.getType());
+            stmt.setInt(5, airplane.getNumberOfSeats());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
+    }
+    public void changeAirline(Airline airline) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE airline_companies SET id=?, name=?, code=? WHERE id=?");
 
+            stmt.setInt(1, airline.getId());
+            stmt.setString(2, airline.getName());
+            stmt.setString(3, airline.getCode());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void changeFlight(Flight flight) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE flights SET id=?, flight_number=?," +
+                    "plane=?, runway_occupy_start=?, runway_occupy_end=?, flight_type=?, reg_user=? WHERE id=?");
+
+            stmt.setInt(1, flight.getId());
+            stmt.setString(2, flight.getCode());
+            stmt.setInt(3, flight.getAirplane().getId());
+            stmt.setString(4, String.valueOf(flight.getStartOfUsingTheRunway().atStartOfDay(
+                    ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setString(5, String.valueOf(flight.getEndOfUsingTheRunway().atStartOfDay(
+                    ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setInt(6, flight.getFlightType().getId());
+            stmt.setInt(7, flight.getUser().getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void changeFlightType(FlightType flightType) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE flight_types SET id=?, name=? WHERE id=?");
+
+            stmt.setInt(1, flightType.getId());
+            stmt.setString(2, flightType.getName());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void changeLuggage(Luggage luggage) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE luggages SET id=?, passenger=? WHERE id=?");
+
+            stmt.setInt(1, luggage.getId());
+            stmt.setInt(2, luggage.getPassenger().getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void changeRole(Role role) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE roles SET id=?, name=? WHERE id=?");
+
+            stmt.setInt(1, role.getId());
+            stmt.setString(2, role.getName());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+    public void changeUser(User user) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE users SET id=?, name=?, role=? WHERE id=?");
+
+            stmt.setInt(1, user.getId());
+            stmt.setString(2, user.getName());
+            stmt.setInt(3, user.getRole().getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addPassenger(Passenger passenger) {
