@@ -23,7 +23,7 @@
     </fx:define>
     <MenuBar fx:id="menuBar">
         <menus>
-            <Menu text="Opcije" fx:id="menuOpcije">
+            <Menu text="Options" fx:id="menuOpcije">
                 <items>
                     <RadioMenuItem onAction="#postaviSQLite" text="SQLite" fx:id="menuDb" toggleGroup="$toggleGroup1"/>
                     <RadioMenuItem onAction="#postaviXML" text="XML" fx:id="menuXml" toggleGroup="$toggleGroup1"/>
@@ -35,41 +35,19 @@
     <TabPane maxWidth="Infinity" maxHeight="Infinity">
 
         <tabs>
-            <Tab text="Vlasnici" fx:id="vlasniciTab">
+            <Tab text="Flights" fx:id="flightsTab">
                 <VBox>
                     <ToolBar>
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddVlasnik" onAction="#addVlasnik" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveVlasnik" onAction="#removeVlasnik" minWidth="50"/>
-                                <Button fx:id="tbEditVlasnik" onAction="#editVlasnik" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddFlight" onAction="#addFlight" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveFlight" onAction="#removeFlight" minWidth="50"/>
+                                <Button fx:id="tbEditFlight" onAction="#editFlight" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
-                    <TableView fx:id="tabelaVlasnici" style="-fx-aligmnent: CENTER;">
-                        <columns>
-                            <TableColumn fx:id="idColumn" prefWidth="50.0" text="Id"/>
-                            <TableColumn fx:id="imeColumn" prefWidth="180.0" text="Ime"/>
-                            <TableColumn fx:id="prezimeColumn" prefWidth="250.0" text="Prezime"/>
-                            <TableColumn fx:id="jmbgColumn" prefWidth="200.0" text="JMBG"/>
-                        </columns>
-                    </TableView>
-                </VBox>
-            </Tab>
-            <Tab text="Vozila" fx:id="vozilaTab">
-                <VBox>
-                    <ToolBar>
-                        <items>
-                            <Region styleClass="spacer"/>
-                            <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddVozilo" onAction="#addVozilo" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveVozilo" onAction="#removeVozilo" minWidth="50"/>
-                                <Button fx:id="tbEditVozilo" onAction="#editVozilo" minWidth="50" styleClass="last"/>
-                            </HBox>
-                        </items>
-                    </ToolBar>
-                    <TableView fx:id="tabelaVozila" style="-fx-aligmnent: CENTER;">
+                    <TableView fx:id="tableFlights" style="-fx-aligmnent: CENTER;">
                         <columns>
                             <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
                             <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
@@ -80,6 +58,78 @@
                     </TableView>
                 </VBox>
             </Tab>
+            <Tab text="Airplanes" fx:id="airplanesTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddAirplane" onAction="#addAirplane" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveAirplane" onAction="#removeAirplane" minWidth="50"/>
+                                <Button fx:id="tbEditAirplane" onAction="#editAirplane" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tabelaAirplanes" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
+                            <TableColumn fx:id="nazivModela1" prefWidth="200.0" text="Model"/>
+                            <TableColumn fx:id="brojSasijeColumn1" prefWidth="150.0" text="Broj Sasije"/>
+                            <TableColumn fx:id="brojRegColumn1" prefWidth="150.0" text="Registracija"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Passengers" fx:id="passengersTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddPassenger" onAction="#addPassenger" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemovePassenger" onAction="#removePassenger" minWidth="50"/>
+                                <Button fx:id="tbEditPassenger" onAction="#editPassenger" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tabelePassenger" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
+                            <TableColumn fx:id="nazivModela1" prefWidth="200.0" text="Model"/>
+                            <TableColumn fx:id="brojSasijeColumn1" prefWidth="150.0" text="Broj Sasije"/>
+                            <TableColumn fx:id="brojRegColumn1" prefWidth="150.0" text="Registracija"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="Airlines" fx:id="airlinesTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddAirline" onAction="#addAirline" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveAirline" onAction="#removeAirline" minWidth="50"/>
+                                <Button fx:id="tbEditAirline" onAction="#editAirline" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableAirline" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idColumn1" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="nazivProizvodjacaColumn1" prefWidth="180.0" text="Naziv Proizvodjaca"/>
+                            <TableColumn fx:id="nazivModela1" prefWidth="200.0" text="Model"/>
+                            <TableColumn fx:id="brojSasijeColumn1" prefWidth="150.0" text="Broj Sasije"/>
+                            <TableColumn fx:id="brojRegColumn1" prefWidth="150.0" text="Registracija"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
         </tabs>
     </TabPane>
 </VBox>

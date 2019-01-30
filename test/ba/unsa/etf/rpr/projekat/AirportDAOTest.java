@@ -23,4 +23,13 @@ public class AirportDAOTest {
         assertEquals(plane.getId(), 1);
         assertEquals(plane.getAirline().getName(), "Lufthansa");
     }
+
+    @Test
+    void getUserById() {
+        dao = new AirportDAO();
+        User user = dao.getUserById(1);
+        assertEquals(user.getId(), 1);
+        assertEquals(user.getRole().getName(), "SomeRole");
+    }
+
 }

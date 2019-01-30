@@ -109,6 +109,57 @@ public class AirportDAO {
         return null;
     }
 
+    public User getUserById(int id){
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement("select * from users join roles " +
+                    "on users.role = roles.id; where planes.id = ?");
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            User user = new User();
+            Role role = new Role();
+
+            while (rs.next()) {
+                user.setId(id);
+                role.setId(rs.getInt(4));
+                role.setName(rs.getString(5));
+                user.setName(rs.getString(2));
+                user.setRole(role);
+            }
+            return user;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+  /*  public Passenger getPassengerById(int id){
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement("select * from passengers join flights f " +
+                    "on passengers.flight = f.idairline_companies where passengers.id = ?");
+
+            stmt.setInt(1, id);
+            ResultSet rs = stmt.executeQuery();
+            Passenger passenger = new Passenger();
+            Flight flight = new Flight();
+
+            while (rs.next()) {
+                passenger.setId(id);
+                flight.setId(rs.getInt(2));
+                flight.setName(rs.getString(7));
+                flight.setCode(rs.getString(8));
+                passenger.setName(rs.getString(2));
+                passenger.setFlight(flight);
+            }
+            return passenger;
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }*/
+
     public ObservableList<FlightType> getFlightTypes() {
         ArrayList<FlightType> res = new ArrayList<>();
         try {
