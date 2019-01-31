@@ -143,7 +143,7 @@ public class Controller implements Initializable {
 
         idUser.setCellValueFactory(new PropertyValueFactory("id"));
         nameUser.setCellValueFactory(new PropertyValueFactory("name"));
-        roleUser.setCellValueFactory(new PropertyValueFactory("role"));
+        roleUser.setCellValueFactory(new PropertyValueFactory("roleName"));
         tableUsers.setItems(listUsers);
     }
 
@@ -346,13 +346,67 @@ public class Controller implements Initializable {
     }
 
     public void removeFlight(ActionEvent actionEvent) {
+        Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
+        alert.setHeaderText("Deleting Flight");
+        alert.setContentText("Do you want to delete a flight?");
+
+        Optional<ButtonType> result = alert.showAndWait();
+        if (result.get() == ButtonType.OK){
+            if (tableFlights.getSelectionModel().getSelectedItems().size() == 0) {
+                Alert alertNew = new Alert(Alert.AlertType.ERROR);
+                alert.setHeaderText("Error!");
+                alert.setContentText("Deleting is not possible!");
+
+                alert.showAndWait();
+                return;
+            }
+            Flight flight = (Flight) tableFlights.getSelectionModel().getSelectedItem();
+
+            try {
+                dao.deleteFlight(flight);
+            }
+            catch (Exception ex) {
+                Alert alertError = new Alert(Alert.AlertType.ERROR);
+                alertError.setHeaderText("Deleting airplane");
+                alertError.setContentText(ex.getMessage());
+                alertError.showAndWait();
+                return;
+            }
+        } else {
+            // ... user chose CANCEL or closed the dialog
+        }
+        tableFlights.setItems(dao.getFlights());
     }
 
     public void editFlight(ActionEvent actionEvent) {
+        if (tableFlights.getSelectionModel().getSelectedItems() == null)
+            return;
+        Flight flight = (Flight) tableFlights.getSelectionModel().getSelectedItem();
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            FlightController flightController = new FlightController(dao, flight);
+            loader.setController(flightController);
+            loader.setLocation(getClass().getResource("/fxml/flight.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Flight");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableFlights.setItems(dao.getFlights());
+            });
+            stage.setOnHiding(event-> {
+                tableFlights.setItems(dao.getFlights());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addFlight(ActionEvent actionEvent) {
-   /*     try {
+        try {
             FXMLLoader loader = new FXMLLoader();
             FlightController flightController = new FlightController(dao, null);
             loader.setController(flightController);
@@ -371,7 +425,7 @@ public class Controller implements Initializable {
         }
         catch (IOException ex) {
             ex.printStackTrace();
-        }*/
+        }
     }
 
     public void removeFlightType(ActionEvent actionEvent) {
