@@ -22,15 +22,15 @@
     <children>
 
 
-        <Label fx:id="idLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"
+        <Label fx:id="idLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="ID"/>
 
-        <TextField fx:id="idField" GridPane.rowIndex="2" GridPane.columnIndex="1" maxWidth="Infinity"/>
+        <TextField fx:id="idField" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
 
-        <Label fx:id="nameLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"
+        <Label fx:id="nameLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="Name"/>
 
-        <TextField fx:id="nameField" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
+        <TextField fx:id="nameField" GridPane.rowIndex="2" GridPane.columnIndex="1" maxWidth="Infinity"/>
 
 
         <Label fx:id="codeLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"

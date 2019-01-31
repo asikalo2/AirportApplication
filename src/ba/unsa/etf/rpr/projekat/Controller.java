@@ -181,6 +181,26 @@ public class Controller {
     }
 
     public void addAirplane(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            AirplaneController airplaneController = new AirplaneController(dao, null);
+            loader.setController(airplaneController);
+            loader.setLocation(getClass().getResource("/fxml/airplane.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Airplane");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tabelaAirplanes.setItems(dao.getAirplanes());
+            });
+            stage.setOnHiding(event-> {
+                tabelaAirplanes.setItems(dao.getAirplanes());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removeAirplane(ActionEvent actionEvent) {
@@ -189,7 +209,27 @@ public class Controller {
     public void editAirplane(ActionEvent actionEvent) {
     }
 
-    public void addFlight(ActionEvent actionEvent) {
+    public void addFlightType(ActionEvent actionEvent) {
+        try {
+        FXMLLoader loader = new FXMLLoader();
+        FlightTypeController flightTypeController = new FlightTypeController(dao, null);
+        loader.setController(flightTypeController);
+        loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
+        Scene scene = new Scene(loader.load(), 600, 400);
+        Stage stage = new Stage();
+        stage.setTitle("Flight Type");
+        stage.setScene(scene);
+        stage.setOnCloseRequest(event-> {
+            tableFlightType.setItems(dao.getFlightTypes());
+        });
+        stage.setOnHiding(event-> {
+            tableFlightType.setItems(dao.getFlightTypes());
+        });
+        stage.show();
+    }
+    catch (IOException ex) {
+        ex.printStackTrace();
+    }
     }
 
     public void removeFlight(ActionEvent actionEvent) {
@@ -198,7 +238,27 @@ public class Controller {
     public void editFlight(ActionEvent actionEvent) {
     }
 
-    public void addFlightType(ActionEvent actionEvent) {
+    public void addFlight(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            FlightController flightController = new FlightController(dao, null);
+            loader.setController(flightController);
+            loader.setLocation(getClass().getResource("/fxml/flight.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Flight");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableFlights.setItems(dao.getFlights());
+            });
+            stage.setOnHiding(event-> {
+                tableFlights.setItems(dao.getFlights());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removeFlightType(ActionEvent actionEvent) {
@@ -208,6 +268,26 @@ public class Controller {
     }
 
     public void addLuggage(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            LuggageController luggageController = new LuggageController(dao, null);
+            loader.setController(luggageController);
+            loader.setLocation(getClass().getResource("/fxml/luggage.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Luggage");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableLuggage.setItems(dao.getLuggages());
+            });
+            stage.setOnHiding(event-> {
+                tableLuggage.setItems(dao.getLuggages());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removeLuggage(ActionEvent actionEvent) {
@@ -217,6 +297,26 @@ public class Controller {
     }
 
     public void addPassenger(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            PassengerController passengerController = new PassengerController(dao, null);
+            loader.setController(passengerController);
+            loader.setLocation(getClass().getResource("/fxml/passenger.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Passenger");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tabelePassenger.setItems(dao.getPassengers());
+            });
+            stage.setOnHiding(event-> {
+                tabelePassenger.setItems(dao.getPassengers());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removePassenger(ActionEvent actionEvent) {
@@ -226,6 +326,26 @@ public class Controller {
     }
 
     public void addUser(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            UserController userController = new UserController(dao, null);
+            loader.setController(userController);
+            loader.setLocation(getClass().getResource("/fxml/user.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("User");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableUsers.setItems(dao.getUsers());
+            });
+            stage.setOnHiding(event-> {
+                tableUsers.setItems(dao.getUsers());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removeUser(ActionEvent actionEvent) {
@@ -235,6 +355,26 @@ public class Controller {
     }
 
     public void addRole(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            RoleController roleController = new RoleController(dao, null);
+            loader.setController(roleController);
+            loader.setLocation(getClass().getResource("/fxml/role.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Role");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableRole.setItems(dao.getRoles());
+            });
+            stage.setOnHiding(event-> {
+                tableRole.setItems(dao.getRoles());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void removeRole(ActionEvent actionEvent) {
