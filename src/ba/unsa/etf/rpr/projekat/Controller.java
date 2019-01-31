@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.event.ActionEvent;
 
 public class Controller {
+
+
     public void postaviSQLite(ActionEvent actionEvent) {
     }
 
