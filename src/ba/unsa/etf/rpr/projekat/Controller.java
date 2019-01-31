@@ -63,7 +63,7 @@ public class Controller {
         fillTableUsers();
     }
 
-    @Override
+
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dao = new AirportDAO();
         fillTableAirlines();
@@ -154,8 +154,8 @@ public class Controller {
     public void addAirline(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            AirlineController controller = new AirlineController(dao, null);
-            loader.setController(controller);
+            AirlineController airlineController = new AirlineController(dao, null);
+            loader.setController(airlineController);
             loader.setLocation(getClass().getResource("/fxml/airline.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
