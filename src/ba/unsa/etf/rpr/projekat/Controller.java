@@ -178,6 +178,31 @@ public class Controller {
     }
 
     public void editAirline(ActionEvent actionEvent) {
+        if (tableAirline.getSelectionModel().getSelectedItems() == null)
+            return;
+        Airline airline = (Airline) tableAirline.getSelectionModel().getSelectedItem();
+        //System.out.println(airplane.get());
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            AirlineController airlineController = new AirlineController(dao, airline);
+            loader.setController(airlineController);
+            loader.setLocation(getClass().getResource("/fxml/airline.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Airline");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableAirline.setItems(dao.getAirlines());
+            });
+            stage.setOnHiding(event-> {
+                tableAirline.setItems(dao.getAirlines());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addAirplane(ActionEvent actionEvent) {
@@ -207,6 +232,31 @@ public class Controller {
     }
 
     public void editAirplane(ActionEvent actionEvent) {
+        if (tabelaAirplanes.getSelectionModel().getSelectedItems() == null)
+            return;
+        Airplane airplane = (Airplane) tabelaAirplanes.getSelectionModel().getSelectedItem();
+        //System.out.println(airplane.get());
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            AirplaneController airplaneController = new AirplaneController(dao, airplane);
+            loader.setController(airplaneController);
+            loader.setLocation(getClass().getResource("/fxml/airplane.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Airplane");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tabelaAirplanes.setItems(dao.getAirplanes());
+            });
+            stage.setOnHiding(event-> {
+                tabelaAirplanes.setItems(dao.getAirplanes());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addFlightType(ActionEvent actionEvent) {
@@ -265,6 +315,31 @@ public class Controller {
     }
 
     public void editFlightType(ActionEvent actionEvent) {
+        if (tableFlightType.getSelectionModel().getSelectedItems() == null)
+            return;
+        FlightType flightType = (FlightType) tableFlightType.getSelectionModel().getSelectedItem();
+        //System.out.println(airplane.get());
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            FlightTypeController flightTypeController = new FlightTypeController(dao,flightType);
+            loader.setController(flightTypeController);
+            loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Flight Type");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableFlightType.setItems(dao.getFlightTypes());
+            });
+            stage.setOnHiding(event-> {
+                tableFlightType.setItems(dao.getFlightTypes());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addLuggage(ActionEvent actionEvent) {
@@ -294,6 +369,31 @@ public class Controller {
     }
 
     public void editLuggage(ActionEvent actionEvent) {
+        if (tableLuggage.getSelectionModel().getSelectedItems() == null)
+            return;
+        Luggage luggage = (Luggage) tableLuggage.getSelectionModel().getSelectedItem();
+        //System.out.println(airplane.get());
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            LuggageController luggageController = new LuggageController(dao, luggage);
+            loader.setController(luggageController);
+            loader.setLocation(getClass().getResource("/fxml/luggage.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Luggage");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableLuggage.setItems(dao.getLuggages());
+            });
+            stage.setOnHiding(event-> {
+                tableLuggage.setItems(dao.getLuggages());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addPassenger(ActionEvent actionEvent) {
@@ -323,6 +423,31 @@ public class Controller {
     }
 
     public void editPassenger(ActionEvent actionEvent) {
+        if (tabelePassenger.getSelectionModel().getSelectedItems() == null)
+            return;
+        Passenger passenger = (Passenger) tabelePassenger.getSelectionModel().getSelectedItem();
+        //System.out.println(airplane.get());
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            PassengerController passengerController = new PassengerController(dao, passenger);
+            loader.setController(passengerController);
+            loader.setLocation(getClass().getResource("/fxml/passenger.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Passenger");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tabelePassenger.setItems(dao.getPassengers());
+            });
+            stage.setOnHiding(event-> {
+                tabelePassenger.setItems(dao.getPassengers());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addUser(ActionEvent actionEvent) {
@@ -352,6 +477,31 @@ public class Controller {
     }
 
     public void editUser(ActionEvent actionEvent) {
+        if (tableUsers.getSelectionModel().getSelectedItems() == null)
+            return;
+        User user = (User) tableUsers.getSelectionModel().getSelectedItem();
+        //System.out.println(airplane.get());
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            UserController userController = new UserController(dao, user);
+            loader.setController(userController);
+            loader.setLocation(getClass().getResource("/fxml/user.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("User");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableUsers.setItems(dao.getUsers());
+            });
+            stage.setOnHiding(event-> {
+                tableUsers.setItems(dao.getUsers());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void addRole(ActionEvent actionEvent) {
@@ -381,5 +531,30 @@ public class Controller {
     }
 
     public void editRole(ActionEvent actionEvent) {
+        if (tableRole.getSelectionModel().getSelectedItems() == null)
+            return;
+        Role role = (Role) tableRole.getSelectionModel().getSelectedItem();
+        //System.out.println(airplane.get());
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            RoleController roleController = new RoleController(dao, role);
+            loader.setController(roleController);
+            loader.setLocation(getClass().getResource("/fxml/role.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Role");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableRole.setItems(dao.getRoles());
+            });
+            stage.setOnHiding(event-> {
+                tableRole.setItems(dao.getRoles());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
     }
 }
