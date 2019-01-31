@@ -25,8 +25,8 @@
         <menus>
             <Menu text="Options" fx:id="menuOpcije">
                 <items>
-                    <RadioMenuItem onAction="#postaviSQLite" text="SQLite" fx:id="menuDb" toggleGroup="$toggleGroup1"/>
-                    <RadioMenuItem onAction="#postaviXML" text="XML" fx:id="menuXml" toggleGroup="$toggleGroup1"/>
+                    <RadioMenuItem onAction="#setSQLite" text="SQLite" fx:id="menuDb" toggleGroup="$toggleGroup1"/>
+                    <RadioMenuItem onAction="#setXML" text="XML" fx:id="menuXml" toggleGroup="$toggleGroup1"/>
                 </items>
             </Menu>
         </menus>
@@ -146,6 +146,7 @@
                     <TableView fx:id="tableLuggage" style="-fx-aligmnent: CENTER;">
                         <columns>
                             <TableColumn fx:id="idLuggage" prefWidth="50.0" text="Id"/>
+                            <TableColumn fx:id="passengerLuggage" prefWidth="50.0" text="Passenger"/>
                         </columns>
                     </TableView>
                 </VBox>
@@ -168,6 +169,8 @@
                         <columns>
                             <TableColumn fx:id="idPassenger" prefWidth="50.0" text="Id"/>
                             <TableColumn fx:id="namePassenger" prefWidth="180.0" text="Name"/>
+                            <TableColumn fx:id="flightPassenger" prefWidth="180.0" text="Flight"/>
+                            <TableColumn fx:id="qrPassenger" prefWidth="180.0" text="Qr Code"/>
                         </columns>
                     </TableView>
                 </VBox>
