@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -12,7 +13,7 @@ public class LuggageController {
     public Label passengerLabel;
     public TextField passengerField;
     public SimpleStringProperty idProperty;
-    public SimpleStringProperty passengerProperty;
+    public SimpleObjectProperty<Passenger> passengerProperty;
 
     private AirportDAO dao;
     private Luggage currentLuggage = null;
@@ -26,7 +27,7 @@ public class LuggageController {
         this.dao = dao;
         this.currentLuggage = luggage;
         idProperty = new SimpleStringProperty("");
-        passengerProperty = new SimpleStringProperty("");
+        passengerProperty = new SimpleObjectProperty<>();
     }
 
 }

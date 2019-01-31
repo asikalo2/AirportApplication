@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -18,7 +19,7 @@ public class AirplaneController {
     public Label numberOfSeatsLabel;
     public TextField numberOfSeatsField;
     public SimpleStringProperty idProperty;
-    public SimpleStringProperty airlineProperty;
+    public SimpleObjectProperty<Airline> airlineProperty;
     public SimpleStringProperty manufacturerProperty;
     public SimpleStringProperty typeProperty;
     public SimpleStringProperty numberOfSeatsProperty;
@@ -36,7 +37,7 @@ public class AirplaneController {
         this.dao = dao;
         this.currentAirplane = airplane;
         idProperty = new SimpleStringProperty("");
-        airlineProperty = new SimpleStringProperty("");
+        airlineProperty = new SimpleObjectProperty<>();
         manufacturerProperty = new SimpleStringProperty("");
         typeProperty = new SimpleStringProperty("");
         numberOfSeatsProperty = new SimpleStringProperty("");

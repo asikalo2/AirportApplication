@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -15,7 +16,7 @@ public class UserController {
     public TextField roleField;
     public SimpleStringProperty idProperty;
     public SimpleStringProperty nameProperty;
-    public SimpleStringProperty roleProperty;
+    public SimpleObjectProperty<Role> roleProperty;
 
     private AirportDAO dao;
     private User currentUser = null;
@@ -30,6 +31,6 @@ public class UserController {
         this.currentUser = user;
         idProperty = new SimpleStringProperty("");
         nameProperty = new SimpleStringProperty("");
-        roleProperty = new SimpleStringProperty("");
+        roleProperty = new SimpleObjectProperty<>();
     }
 }

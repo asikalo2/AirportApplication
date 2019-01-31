@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -17,7 +18,7 @@ public class PassengerController {
     public TextField qrCodeField;
     public SimpleStringProperty idProperty;
     public SimpleStringProperty nameProperty;
-    public SimpleStringProperty flightProperty;
+    public SimpleObjectProperty<Flight> flightProperty;
     public SimpleStringProperty qrCodeProperty;
 
     private AirportDAO dao;
@@ -33,7 +34,7 @@ public class PassengerController {
         this.currentPassenger = passenger;
         idProperty = new SimpleStringProperty("");
         nameProperty = new SimpleStringProperty("");
-        flightProperty = new SimpleStringProperty("");
+        flightProperty = new SimpleObjectProperty<>();
         qrCodeProperty = new SimpleStringProperty("");
     }
 
