@@ -53,18 +53,30 @@ public class Controller {
 
     public void setSQLite(ActionEvent actionEvent) {
         dao = new AirportDAO();
-        napuniTabeluVlasnici();
-        napuniTabeluVozila();
+        fillTableAirlines();
+        fillTableAirplanes();
+        fillTableFlights();
+        fillTableFlightTypes();
+        fillTableLuggages();
+        fillTablePassengers();
+        fillTableRoles();
+        fillTableUsers();
     }
 
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dao = new AirportDAO();
-        napuniTabeluVlasnici();
-        napuniTabeluVozila();
+        fillTableAirlines();
+        fillTableAirplanes();
+        fillTableFlights();
+        fillTableFlightTypes();
+        fillTableLuggages();
+        fillTablePassengers();
+        fillTableRoles();
+        fillTableUsers();
     }
 
-    private void fillTableAirline() {
+    private void fillTableAirlines() {
         ObservableList<Airline> listAirlines = dao.getAirlines();
 
         idAirline.setCellValueFactory(new PropertyValueFactory("id"));
@@ -73,66 +85,69 @@ public class Controller {
         tableAirline.setItems(listAirlines);
     }
 
-    private void fillTableAirline() {
-        ObservableList<Airline> listAirlines = dao.getAirlines();
+    private void fillTableAirplanes() {
+        ObservableList<Airplane> listAirplanes = dao.getAirplanes();
 
-        idAirline.setCellValueFactory(new PropertyValueFactory("id"));
-        nameAirline.setCellValueFactory(new PropertyValueFactory("nazivProizvodjaca"));
-        codeAirline.setCellValueFactory(new PropertyValueFactory("model"));
-        tableAirline.setItems(listAirlines);
+        idAirplane.setCellValueFactory(new PropertyValueFactory("idAirplane"));
+        airlineAirplane.setCellValueFactory(new PropertyValueFactory("airlineAirplane"));
+        manufacturerAirplane.setCellValueFactory(new PropertyValueFactory("manufacturerAirplane"));
+        typeAirplane.setCellValueFactory(new PropertyValueFactory("typeAirplane"));
+        numberOfSeatsAirplane.setCellValueFactory(new PropertyValueFactory("numberOfSeatsAirplane"));
+        tabelaAirplanes.setItems(listAirplanes);
     }
 
-    private void fillTableAirline() {
-        ObservableList<Airline> listAirlines = dao.getAirlines();
+    private void fillTableFlights() {
+        ObservableList<Flight> listFlights = dao.getFlights();
 
-        idAirline.setCellValueFactory(new PropertyValueFactory("id"));
-        nameAirline.setCellValueFactory(new PropertyValueFactory("nazivProizvodjaca"));
-        codeAirline.setCellValueFactory(new PropertyValueFactory("model"));
-        tableAirline.setItems(listAirlines);
+        idFlight.setCellValueFactory(new PropertyValueFactory("idFlight"));
+        airplaneFlight.setCellValueFactory(new PropertyValueFactory("airplaneFlight"));
+        codeFlight.setCellValueFactory(new PropertyValueFactory("codeFlight"));
+        startOfUsingTheRunwayFlight.setCellValueFactory(new PropertyValueFactory("startOfUsingTheRunwayFlight"));
+        endOfUsingTheRunwayFlight.setCellValueFactory(new PropertyValueFactory("endOfUsingTheRunwayFlight"));
+        userFlight.setCellValueFactory(new PropertyValueFactory("userFlight"));
+        tableFlights.setItems(listFlights);
     }
 
-    private void fillTableAirline() {
-        ObservableList<Airline> listAirlines = dao.getAirlines();
+    private void fillTableFlightTypes() {
+        ObservableList<FlightType> listFlightType = dao.getFlightTypes();
 
-        idAirline.setCellValueFactory(new PropertyValueFactory("id"));
-        nameAirline.setCellValueFactory(new PropertyValueFactory("nazivProizvodjaca"));
-        codeAirline.setCellValueFactory(new PropertyValueFactory("model"));
-        tableAirline.setItems(listAirlines);
+        idFT.setCellValueFactory(new PropertyValueFactory("idFT"));
+        nameFT.setCellValueFactory(new PropertyValueFactory("nameFT"));
+        tableFlightType.setItems(listFlightType);
     }
 
-    private void fillTableAirline() {
-        ObservableList<Airline> listAirlines = dao.getAirlines();
+    private void fillTableLuggages() {
+        ObservableList<Luggage> listLuggage = dao.getLuggages();
 
-        idAirline.setCellValueFactory(new PropertyValueFactory("id"));
-        nameAirline.setCellValueFactory(new PropertyValueFactory("nazivProizvodjaca"));
-        codeAirline.setCellValueFactory(new PropertyValueFactory("model"));
-        tableAirline.setItems(listAirlines);
+        idLuggage.setCellValueFactory(new PropertyValueFactory("idLuggage"));
+        passengerLuggage.setCellValueFactory(new PropertyValueFactory("passengerLuggage"));
+        tableLuggage.setItems(listLuggage);
     }
 
-    private void fillTableAirline() {
-        ObservableList<Airline> listAirlines = dao.getAirlines();
+    private void fillTablePassengers() {
+        ObservableList<Passenger> listPassengers = dao.getPassengers();
 
-        idAirline.setCellValueFactory(new PropertyValueFactory("id"));
-        nameAirline.setCellValueFactory(new PropertyValueFactory("nazivProizvodjaca"));
-        codeAirline.setCellValueFactory(new PropertyValueFactory("model"));
-        tableAirline.setItems(listAirlines);
+        idPassenger.setCellValueFactory(new PropertyValueFactory("idPassenger"));
+        namePassenger.setCellValueFactory(new PropertyValueFactory("namePassenger"));
+        flightPassenger.setCellValueFactory(new PropertyValueFactory("flightPassenger"));
+        qrPassenger.setCellValueFactory(new PropertyValueFactory("qrPassenger"));
+        tabelePassenger.setItems(listPassengers);
     }
 
-    private void fillTableAirline() {
+    private void fillTableUsers() {
         ObservableList<User> listUsers = dao.getUsers();
 
-        idAirline.setCellValueFactory(new PropertyValueFactory("id"));
-        nameAirline.setCellValueFactory(new PropertyValueFactory("nazivProizvodjaca"));
-        codeAirline.setCellValueFactory(new PropertyValueFactory("model"));
+        idUser.setCellValueFactory(new PropertyValueFactory("idUser"));
+        nameUser.setCellValueFactory(new PropertyValueFactory("nameUser"));
+        roleUser.setCellValueFactory(new PropertyValueFactory("roleUser"));
         tableUsers.setItems(listUsers);
     }
 
-    private void fillTableRolee() {
+    private void fillTableRoles() {
         ObservableList<Role> listRoles = dao.getRoles();
 
-        idAirline.setCellValueFactory(new PropertyValueFactory("id"));
-        nameAirline.setCellValueFactory(new PropertyValueFactory("nazivProizvodjaca"));
-        codeAirline.setCellValueFactory(new PropertyValueFactory("model"));
+        idRole.setCellValueFactory(new PropertyValueFactory("idRole"));
+        nameRole.setCellValueFactory(new PropertyValueFactory("nameRole"));
         tableRole.setItems(listRoles);
     }
 
