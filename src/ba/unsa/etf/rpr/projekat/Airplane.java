@@ -56,4 +56,6 @@ public class Airplane {
     public void setAirline(Airline airline) {
         this.airline = airline;
     }
+
+    public String getAirlineName() { return airline.getName(); }
 }

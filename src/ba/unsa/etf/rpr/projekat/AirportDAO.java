@@ -183,7 +183,7 @@ public class AirportDAO {
 
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types on " +
-                    "flights.flight_type=flight_types.id where id=?");
+                    "flights.flight_type=flight_types.id where flights.id=?");
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -214,10 +214,10 @@ public class AirportDAO {
                     "on luggages.passenger = p.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Image img = new Image(new ByteArrayInputStream(rs.getBytes(6)));
+                //Image img = new Image(new ByteArrayInputStream(rs.getBytes(6)));
                 Flight flight = getFlightById(rs.getInt(5));
                 Passenger passenger = new Passenger(rs.getInt(3), rs.getString(4), flight,
-                        img);
+                        null);
                 Luggage luggage = new Luggage(rs.getInt(1), passenger);
                 res.add(luggage);
             }
@@ -253,7 +253,7 @@ public class AirportDAO {
                     "on planes.airline_company = a.id)");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Airline airline = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3));
+                Airline airline = new Airline(rs.getInt(6), rs.getString(7), rs.getString(8));
                 Airplane airplane = new Airplane(rs.getInt(1), airline, rs.getString(3),
                         rs.getString(4), rs.getInt(5));
                 res.add(airplane);

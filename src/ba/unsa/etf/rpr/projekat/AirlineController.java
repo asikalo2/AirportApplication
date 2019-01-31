@@ -1,10 +1,12 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
+import javafx.stage.Stage;
 
 public class AirlineController {
     public Label idLabel;
@@ -30,6 +32,25 @@ public class AirlineController {
         idProperty = new SimpleStringProperty("");
         nameProperty = new SimpleStringProperty("");
         codeProperty = new SimpleStringProperty("");
+    }
+
+    private void initializeDataBinding() {
+        idField.textProperty().bindBidirectional(idProperty);
+        nameField.textProperty().bindBidirectional(nameProperty);
+        codeField.textProperty().bindBidirectional(codeProperty);
+    }
+
+   /* private void fillForm() {
+        idProperty.set(currentAirline.getId());
+        nameProperty.set(currentAirline.getName());
+        codeProperty.set(currentAirline.getCode());
+    }*/
+
+    private void dodajListenere() {}
+
+    public void stopFormBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
 
 }

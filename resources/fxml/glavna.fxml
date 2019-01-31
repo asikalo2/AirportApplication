@@ -21,16 +21,6 @@
     <fx:define>
         <ToggleGroup fx:id="toggleGroup1"/>
     </fx:define>
-    <MenuBar fx:id="menuBar">
-        <menus>
-            <Menu text="Options" fx:id="menuOpcije">
-                <items>
-                    <RadioMenuItem onAction="#setSQLite" text="SQLite" fx:id="menuDb" toggleGroup="$toggleGroup1"/>
-                    <RadioMenuItem onAction="#setXML" text="XML" fx:id="menuXml" toggleGroup="$toggleGroup1"/>
-                </items>
-            </Menu>
-        </menus>
-    </MenuBar>
 
     <TabPane maxWidth="Infinity" maxHeight="Infinity">
 

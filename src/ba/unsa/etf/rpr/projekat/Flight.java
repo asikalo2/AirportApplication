@@ -69,6 +69,7 @@ public class Flight {
     public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
     }
+    public String getAirlineName() { return airplane.getAirlineName(); }
 
     public FlightType getFlightType() {
         return flightType;
@@ -85,4 +86,5 @@ public class Flight {
     public void setUser(User user) {
         this.user = user;
     }
+    public String getUserName() { return user.getName(); }
 }
