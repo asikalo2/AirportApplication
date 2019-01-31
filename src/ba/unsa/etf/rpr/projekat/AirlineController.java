@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -16,6 +18,11 @@ public class AirlineController {
     public SimpleStringProperty codeProperty;
     private AirportDAO dao;
     private Airline currentAirline = null;
+
+    @FXML
+    public Button cancelButton;
+    @FXML
+    public Button okButton;
 
     public AirlineController(AirportDAO dao, Airline airline) {
         this.dao = dao;

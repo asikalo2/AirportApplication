@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -14,6 +16,11 @@ public class LuggageController {
 
     private AirportDAO dao;
     private Luggage currentLuggage = null;
+
+    @FXML
+    public Button cancelButton;
+    @FXML
+    public Button okButton;
 
     public LuggageController(AirportDAO dao, Luggage luggage) {
         this.dao = dao;

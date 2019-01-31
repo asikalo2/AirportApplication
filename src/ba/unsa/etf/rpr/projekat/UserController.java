@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.beans.property.SimpleStringProperty;
+import javafx.fxml.FXML;
+import javafx.scene.control.Button;
 import javafx.scene.control.Label;
 import javafx.scene.control.TextField;
 
@@ -17,6 +19,11 @@ public class UserController {
 
     private AirportDAO dao;
     private User currentUser = null;
+
+    @FXML
+    public Button cancelButton;
+    @FXML
+    public Button okButton;
 
     public UserController(AirportDAO dao, User user) {
         this.dao = dao;
