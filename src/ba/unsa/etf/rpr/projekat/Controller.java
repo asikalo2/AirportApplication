@@ -238,7 +238,7 @@ public class Controller {
     public void editFlight(ActionEvent actionEvent) {
     }
 
-    public void addFlight(ActionEvent actionEvent) {
+   /* public void addFlight(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader();
             FlightController flightController = new FlightController(dao, null);
@@ -259,7 +259,7 @@ public class Controller {
         catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
+    }*/
 
     public void removeFlightType(ActionEvent actionEvent) {
     }
