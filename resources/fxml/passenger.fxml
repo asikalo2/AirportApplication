@@ -8,10 +8,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ba.unsa.etf.rpr.projekat.PassengerController"
-            prefHeight="400.0" prefWidth="600.0">
+<GridPane alignment="CENTER" vgap="4" hgap="4"
+          xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml">
 
     <stylesheets>
         <URL value="@../css/style.css"/>
@@ -19,8 +18,12 @@
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
-    <children>
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
+    </columnConstraints>
 
+    <children>
 
         <Label fx:id="idLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="ID"/>
@@ -36,8 +39,9 @@
         <Label fx:id="flightLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="Flight"/>
 
-        <TextField fx:id="flightField" GridPane.rowIndex="3" GridPane.columnIndex="1" maxWidth="Infinity"/>
-
+        <ComboBox fx:id="flight" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
 
         <Label fx:id="qrCodeLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="Qr Code"/>
@@ -50,11 +54,11 @@
                 <Insets top="25"/>
             </GridPane.margin>
             <buttons>
-                <Button text="OK" fx:id="okButton" ButtonBar.buttonData="RIGHT" onAction="#potvrdiFormuBtn" />
-                <Button text="Prekini" fx:id="cancelButton" ButtonBar.buttonData="LEFT" onAction="#prekiniFormuBtn" />
+                <Button text="OK" fx:id="okButton" ButtonBar.buttonData="RIGHT" onAction="#okFormBtn" />
+                <Button text="Prekini" fx:id="cancelButton" ButtonBar.buttonData="LEFT" onAction="#cancelFormBtn" />
             </buttons>
         </ButtonBar>
 
     </children>
 
-</AnchorPane>
+</GridPane>

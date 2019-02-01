@@ -54,9 +54,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddAirplane" onAction="#addAirplane" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveAirplane" onAction="#removeAirplane" minWidth="50"/>
-                                <Button fx:id="tbEditAirplane" onAction="#editAirplane" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddAirplane" onAction="#addAirplane" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveAirplane" onAction="#removeAirplane" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditAirplane" onAction="#editAirplane" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
@@ -79,9 +79,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddFlight" onAction="#addFlight" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveFlight" onAction="#removeFlight" minWidth="50"/>
-                                <Button fx:id="tbEditFlight" onAction="#editFlight" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddFlight" onAction="#addFlight" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveFlight" onAction="#removeFlight" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditFlight" onAction="#editFlight" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
@@ -106,9 +106,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddFlightType" onAction="#addFlightType" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveFlightType" onAction="#removeFlightType" minWidth="50"/>
-                                <Button fx:id="tbEditFlightType" onAction="#editFlightType" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddFlightType" onAction="#addFlightType" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveFlightType" onAction="#removeFlightType" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditFlightType" onAction="#editFlightType" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
@@ -127,9 +127,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddLuggage" onAction="#addLuggage" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveLuggage" onAction="#removeLuggage" minWidth="50"/>
-                                <Button fx:id="tbEditLuggage" onAction="#editLuggage" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddLuggage" onAction="#addLuggage" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveLuggage" onAction="#removeLuggage" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditLuggage" onAction="#editLuggage" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
@@ -149,9 +149,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddPassenger" onAction="#addPassenger" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemovePassenger" onAction="#removePassenger" minWidth="50"/>
-                                <Button fx:id="tbEditPassenger" onAction="#editPassenger" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddPassenger" onAction="#addPassenger" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemovePassenger" onAction="#removePassenger" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditPassenger" onAction="#editPassenger" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
@@ -172,9 +172,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddUser" onAction="#addUser" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveUser" onAction="#removeUser" minWidth="50"/>
-                                <Button fx:id="tbEditUser" onAction="#editUser" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddUser" onAction="#addUser" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveUser" onAction="#removeUser" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditUser" onAction="#editUser" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
@@ -194,9 +194,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddRole" onAction="#addRole" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveRole" onAction="#removeRole" minWidth="50"/>
-                                <Button fx:id="tbEditRole" onAction="#editRole" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddRole" onAction="#addRole" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveRole" onAction="#removeRole" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditRole" onAction="#editRole" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>

@@ -48,4 +48,5 @@ public class Passenger {
     public void setQrCode(Image qrCode) {
         this.qrCode = qrCode;
     }
+
 }

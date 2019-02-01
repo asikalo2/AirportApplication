@@ -3,21 +3,22 @@ package ba.unsa.etf.rpr.projekat;
 import javafx.scene.control.DatePicker;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 
 public class Flight {
     private int id;
     private String code;
     private Airplane airplane;
-    private LocalDate startOfUsingTheRunway;
-    private LocalDate endOfUsingTheRunway;
+    private LocalDateTime startOfUsingTheRunway;
+    private LocalDateTime endOfUsingTheRunway;
     private FlightType flightType;
     private User user;
 
     public Flight(){
     }
 
-    public Flight(int id, String code, Airplane airplane, LocalDate startOfUsingTheRunway,
-                  LocalDate endOfUsingTheRunway, FlightType flightType, User user) {
+    public Flight(int id, String code, Airplane airplane, LocalDateTime startOfUsingTheRunway,
+                  LocalDateTime endOfUsingTheRunway, FlightType flightType, User user) {
         this.id = id;
         this.airplane = airplane;
         this.code = code;
@@ -44,19 +45,19 @@ public class Flight {
         this.code = code;
     }
 
-    public LocalDate getStartOfUsingTheRunway() {
+    public LocalDateTime getStartOfUsingTheRunway() {
         return startOfUsingTheRunway;
     }
 
-    public void setStartOfUsingTheRunway(LocalDate startOfUsingTheRunway) {
+    public void setStartOfUsingTheRunway(LocalDateTime startOfUsingTheRunway) {
         this.startOfUsingTheRunway = startOfUsingTheRunway;
     }
 
-    public LocalDate getEndOfUsingTheRunway() {
+    public LocalDateTime getEndOfUsingTheRunway() {
         return endOfUsingTheRunway;
     }
 
-    public void setEndOfUsingTheRunway(LocalDate endOfUsingTheRunway) {
+    public void setEndOfUsingTheRunway(LocalDateTime endOfUsingTheRunway) {
         this.endOfUsingTheRunway = endOfUsingTheRunway;
     }
 
@@ -87,4 +88,5 @@ public class Flight {
         this.user = user;
     }
     public String getUserName() { return user.getName(); }
+
 }

@@ -8,10 +8,9 @@
 
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
-<AnchorPane xmlns="http://javafx.com/javafx"
-            xmlns:fx="http://javafx.com/fxml"
-            fx:controller="ba.unsa.etf.rpr.projekat.FlightTypeController"
-            prefHeight="400.0" prefWidth="600.0">
+<GridPane alignment="CENTER" vgap="4" hgap="4"
+          xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml">
 
     <stylesheets>
         <URL value="@../css/style.css"/>
@@ -19,6 +18,10 @@
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
     </padding>
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
+    </columnConstraints>
     <children>
 
 
@@ -38,11 +41,11 @@
                 <Insets top="25"/>
             </GridPane.margin>
             <buttons>
-                <Button text="OK" fx:id="okButton" ButtonBar.buttonData="RIGHT" onAction="#potvrdiFormuBtn" />
-                <Button text="Prekini" fx:id="cancelButton" ButtonBar.buttonData="LEFT" onAction="#prekiniFormuBtn" />
+                <Button text="OK" fx:id="okButton" ButtonBar.buttonData="RIGHT" onAction="#okFormBtn" />
+                <Button text="Prekini" fx:id="cancelButton" ButtonBar.buttonData="LEFT" onAction="#cancelFormBtn" />
             </buttons>
         </ButtonBar>
 
-    </children>
 
-</AnchorPane>
+        </children>
+</GridPane>

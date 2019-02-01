@@ -178,6 +178,30 @@ public class Controller implements Initializable {
         }
     }
 
+    public void addFlightType(ActionEvent actionEvent) {
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            FlightTypeController flightTypeController = new FlightTypeController(dao,null);
+            loader.setController(flightTypeController);
+            loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Flight type");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableFlightType.setItems(dao.getFlightTypes());
+            });
+            stage.setOnHiding(event-> {
+                tableFlightType.setItems(dao.getFlightTypes());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
     public void removeAirline(ActionEvent actionEvent) {
 
         Alert alert = new Alert(Alert.AlertType.CONFIRMATION);
@@ -231,6 +255,33 @@ public class Controller implements Initializable {
             });
             stage.setOnHiding(event-> {
                 tableAirline.setItems(dao.getAirlines());
+            });
+            stage.show();
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void editFlightType(ActionEvent actionEvent) {
+        if (tableFlightType.getSelectionModel().getSelectedItem() == null)
+            return;
+        FlightType flightType = (FlightType) tableFlightType.getSelectionModel().getSelectedItem();
+
+        try {
+            FXMLLoader loader = new FXMLLoader();
+            FlightTypeController flightTypeController = new FlightTypeController(dao, flightType);
+            loader.setController(flightTypeController);
+            loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
+            Scene scene = new Scene(loader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("Flight type");
+            stage.setScene(scene);
+            stage.setOnCloseRequest(event-> {
+                tableFlightType.setItems(dao.getFlightTypes());
+            });
+            stage.setOnHiding(event-> {
+                tableFlightType.setItems(dao.getFlightTypes());
             });
             stage.show();
         }
@@ -320,29 +371,6 @@ public class Controller implements Initializable {
         catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    public void addFlightType(ActionEvent actionEvent) {
-        try {
-        FXMLLoader loader = new FXMLLoader();
-        FlightTypeController flightTypeController = new FlightTypeController(dao, null);
-        loader.setController(flightTypeController);
-        loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
-        Scene scene = new Scene(loader.load(), 600, 400);
-        Stage stage = new Stage();
-        stage.setTitle("Flight Type");
-        stage.setScene(scene);
-        stage.setOnCloseRequest(event-> {
-            tableFlightType.setItems(dao.getFlightTypes());
-        });
-        stage.setOnHiding(event-> {
-            tableFlightType.setItems(dao.getFlightTypes());
-        });
-        stage.show();
-    }
-    catch (IOException ex) {
-        ex.printStackTrace();
-    }
     }
 
     public void removeFlight(ActionEvent actionEvent) {
@@ -462,32 +490,6 @@ public class Controller implements Initializable {
         tableFlightType.setItems(dao.getFlightTypes());
     }
 
-    public void editFlightType(ActionEvent actionEvent) {
-        if (tableFlightType.getSelectionModel().getSelectedItems() == null)
-            return;
-        FlightType flightType = (FlightType) tableFlightType.getSelectionModel().getSelectedItem();
-
-        try {
-            FXMLLoader loader = new FXMLLoader();
-            FlightTypeController flightTypeController = new FlightTypeController(dao,flightType);
-            loader.setController(flightTypeController);
-            loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
-            Scene scene = new Scene(loader.load(), 600, 400);
-            Stage stage = new Stage();
-            stage.setTitle("Flight Type");
-            stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
-                tableFlightType.setItems(dao.getFlightTypes());
-            });
-            stage.setOnHiding(event-> {
-                tableFlightType.setItems(dao.getFlightTypes());
-            });
-            stage.show();
-        }
-        catch (IOException ex) {
-            ex.printStackTrace();
-        }
-    }
 
     public void addLuggage(ActionEvent actionEvent) {
         try {

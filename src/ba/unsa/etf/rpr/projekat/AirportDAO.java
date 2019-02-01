@@ -9,8 +9,10 @@ import java.io.ByteArrayInputStream;
 import java.sql.*;
 import java.time.Instant;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
+import java.util.TimeZone;
 
 public class AirportDAO {
     private static AirportDAO instance = null;
@@ -162,10 +164,10 @@ public class AirportDAO {
             while (rs.next()) {
                 Airplane airplane = getPlaneById(rs.getInt(3));
                 User user = getUserById(rs.getInt(7));
-                LocalDate startOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
-                        rs.getString(4))).atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate endOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
-                        rs.getString(5))).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDateTime startOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(4) ),
+                        TimeZone.getDefault().toZoneId());
+                LocalDateTime endOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(5) ),
+                        TimeZone.getDefault().toZoneId());
                 FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
                 Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
                         startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
@@ -191,10 +193,10 @@ public class AirportDAO {
             while (rs.next()) {
                 Airplane airplane = getPlaneById(rs.getInt(3));
                 User user = getUserById(rs.getInt(7));
-                LocalDate startOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
-                        rs.getString(4))).atZone(ZoneId.systemDefault()).toLocalDate();
-                LocalDate endOfUsingTheRunway = Instant.ofEpochMilli(Integer.valueOf(
-                        rs.getString(5))).atZone(ZoneId.systemDefault()).toLocalDate();
+                LocalDateTime startOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(4) ),
+                        TimeZone.getDefault().toZoneId());
+                LocalDateTime endOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(5) ),
+                        TimeZone.getDefault().toZoneId());
                 FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
                 Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
                         startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
@@ -235,7 +237,7 @@ public class AirportDAO {
                     "on users.role = r.id)");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Role ro = new Role(rs.getInt(1), rs.getString(2));
+                Role ro = new Role(rs.getInt(4), rs.getString(5));
                 User u = new User(rs.getInt(1), rs.getString(2),ro);
                 res.add(u);
             }
@@ -271,7 +273,11 @@ public class AirportDAO {
             PreparedStatement stmt = conn.prepareStatement("select * from passengers");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Image img = new Image(new ByteArrayInputStream(rs.getBytes(4)));
+                Image img;
+                if (rs.getBytes(4) != null)
+                    img = new Image(new ByteArrayInputStream(rs.getBytes(4)));
+                else
+                    img = null;
                 Flight flight = getFlightById(rs.getInt(3));
                 Passenger passenger = new Passenger(rs.getInt(1),rs.getString(2), flight,
                         img);
@@ -665,10 +671,10 @@ public class AirportDAO {
             stmt.setInt(1, flight.getId());
             stmt.setString(2, flight.getCode());
             stmt.setInt(3, flight.getAirplane().getId());
-            stmt.setString(4, String.valueOf(flight.getStartOfUsingTheRunway().atStartOfDay(
-                    ZoneId.systemDefault()).toEpochSecond()));
-            stmt.setString(5, String.valueOf(flight.getEndOfUsingTheRunway().atStartOfDay(
-                    ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setString(4, String.valueOf(flight.getStartOfUsingTheRunway().
+                    atZone(ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setString(5, String.valueOf(flight.getEndOfUsingTheRunway().
+                    atZone(ZoneId.systemDefault()).toEpochSecond()));
             stmt.setInt(6, flight.getFlightType().getId());
             stmt.setInt(7, flight.getUser().getId());
 
@@ -740,10 +746,10 @@ public class AirportDAO {
             stmt.setInt(1, flight.getId());
             stmt.setString(2, flight.getCode());
             stmt.setInt(3, flight.getAirplane().getId());
-            stmt.setString(4, String.valueOf(flight.getStartOfUsingTheRunway().atStartOfDay(
-                    ZoneId.systemDefault()).toEpochSecond()));
-            stmt.setString(5, String.valueOf(flight.getEndOfUsingTheRunway().atStartOfDay(
-                    ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setString(4, String.valueOf(flight.getStartOfUsingTheRunway().
+                    atZone(ZoneId.systemDefault()).toEpochSecond()));
+            stmt.setString(5, String.valueOf(flight.getEndOfUsingTheRunway().
+                    atZone(ZoneId.systemDefault()).toEpochSecond()));
             stmt.setInt(6, flight.getFlightType().getId());
             stmt.setInt(7, flight.getUser().getId());
             stmt.executeUpdate();
