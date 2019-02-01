@@ -19,7 +19,7 @@ public class AirportDAOTest {
 
     @BeforeAll
     void initDb() {
-        File dbfile = new File("AirportDB.db");
+        File dbfile = new File("AirportDBtest.db");
         ClassLoader classLoader = getClass().getClassLoader();
         File srcfile = new File(classLoader.getResource("AirportDBtest.db").getFile());
         try {
@@ -34,7 +34,7 @@ public class AirportDAOTest {
 
     @AfterAll
     void deleteDb() {
-        File dbfile = new File("AirportDB.db");
+        File dbfile = new File("AirportDBtest.db");
         dbfile.delete();
     }
 
