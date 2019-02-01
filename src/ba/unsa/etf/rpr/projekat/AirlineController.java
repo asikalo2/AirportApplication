@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -34,23 +35,38 @@ public class AirlineController {
         codeProperty = new SimpleStringProperty("");
     }
 
+    @FXML
+    public void initialize() {
+        initializeDataBinding();
+        if (currentAirline != null) {
+            fillForm();
+        }
+    }
+
+    private void fillForm() {
+        idProperty.set(String.valueOf(currentAirline.getId()));
+        nameProperty.set(currentAirline.getName());
+        codeProperty.set(currentAirline.getCode());
+    }
+
     private void initializeDataBinding() {
         idField.textProperty().bindBidirectional(idProperty);
         nameField.textProperty().bindBidirectional(nameProperty);
         codeField.textProperty().bindBidirectional(codeProperty);
     }
 
-    private void dodajListenere() {}
+    private void dodajListenere() {
+    }
 
     public void stopFormBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
-    public void potvrdiFormuBtn(ActionEvent actionEvent) {
+    public void okFormBtn(ActionEvent actionEvent) {
     }
 
-    public void prekiniFormuBtn(ActionEvent actionEvent) {
+    public void cancelFormBtn(ActionEvent actionEvent) {
     }
 
 
@@ -168,5 +184,5 @@ public class AirlineController {
                 codeField.getStyleClass().add("notCorrect");
             }
     }*/
-    }
+}
 

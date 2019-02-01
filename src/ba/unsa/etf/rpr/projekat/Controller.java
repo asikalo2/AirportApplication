@@ -213,7 +213,7 @@ public class Controller implements Initializable {
     }
 
     public void editAirline(ActionEvent actionEvent) {
-        if (tableAirline.getSelectionModel().getSelectedItems() == null)
+        if (tableAirline.getSelectionModel().getSelectedItem() == null)
             return;
         Airline airline = (Airline) tableAirline.getSelectionModel().getSelectedItem();
 
