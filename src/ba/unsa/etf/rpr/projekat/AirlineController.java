@@ -53,4 +53,9 @@ public class AirlineController {
         stage.close();
     }
 
+    public void potvrdiFormuBtn(ActionEvent actionEvent) {
+    }
+
+    public void prekiniFormuBtn(ActionEvent actionEvent) {
+    }
 }

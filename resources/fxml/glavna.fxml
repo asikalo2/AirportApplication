@@ -32,9 +32,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddAirline" onAction="#addAirline" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveAirline" onAction="#removeAirline" minWidth="50"/>
-                                <Button fx:id="tbEditAirline" onAction="#editAirline" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddAirline" onAction="#addAirline" text="Add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveAirline" onAction="#removeAirline" text="Remove" minWidth="50"/>
+                                <Button fx:id="tbEditAirline" onAction="#editAirline" text="Edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>
