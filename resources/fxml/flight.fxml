@@ -9,6 +9,7 @@
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
 <?import tornadofx.control.DateTimePicker?>
+
 <GridPane alignment="CENTER" vgap="4" hgap="4"
           xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml">
@@ -47,13 +48,13 @@
                maxHeight="Infinity" maxWidth="Infinity" text="Start of using the runway"/>
 
         <DateTimePicker fx:id="startOfUsingTheRunwayField" GridPane.rowIndex="4" GridPane.columnIndex="1"
-                    maxWidth="Infinity"/>
+                            maxWidth="Infinity"/>
 
         <Label fx:id="endOfUsingTheRunwayLabel" GridPane.rowIndex="5" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="End of using the runway"/>
 
         <DateTimePicker fx:id="endOfUsingTheRunwayField" GridPane.rowIndex="5" GridPane.columnIndex="1"
-                    maxWidth="Infinity"/>
+                        maxWidth="Infinity"/>
 
 
         <Label fx:id="flightTypeLabel" GridPane.rowIndex="6" GridPane.columnIndex="0"

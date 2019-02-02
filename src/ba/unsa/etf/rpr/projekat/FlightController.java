@@ -7,9 +7,10 @@ import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import tornadofx.control.DateTimePicker;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
+
 
 public class FlightController {
     public Label idLabel;
@@ -19,9 +20,9 @@ public class FlightController {
     public Label airplaneLabel;
     public TextField airplaneField;
     public Label startOfUsingTheRunwayLabel;
-    public DatePicker startOfUsingTheRunwayField;
+    public DateTimePicker startOfUsingTheRunwayField;
     public Label endOfUsingTheRunwayLabel;
-    public DatePicker endOfUsingTheRunwayField;
+    public DateTimePicker endOfUsingTheRunwayField;
     public Label flightTypeLabel;
     public TextField flightTypeField;
     public Label userLabel;
@@ -64,6 +65,7 @@ public class FlightController {
     @FXML
     public void initialize() {
         airplane.setItems(dao.getAirplanes());
+        flightType.setItems(dao.getFlightTypes());
         initializeDataBinding();
 
         airplane.setConverter(new StringConverter<Airplane>() {
