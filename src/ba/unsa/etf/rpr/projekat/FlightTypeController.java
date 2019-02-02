@@ -35,6 +35,7 @@ public class FlightTypeController {
     public void initialize() {
         initializeDataBinding();
         if (currentFlightType != null) {
+            idField.setDisable(true);
             fillForm();
         }
     }
