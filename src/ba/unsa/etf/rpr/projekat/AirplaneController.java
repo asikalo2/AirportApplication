@@ -94,9 +94,38 @@ public class AirplaneController {
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            boolean adding = currentAirplane == null;
+
+            if (currentAirplane == null)
+                currentAirplane = new Airplane();
+
+            currentAirplane.setId(Integer.valueOf((idProperty.get())));
+            currentAirplane.setAirline(airlineProperty.get());
+            currentAirplane.setManufacturer(manufacturerProperty.get());
+            currentAirplane.setType(typeProperty.get());
+            currentAirplane.setNumberOfSeats(Integer.valueOf(numberOfSeatsProperty.get()));
+
+            if (adding) {
+                dao.addAirplane(currentAirplane);
+            } else {
+                dao.changeAirplane(currentAirplane);
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
 
+
     public void cancelFormBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
+
+    private boolean isFormValid() {
+        return true;
+    }
+
 
 }

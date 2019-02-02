@@ -64,9 +64,35 @@ public class AirlineController {
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            boolean adding = currentAirline == null;
+
+            if (currentAirline == null)
+                currentAirline = new Airline();
+
+            currentAirline.setId(Integer.valueOf((idProperty.get())));
+            currentAirline.setName(nameProperty.get());
+            currentAirline.setCode(codeProperty.get());
+
+            if (adding) {
+                dao.addAirline(currentAirline);
+            } else {
+                dao.changeAirline(currentAirline);
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
 
+
     public void cancelFormBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+    private boolean isFormValid() {
+        return true;
     }
 
 }

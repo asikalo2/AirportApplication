@@ -156,9 +156,40 @@ public class FlightController {
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            boolean adding = currentFlight == null;
+
+            if (currentFlight == null)
+                currentFlight = new Flight();
+
+            currentFlight.setId(Integer.valueOf((idProperty.get())));
+            currentFlight.setCode(codeProperty.get());
+            currentFlight.setAirplane(airplaneProperty.get());
+            currentFlight.setStartOfUsingTheRunway(startOfUsingTheRunwayProperty.get());
+            currentFlight.setEndOfUsingTheRunway(endOfUsingTheRunwayProperty.get());
+            currentFlight.setFlightType(flightTypeProperty.get());
+            currentFlight.setUser(userProperty.get());
+
+
+            if (adding) {
+                dao.addFlight(currentFlight);
+            } else {
+                dao.changeFlight(currentFlight);
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
 
+
     public void cancelFormBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
+    }
+
+    private boolean isFormValid() {
+        return true;
     }
 
 }

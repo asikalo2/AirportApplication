@@ -95,10 +95,38 @@ public class PassengerController {
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            boolean adding = currentPassenger == null;
+
+            if (currentPassenger == null)
+                currentPassenger = new Passenger();
+
+            currentPassenger.setId(Integer.valueOf((idProperty.get())));
+            currentPassenger.setName(nameProperty.get());
+            currentPassenger.setFlight(flightProperty.get());
+            currentPassenger.setQrCode(qrCodeProperty.get());
+
+            if (adding) {
+                dao.addPassenger(currentPassenger);
+            } else {
+                dao.changePassenger(currentPassenger);
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
 
+
     public void cancelFormBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
+
+    private boolean isFormValid() {
+        return true;
+    }
+
 
 
 }

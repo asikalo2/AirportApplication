@@ -59,8 +59,34 @@ public class RoleController {
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            boolean adding = currentRole == null;
+
+            if (currentRole == null)
+                currentRole = new Role();
+
+            currentRole.setId(Integer.valueOf((idProperty.get())));
+            currentRole.setName(nameProperty.get());
+
+            if (adding) {
+                dao.addRole(currentRole);
+            } else {
+                dao.changeRole(currentRole);
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
 
+
     public void cancelFormBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
+
+    private boolean isFormValid() {
+        return true;
+    }
+
 }
