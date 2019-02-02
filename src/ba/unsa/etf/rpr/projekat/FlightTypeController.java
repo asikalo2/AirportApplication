@@ -58,11 +58,37 @@ public class FlightTypeController {
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            boolean adding = currentFlightType == null;
+
+            if (currentFlightType == null)
+                currentFlightType = new FlightType();
+
+            currentFlightType.setId(Integer.valueOf((idProperty.get())));
+            currentFlightType.setName(nameProperty.get());
+
+            if (adding) {
+                dao.addFlightType(currentFlightType);
+            } else {
+                dao.changeFlightType(currentFlightType);
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
 
     public void cancelFormBtn(ActionEvent actionEvent) {
+        Stage stage = (Stage) cancelButton.getScene().getWindow();
+        stage.close();
     }
-}
+
+
+    private boolean isFormValid() {
+        return true;
+    }
+
+};
 
 
 

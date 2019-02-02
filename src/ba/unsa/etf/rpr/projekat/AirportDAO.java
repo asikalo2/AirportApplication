@@ -759,10 +759,11 @@ public class AirportDAO {
     }
     public void changeFlightType(FlightType flightType) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE flight_types SET id=?, name=? WHERE id=?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE flight_types SET name=? WHERE id=?");
 
-            stmt.setInt(1, flightType.getId());
-            stmt.setString(2, flightType.getName());
+            stmt.setString(1, flightType.getName());
+            stmt.setInt(2, flightType.getId());
+
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
