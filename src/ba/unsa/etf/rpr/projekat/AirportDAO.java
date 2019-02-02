@@ -728,11 +728,11 @@ public class AirportDAO {
     }
     public void changeAirline(Airline airline) {
         try {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE airline_companies SET id=?, name=?, code=? WHERE id=?");
+            PreparedStatement stmt = conn.prepareStatement("UPDATE airline_companies SET name=?, code=? WHERE id=?");
 
-            stmt.setInt(1, airline.getId());
-            stmt.setString(2, airline.getName());
-            stmt.setString(3, airline.getCode());
+            stmt.setString(1, airline.getName());
+            stmt.setString(2, airline.getCode());
+            stmt.setInt(3, airline.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
