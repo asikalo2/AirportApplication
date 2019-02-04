@@ -1,14 +1,14 @@
 package ba.unsa.etf.rpr.projekat;
 
+import com.google.zxing.WriterException;
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
+import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -20,8 +20,12 @@ public class PassengerController {
     public Label flightLabel;
     public TextField flightField;
     public Label qrCodeLabel;
-    public TextField qrCodeField;
+    //public TextField qrCodeField;
     public ComboBox<Flight> flight;
+    public ImageView qrCodeView;
+
+    public ToggleButton checkInToggle;
+
     public SimpleStringProperty idProperty;
     public SimpleStringProperty nameProperty;
     public SimpleObjectProperty<Flight> flightProperty;
@@ -121,6 +125,28 @@ public class PassengerController {
     public void cancelFormBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
+    }
+
+    public void toggleCheckIn(ActionEvent actionEvent) {
+        if (checkInToggle.isSelected()) {
+            checkInToggle.setText("Yes");
+            try {
+                if (nameProperty.get() != null && flightProperty.get() != null) {
+                    WritableImage wr = Utils.generateQrCode(nameProperty.get(),
+                            flightProperty.get().getAirlineName() + "|" + flightProperty.get().getCode());
+
+                    qrCodeView.setImage(wr);
+                }
+            }
+            catch (WriterException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else {
+            checkInToggle.setText("No");
+            qrCodeView.setImage(null);
+        }
+
     }
 
     private boolean isFormValid() {

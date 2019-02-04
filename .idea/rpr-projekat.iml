@@ -13,5 +13,6 @@
     <orderEntry type="library" name="org.xerial:sqlite-jdbc:3.25.2" level="project" />
     <orderEntry type="library" name="org.junit.jupiter:junit-jupiter-api:5.2.0" level="project" />
     <orderEntry type="library" name="no.tornado:tornadofx-controls:1.0.6" level="project" />
+    <orderEntry type="library" name="com.google.zxing:core:3.3.3" level="project" />
   </component>
 </module>
