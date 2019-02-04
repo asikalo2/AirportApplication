@@ -274,10 +274,13 @@ public class AirportDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Image img;
-                if (rs.getBytes(4) != null)
-                    img = new Image(new ByteArrayInputStream(rs.getBytes(4)));
-                else
+                byte[] buf = rs.getBytes(4);
+                if (buf != null) {
+                    img = Utils.getImageFromByteArray(buf);
+                }
+                else {
                     img = null;
+                }
                 Flight flight = getFlightById(rs.getInt(3));
                 Passenger passenger = new Passenger(rs.getInt(1),rs.getString(2), flight,
                         img);

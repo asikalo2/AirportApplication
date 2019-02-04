@@ -81,6 +81,13 @@ public class PassengerController {
         nameProperty.set(currentPassenger.getName());
         flightProperty.setValue(currentPassenger.getFlight());
         qrCodeProperty.set(currentPassenger.getQrCode());
+        //qrCodeView.setImage(currentPassenger.getQrCode());
+        if (currentPassenger.getCheckedIn() == "Yes") {
+            checkInToggle.setSelected(true);
+            checkInToggle.setText("Yes");
+        }
+
+        //System.out.println(currentPassenger.getQrCode().getWidth());
     }
 
     private void initializeDataBinding() {
@@ -88,6 +95,7 @@ public class PassengerController {
         nameField.textProperty().bindBidirectional(nameProperty);
         flight.valueProperty().bindBidirectional(flightProperty);
         //qrCodeField.textProperty().bindBidirectional(qrCodeProperty);
+        qrCodeView.imageProperty().bindBidirectional(qrCodeProperty);
     }
 
     private void dodajListenere() {
@@ -135,7 +143,8 @@ public class PassengerController {
                     WritableImage wr = Utils.generateQrCode(nameProperty.get(),
                             flightProperty.get().getAirlineName() + "|" + flightProperty.get().getCode());
 
-                    qrCodeView.setImage(wr);
+                    //qrCodeView.setImage(wr);
+                    qrCodeProperty.set(wr);
                 }
             }
             catch (WriterException ex) {
@@ -144,7 +153,8 @@ public class PassengerController {
         }
         else {
             checkInToggle.setText("No");
-            qrCodeView.setImage(null);
+            //qrCodeView.setImage(null);
+            qrCodeProperty.set(null);
         }
 
     }
