@@ -75,7 +75,7 @@ public class Controller implements Initializable {
         fillTableFlights();
         fillTableFlightTypes();
         fillTableLuggages();
-        //fillTablePassengers();
+        fillTablePassengers();
         fillTableRoles();
         fillTableUsers();
     }
@@ -133,8 +133,8 @@ public class Controller implements Initializable {
 
         idPassenger.setCellValueFactory(new PropertyValueFactory("id"));
         namePassenger.setCellValueFactory(new PropertyValueFactory("name"));
-        flightPassenger.setCellValueFactory(new PropertyValueFactory("flight"));
-        qrPassenger.setCellValueFactory(new PropertyValueFactory("qrCode"));
+        flightPassenger.setCellValueFactory(new PropertyValueFactory("flightName"));
+        qrPassenger.setCellValueFactory(new PropertyValueFactory("checkedIn"));
         tabelePassenger.setItems(listPassengers);
     }
 

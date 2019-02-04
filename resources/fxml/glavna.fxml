@@ -160,7 +160,7 @@
                             <TableColumn fx:id="idPassenger" prefWidth="50.0" text="Id"/>
                             <TableColumn fx:id="namePassenger" prefWidth="180.0" text="Name"/>
                             <TableColumn fx:id="flightPassenger" prefWidth="180.0" text="Flight"/>
-                            <TableColumn fx:id="qrPassenger" prefWidth="180.0" text="Qr Code"/>
+                            <TableColumn fx:id="qrPassenger" prefWidth="180.0" text="Checked In"/>
                         </columns>
                     </TableView>
                 </VBox>

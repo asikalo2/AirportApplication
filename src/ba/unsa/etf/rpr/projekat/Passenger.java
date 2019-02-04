@@ -8,7 +8,8 @@ public class Passenger {
     private Flight flight;
     private Image qrCode;
 
-    public Passenger(){}
+    public Passenger() {
+    }
 
     public Passenger(int id, String name, Flight flight, Image qrCode) {
         this.id = id;
@@ -47,6 +48,15 @@ public class Passenger {
 
     public void setQrCode(Image qrCode) {
         this.qrCode = qrCode;
+    }
+
+    public String getCheckedIn() {
+        return this.qrCode != null ? "Yes" : "No";
+    }
+
+    public String getFlightName() {
+        return this.flight.getAirlineName() + "  |  " +
+                this.flight.getCode();
     }
 
 }
