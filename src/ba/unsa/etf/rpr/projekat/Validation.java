@@ -11,12 +11,6 @@ import java.util.List;
 
 public class Validation {
 
-        public static boolean isStringValid(String n) {
-            if (n.length() < 1)
-                return false;
-            return true;
-        }
-
         public static boolean isDateValid(String s) {
             DateFormat format = new SimpleDateFormat("M/d/yyyy");
             format.setLenient(false);
@@ -33,26 +27,79 @@ public class Validation {
             return true;
         }
 
-        private static boolean cifraCheck(String number) {
-            boolean validno = false;
+        private static boolean numberCheck(String number) {
+            boolean valid = false;
 
             char[] chars = number.toCharArray();
             for (int i = 0; i < chars.length; i++) {
-                validno = false;
+                valid = false;
                 if (((chars[i] >= '0') && (chars[i] <= '9'))) {
-                    validno = true;
+                    valid = true;
                 }
             }
-            return validno;
+            return valid;
         }
 
 
-        private static boolean charCheck(char c) {
-            // A, E, O, T, K, J, M, 0-9
-            if (c == 'A' || c == 'E' || c == 'O' || c == 'T' || c == 'K' || c == 'J' || c == 'M' ||
-                    (c > '0' && c < '9'))
+
+        private static boolean charCheck(char charx) {
+            if ((charx >= '0') && (charx <= '9'))
                 return true;
+        return false;
+        }
+
+        private static boolean upperLetter(char c){
+            if(c >= 'A' && c <='Z') return true;
             return false;
+        }
+        private static boolean lowerLetter(char c){
+            if(c >= 'a' && c <='z') return true;
+        return false;
+        }
+        private static boolean justLetter(char c){
+            if((c >= 'A' && c <='Z') || (c >= 'a' && c <='z')) return true;
+        return false;
+        }
+        private static boolean isValidString(String s){
+            if(s.length()<1) return false;
+            int i=0;
+                for (i=0; i<s.length(); i++)
+                    if(!charCheck(s.charAt(i)) || !justLetter(s.charAt(i))) return false;
+        return true;
+        }
+
+        private static boolean name(String s){
+            if (s.length() > 15) return false;
+            int i=0;
+            for(i=0; i<s.length(); i++){
+                if(!justLetter(s.charAt(i))) return false;
+            }
+            return true;
+        }
+
+
+        private static boolean flightNumberLength(String string){
+            int i = 0;
+            int counter = 0;
+
+            for(i=0; i<string.length(); i++) {
+                if (charCheck(string.charAt(i)) == true)
+                    counter++;
+            }
+            if (counter>4 || counter<1) return false;
+            return true;
+        }
+
+        private static boolean flightCode(String string){
+            if (string.length()!=6) return false;
+            if(!upperLetter(string.charAt(0))) return false;
+            if(lowerLetter(string.charAt(1))) return false;
+
+            int i = 0;
+            for (i = 2; i<string.length(); i++){
+                if(justLetter(string.charAt(i))) return false;
+            }
+            return true;
         }
 
 }
