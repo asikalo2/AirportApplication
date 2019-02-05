@@ -5,8 +5,15 @@ import javafx.fxml.FXMLLoader;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.stage.Stage;
+import javafx.stage.Window;
 
 public class Main extends Application {
+
+    private static Stage stage;
+
+    public static Stage getStage() {
+        return stage;
+    }
 
     @Override
     public void start(Stage primaryStage) throws Exception{

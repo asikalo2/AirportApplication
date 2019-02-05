@@ -22,8 +22,20 @@
         <ToggleGroup fx:id="toggleGroup1"/>
     </fx:define>
 
-    <TabPane maxWidth="Infinity" maxHeight="Infinity">
+    <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
+        <menus>
+            <Menu text="File">
+                <items>
+                    <MenuItem onAction="#saveAction" text="Save As" />
+                    <MenuItem onAction="#viewReportAction" text="Flights Report" />
+                    <MenuItem onAction="#viewReportAction" text="Passengers Report" />
+                    <MenuItem onAction="#viewReportAction" text="Users Report" />
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
 
+    <TabPane maxWidth="Infinity" maxHeight="Infinity">
         <tabs>
 
             <Tab text="Airlines" fx:id="airlineTab">

@@ -1,5 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
+import javafx.application.Platform;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -10,14 +11,21 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
+import javafx.scene.input.KeyEvent;
+import javafx.stage.FileChooser;
 import javafx.stage.Stage;
+import net.sf.jasperreports.engine.JRException;
+import org.apache.commons.io.FilenameUtils;
 
+import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
 public class Controller implements Initializable {
+
+    private ResourceBundle bundle;
     public TableView tableAirline;
     public TableColumn idAirline;
     public TableColumn nameAirline;
@@ -55,6 +63,38 @@ public class Controller implements Initializable {
     public TableColumn nameRole;
     private AirportDAO dao;
 
+
+    public void saveAction(ActionEvent actionEvent) throws IOException {
+        FileChooser fileChooser = new FileChooser();
+
+        FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
+        FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("DOCX files (*.docx)", "*.docx");
+        FileChooser.ExtensionFilter extFilter3 = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
+
+        fileChooser.getExtensionFilters().add(extFilter1);
+        fileChooser.getExtensionFilters().add(extFilter2);
+        fileChooser.getExtensionFilters().add(extFilter3);
+
+        File file = fileChooser.showSaveDialog(Main.getStage());
+
+        if (file != null) {
+            FlightsReport flightsReport = new FlightsReport();
+            try {
+                flightsReport.saveAs(FilenameUtils.getExtension(file.getCanonicalPath()).toUpperCase(),
+                        AirportDAO.getConn(),
+                        file.getCanonicalPath());
+            }
+            catch (JRException ex) {
+                ex.printStackTrace();
+            }
+
+        }
+    }
+
+    public void exitAction(ActionEvent actionEvent) {
+        Platform.exit();
+    }
+
     public void setSQLite(ActionEvent actionEvent) {
         dao = new AirportDAO();
         fillTableAirlines();
@@ -70,6 +110,7 @@ public class Controller implements Initializable {
     @Override
     public void initialize(URL url, ResourceBundle resourceBundle) {
         dao = new AirportDAO();
+        bundle = resourceBundle;
         fillTableAirlines();
         fillTableAirplanes();
         fillTableFlights();
@@ -827,4 +868,34 @@ public class Controller implements Initializable {
             ex.printStackTrace();
         }
     }
+
+    public void handleKeyInput(KeyEvent keyEvent) {
+    }
+
+    public void viewReportAction(ActionEvent actionEvent) {
+        FlightsReport flightsReport = new FlightsReport();
+        try {
+            flightsReport.showReport(AirportDAO.getConn());
+        }
+        catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+  /*  public void viewReportCountryAction(ActionEvent actionEvent) {
+        try {
+            FXMLLoader fxmlLoader = new FXMLLoader();
+            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+            fxmlLoader.setResources(bundle);
+            fxmlLoader.setLocation(getClass().getResource("odabirDrzave.fxml"));
+            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
+            Stage stage = new Stage();
+            stage.setTitle("New Window");
+            stage.setScene(scene);
+            stage.show();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }*/
 }
