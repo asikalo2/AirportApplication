@@ -90,5 +90,12 @@ public class Flight {
         this.user = user;
     }
     public String getUserName() { return user.getName(); }
+    public Gate getGate() {
+        return gate;
+    }
+
+    public void setGate(Gate gate) {
+        this.gate = gate;
+    }
 
 }
