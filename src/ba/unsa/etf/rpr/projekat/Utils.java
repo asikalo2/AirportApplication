@@ -16,6 +16,8 @@ import javax.swing.plaf.synth.SynthTextAreaUI;
 import java.awt.image.BufferedImage;
 import java.awt.image.WritableRaster;
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.IOException;
 
 public class Utils {
 
@@ -83,6 +85,16 @@ public class Utils {
             }
         }
         return wr;
+    }
+
+    public static void saveToFile(Image image) {
+        File outputFile = new File("qrcode.png");
+        BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
+        try {
+            ImageIO.write(bImage, "png", outputFile);
+        } catch (IOException e) {
+            throw new RuntimeException(e);
+        }
     }
 
 }

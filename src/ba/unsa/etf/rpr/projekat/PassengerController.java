@@ -11,6 +11,9 @@ import javafx.scene.image.ImageView;
 import javafx.scene.image.WritableImage;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
+import net.sf.jasperreports.engine.JRException;
+
+import java.time.LocalDate;
 
 public class PassengerController {
     public Label idLabel;
@@ -123,6 +126,19 @@ public class PassengerController {
             } else {
                 dao.changePassenger(currentPassenger);
             }
+            Utils.saveToFile(currentPassenger.getQrCode());
+            Reports reports = new Reports();
+            try {
+                String boardingTime = currentPassenger.getFlight().getStartOfUsingTheRunway().
+                        minusMinutes(30).toLocalTime().toString();
+                String titleDate = LocalDate.now().toString();
+                reports.showBoadingPass(currentPassenger.getName(), currentPassenger.getFlight().getAirlineName(),
+                        currentPassenger.getFlightName(), titleDate, boardingTime);
+            }
+            catch (JRException ex) {
+                ex.printStackTrace();
+            }
+
             Stage stage = (Stage) okButton.getScene().getWindow();
             // do what you have to do
             stage.close();
