@@ -13,12 +13,13 @@ public class Flight {
     private LocalDateTime endOfUsingTheRunway;
     private FlightType flightType;
     private User user;
+    private Gate gate;
 
     public Flight(){
     }
 
     public Flight(int id, String code, Airplane airplane, LocalDateTime startOfUsingTheRunway,
-                  LocalDateTime endOfUsingTheRunway, FlightType flightType, User user) {
+                  LocalDateTime endOfUsingTheRunway, FlightType flightType, User user, Gate gate) {
         this.id = id;
         this.airplane = airplane;
         this.code = code;
@@ -26,6 +27,7 @@ public class Flight {
         this.endOfUsingTheRunway = endOfUsingTheRunway;
         this.flightType = flightType;
         this.user = user;
+        this.gate = gate;
     }
 
     public int getId() {

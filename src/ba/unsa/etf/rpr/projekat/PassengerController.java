@@ -68,7 +68,7 @@ public class PassengerController {
 
             @Override
             public Flight fromString(String string) {
-                Flight newFlight = new Flight(0, string, null, null,null,null, null);
+                Flight newFlight = new Flight(0, string, null, null,null,null, null, null);
 
                 return newFlight;
             }

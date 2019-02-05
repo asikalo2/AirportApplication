@@ -86,7 +86,7 @@ public class AirportDAO {
         return null;
     }
 
-    public Airplane getPlaneById(int id){
+    public Airplane getPlaneById(int id) {
 
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from planes join airline_companies " +
@@ -114,7 +114,7 @@ public class AirportDAO {
         return null;
     }
 
-    public User getUserById(int id){
+    public User getUserById(int id) {
 
         try {
             PreparedStatement stmt = conn.prepareStatement("select * from users join roles " +
@@ -158,19 +158,20 @@ public class AirportDAO {
     public ObservableList<Flight> getFlights() {
         ArrayList<Flight> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types on " +
-                    "flights.flight_type=flight_types.id");
+            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types, gates on \n" +
+                    "flights.flight_type=flight_types.id and flights.gate=gates.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Airplane airplane = getPlaneById(rs.getInt(3));
                 User user = getUserById(rs.getInt(7));
-                LocalDateTime startOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(4) ),
+                LocalDateTime startOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond(rs.getLong(4)),
                         TimeZone.getDefault().toZoneId());
-                LocalDateTime endOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(5) ),
+                LocalDateTime endOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond(rs.getLong(5)),
                         TimeZone.getDefault().toZoneId());
                 FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
+                Gate gate = new Gate(rs.getInt(11), rs.getString(12));
                 Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
-                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
+                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
                 res.add(flight);
 
             }
@@ -181,11 +182,11 @@ public class AirportDAO {
         return null;
     }
 
-    public Flight getFlightById(int id){
+    public Flight getFlightById(int id) {
 
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types on " +
-                    "flights.flight_type=flight_types.id where flights.id=?");
+            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types, gates on " +
+                    "flights.flight_type=flight_types.id and flights.gate=gates.id where flights.id=?");
 
             stmt.setInt(1, id);
             ResultSet rs = stmt.executeQuery();
@@ -193,13 +194,14 @@ public class AirportDAO {
             while (rs.next()) {
                 Airplane airplane = getPlaneById(rs.getInt(3));
                 User user = getUserById(rs.getInt(7));
-                LocalDateTime startOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(4) ),
+                LocalDateTime startOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond(rs.getLong(4)),
                         TimeZone.getDefault().toZoneId());
-                LocalDateTime endOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond( rs.getLong(5) ),
+                LocalDateTime endOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond(rs.getLong(5)),
                         TimeZone.getDefault().toZoneId());
                 FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
+                Gate gate = new Gate(rs.getInt(11), rs.getString(12));
                 Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
-                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user);
+                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
                 return flight;
             }
         } catch (SQLException ex) {
@@ -238,7 +240,7 @@ public class AirportDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Role ro = new Role(rs.getInt(4), rs.getString(5));
-                User u = new User(rs.getInt(1), rs.getString(2),ro);
+                User u = new User(rs.getInt(1), rs.getString(2), ro);
                 res.add(u);
             }
             return FXCollections.observableArrayList(res);
@@ -277,12 +279,11 @@ public class AirportDAO {
                 byte[] buf = rs.getBytes(4);
                 if (buf != null) {
                     img = Utils.getImageFromByteArray(buf);
-                }
-                else {
+                } else {
                     img = null;
                 }
                 Flight flight = getFlightById(rs.getInt(3));
-                Passenger passenger = new Passenger(rs.getInt(1),rs.getString(2), flight,
+                Passenger passenger = new Passenger(rs.getInt(1), rs.getString(2), flight,
                         img);
                 res.add(passenger);
 
@@ -598,8 +599,7 @@ public class AirportDAO {
         }
     }
 
-    public void addUser(User user)
-    {
+    public void addUser(User user) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO users(id, name, role) VALUES(?,?,?)");
             stmt.setInt(1, user.getId());
@@ -611,8 +611,7 @@ public class AirportDAO {
         }
     }
 
-    public void addAirplane(Airplane airplane)
-    {
+    public void addAirplane(Airplane airplane) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO planes(id, airline_company," +
                     "supplier, type, seats) VALUES(?,?,?,?,?)");
@@ -628,8 +627,7 @@ public class AirportDAO {
         }
     }
 
-    public void addAirline(Airline airline)
-    {
+    public void addAirline(Airline airline) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO airline_companies(id, name, code) VALUES(?,?,?)");
             stmt.setInt(1, airline.getId());
@@ -641,8 +639,7 @@ public class AirportDAO {
         }
     }
 
-    public void addLuggage(Luggage luggage)
-    {
+    public void addLuggage(Luggage luggage) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO luggages(id, passenger) VALUES(?,?)");
             stmt.setInt(1, luggage.getId());
@@ -653,8 +650,7 @@ public class AirportDAO {
         }
     }
 
-    public void addFlightType(FlightType flightType)
-    {
+    public void addFlightType(FlightType flightType) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO flight_types(id, name) " +
                     "VALUES(?,?)");
@@ -666,8 +662,7 @@ public class AirportDAO {
         }
     }
 
-    public void addFlight(Flight flight)
-    {
+    public void addFlight(Flight flight) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO flights (id,flight_number, plane, " +
                     "runway_occupy_start, runway_occupy_end,flight_type,reg_user VALUES(?,?,?,?,?,?,?)");
@@ -687,8 +682,7 @@ public class AirportDAO {
         }
     }
 
-    public void addRole(Role role)
-    {
+    public void addRole(Role role) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO roles(id, name) VALUES(?,?)");
             stmt.setInt(1, role.getId());
@@ -704,14 +698,14 @@ public class AirportDAO {
             PreparedStatement stmt = conn.prepareStatement("UPDATE passengers SET name=?, flight=?," +
                     "qr_code=? WHERE id=?");
 
-                stmt.setString(1, passenger.getName());
-                stmt.setInt(2, passenger.getFlight().getId());
-                stmt.setBytes(3, Utils.getByteArrayFromImage(passenger.getQrCode()));
-                stmt.setInt(4, passenger.getId());
-                stmt.executeUpdate();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            stmt.setString(1, passenger.getName());
+            stmt.setInt(2, passenger.getFlight().getId());
+            stmt.setBytes(3, Utils.getByteArrayFromImage(passenger.getQrCode()));
+            stmt.setInt(4, passenger.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
     }
 
     public void changeAirplane(Airplane airplane) {
@@ -730,6 +724,7 @@ public class AirportDAO {
             ex.printStackTrace();
         }
     }
+
     public void changeAirline(Airline airline) {
         try {
             PreparedStatement stmt = conn.prepareStatement("UPDATE airline_companies SET name=?, code=? WHERE id=?");
@@ -742,6 +737,7 @@ public class AirportDAO {
             ex.printStackTrace();
         }
     }
+
     public void changeFlight(Flight flight) {
         try {
             PreparedStatement stmt = conn.prepareStatement("UPDATE flights SET flight_number=?," +
@@ -762,6 +758,7 @@ public class AirportDAO {
             ex.printStackTrace();
         }
     }
+
     public void changeFlightType(FlightType flightType) {
         try {
             PreparedStatement stmt = conn.prepareStatement("UPDATE flight_types SET name=? WHERE id=?");
@@ -774,6 +771,7 @@ public class AirportDAO {
             ex.printStackTrace();
         }
     }
+
     public void changeLuggage(Luggage luggage) {
         try {
             PreparedStatement stmt = conn.prepareStatement("UPDATE luggages SET passenger=? WHERE id=?");
@@ -786,6 +784,7 @@ public class AirportDAO {
             ex.printStackTrace();
         }
     }
+
     public void changeRole(Role role) {
         try {
             PreparedStatement stmt = conn.prepareStatement("UPDATE roles SET name=? WHERE id=?");
@@ -798,6 +797,7 @@ public class AirportDAO {
             ex.printStackTrace();
         }
     }
+
     public void changeUser(User user) {
         try {
             PreparedStatement stmt = conn.prepareStatement("UPDATE users SET name=?, role=? WHERE id=?");
@@ -841,8 +841,7 @@ public class AirportDAO {
             conn.close();
             conn = null;
             instance = null;
-        }
-        catch (SQLException ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
     }
@@ -870,16 +869,16 @@ public class AirportDAO {
     }
 
     public void changeGate(Gate gate) {
-            try {
-                PreparedStatement stmt = conn.prepareStatement("UPDATE gates SET name=? WHERE id=?");
+        try {
+            PreparedStatement stmt = conn.prepareStatement("UPDATE gates SET name=? WHERE id=?");
 
 
-                stmt.setString(1, gate.getName());
-                stmt.setInt(2, gate.getId());
-                stmt.executeUpdate();
-            } catch (SQLException ex) {
-                ex.printStackTrace();
-            }
+            stmt.setString(1, gate.getName());
+            stmt.setInt(2, gate.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
 
     }
 }
