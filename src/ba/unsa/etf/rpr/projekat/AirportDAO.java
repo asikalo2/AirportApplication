@@ -846,4 +846,40 @@ public class AirportDAO {
             ex.printStackTrace();
         }
     }
+
+    public void deleteGate(Gate gate) {
+
+        try {
+            PreparedStatement stmt = conn.prepareStatement("DELETE FROM gates WHERE id=?");
+            stmt.setInt(1, gate.getId());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void addGate(Gate gate) {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("INSERT INTO gates(id, name) VALUES(?,?)");
+            stmt.setInt(1, gate.getId());
+            stmt.setString(2, gate.getName());
+            stmt.executeUpdate();
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void changeGate(Gate gate) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement("UPDATE gates SET name=? WHERE id=?");
+
+
+                stmt.setString(1, gate.getName());
+                stmt.setInt(2, gate.getId());
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+
+    }
 }
