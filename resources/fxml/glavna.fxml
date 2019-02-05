@@ -28,8 +28,8 @@
                 <items>
                     <MenuItem onAction="#saveAction" text="Save As" />
                     <MenuItem onAction="#viewReportAction" text="Flights Report" />
-                    <MenuItem onAction="#viewReportAction" text="Passengers Report" />
-                    <MenuItem onAction="#viewReportAction" text="Users Report" />
+                    <MenuItem onAction="#viewReportActionPassenger" text="Passengers Report" />
+                    <MenuItem onAction="#viewReportActionUser" text="Users Report" />
                 </items>
             </Menu>
         </menus>

@@ -882,6 +882,27 @@ public class Controller implements Initializable {
         }
     }
 
+    public void viewReportActionUser(ActionEvent actionEvent) {
+        UsersReport usersReport = new UsersReport();
+        try {
+            usersReport.showReport(AirportDAO.getConn());
+        }
+        catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void viewReportActionPassenger(ActionEvent actionEvent) {
+        PassengerReport passengerReport = new PassengerReport();
+        try {
+            passengerReport.showReport(AirportDAO.getConn());
+        }
+        catch (JRException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
   /*  public void viewReportCountryAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
