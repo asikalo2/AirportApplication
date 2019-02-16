@@ -813,15 +813,6 @@ public class AirportDAO {
     }
 
     public void addPassenger(Passenger passenger) {
-       /* if (vlasnik.getMjestoRodjenja().getId() == 0) {
-            vlasnik.getMjestoRodjenja().setId(dajNajveciIdMjesta() + 1);
-            dodajMjesto(vlasnik.getMjestoRodjenja());
-        }
-        if (vlasnik.getMjestoPrebivalista().getId() == 0) {
-            vlasnik.getMjestoPrebivalista().setId(dajNajveciIdMjesta() + 1);
-            dodajMjesto(vlasnik.getMjestoPrebivalista());
-        }*/
-        //vlasnik.setId(dajNajveciIdVlasnika()+1);
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO passengers(id, name, flight, qr_code) \n" +
                     "VALUES(?,?,?,?)");
