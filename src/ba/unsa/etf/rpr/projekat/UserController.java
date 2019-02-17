@@ -77,17 +77,36 @@ public class UserController {
         role.valueProperty().bindBidirectional(roleProperty);
     }
 
-    private void dodajListenere() {
-    }
-
-    public void stopFormBtn(ActionEvent actionEvent) {
+    public void cancelFormBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
+        if (isFormValid()) {
+            boolean adding = currentUser == null;
+
+            if (currentUser == null)
+                currentUser = new User();
+
+            currentUser.setId(Integer.valueOf((idProperty.get())));
+            currentUser.setName(nameProperty.get());
+            currentUser.setRole(roleProperty.get());
+
+
+            if (adding) {
+                dao.addUser(currentUser);
+            } else {
+                dao.changeUser(currentUser);
+            }
+            Stage stage = (Stage) okButton.getScene().getWindow();
+            // do what you have to do
+            stage.close();
+        }
     }
 
-    public void cancelFormBtn(ActionEvent actionEvent) {
+    private boolean isFormValid() {
+    return true;
     }
+
 }

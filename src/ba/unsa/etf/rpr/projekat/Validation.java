@@ -27,7 +27,7 @@ public class Validation {
             return true;
         }
 
-        private static boolean numberCheck(String number) {
+    public static boolean numberCheck(String number) {
             boolean valid = false;
 
             char[] chars = number.toCharArray();
@@ -42,33 +42,33 @@ public class Validation {
 
 
 
-        private static boolean charCheck(char charx) {
+    public static boolean charCheck(char charx) {
             if ((charx >= '0') && (charx <= '9'))
                 return true;
         return false;
         }
 
-        private static boolean upperLetter(char c){
+    public static boolean upperLetter(char c){
             if(c >= 'A' && c <='Z') return true;
             return false;
         }
-        private static boolean lowerLetter(char c){
+    public static boolean lowerLetter(char c){
             if(c >= 'a' && c <='z') return true;
         return false;
         }
-        private static boolean justLetter(char c){
+    public static boolean justLetter(char c){
             if((c >= 'A' && c <='Z') || (c >= 'a' && c <='z')) return true;
         return false;
         }
-        private static boolean isValidString(String s){
+    public static boolean isValidString(String s){
             if(s.length()<1) return false;
             int i=0;
                 for (i=0; i<s.length(); i++)
-                    if(!charCheck(s.charAt(i)) || !justLetter(s.charAt(i))) return false;
+                    if(!charCheck(s.charAt(i)) || !justLetter(s.charAt(i)) || s.charAt(i) != ' ') return false;
         return true;
         }
 
-        private static boolean name(String s){
+    public static boolean name(String s){
             if (s.length() > 15) return false;
             int i=0;
             for(i=0; i<s.length(); i++){
@@ -78,7 +78,7 @@ public class Validation {
         }
 
 
-        private static boolean flightNumberLength(String string){
+    public static boolean flightNumberLength(String string){
             int i = 0;
             int counter = 0;
 
@@ -90,7 +90,7 @@ public class Validation {
             return true;
         }
 
-        private static boolean flightCode(String string){
+        public static boolean flightCode(String string){
             if (string.length()!=6) return false;
             if(!upperLetter(string.charAt(0))) return false;
             if(lowerLetter(string.charAt(1))) return false;
@@ -102,4 +102,21 @@ public class Validation {
             return true;
         }
 
+    public static boolean isStringTooLong(String s){
+            int i=0, brojac=0;
+            for(i=0; i<s.length(); i++){
+                brojac++;
+            }
+            if(brojac>15) return false;
+            return true;
+    }
+
+    public static boolean isStringTooLong2(String text) {
+        int i=0, brojac=0;
+        for(i=0; i<text.length(); i++){
+            brojac++;
+        }
+        if(brojac>6) return false;
+        return true;
+    }
 }
