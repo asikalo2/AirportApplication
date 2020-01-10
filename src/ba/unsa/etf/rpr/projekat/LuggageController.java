@@ -56,6 +56,7 @@ public class LuggageController {
             }
         });
 
+        addListeners();
         if (currentLuggage != null) {
             fillForm();
         }
@@ -71,7 +72,19 @@ public class LuggageController {
         passenger.valueProperty().bindBidirectional(passengerProperty);
     }
 
-    private void dodajListenere() {
+    private void addListeners() {
+
+
+        idField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                idField.getStyleClass().removeAll("notCorrect");
+                idField.getStyleClass().add("correct");
+            }
+            else {
+                idField.getStyleClass().removeAll("correct");
+                idField.getStyleClass().add("notCorrect");
+            }
+        });
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {

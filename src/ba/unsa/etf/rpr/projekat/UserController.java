@@ -59,7 +59,7 @@ public class UserController {
                 return newRole;
             }
         });
-
+        addListeners();
         if (currentUser != null) {
             fillForm();
         }
@@ -75,6 +75,31 @@ public class UserController {
         idField.textProperty().bindBidirectional(idProperty);
         nameField.textProperty().bindBidirectional(nameProperty);
         role.valueProperty().bindBidirectional(roleProperty);
+    }
+
+    private void addListeners() {
+        nameField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isValidString(n)) {
+                nameField.getStyleClass().removeAll("notCorrect");
+                nameField.getStyleClass().add("correct");
+            }
+            else {
+                nameField.getStyleClass().removeAll("correct");
+                nameField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        idField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                idField.getStyleClass().removeAll("notCorrect");
+                idField.getStyleClass().add("correct");
+            }
+            else {
+                idField.getStyleClass().removeAll("correct");
+                idField.getStyleClass().add("notCorrect");
+            }
+        });
+
     }
 
     public void cancelFormBtn(ActionEvent actionEvent) {

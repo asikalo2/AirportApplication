@@ -34,6 +34,7 @@ public class GateController {
         @FXML
         public void initialize() {
             initializeDataBinding();
+            addListeners();
             if (currentgate != null) {
                 fillForm();
             }
@@ -49,9 +50,31 @@ public class GateController {
             nameField.textProperty().bindBidirectional(nameProperty);
         }
 
-        private void dodajListenere() {
-        }
+    private void addListeners() {
+        nameField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isValidString(n)) {
+                nameField.getStyleClass().removeAll("notCorrect");
+                nameField.getStyleClass().add("correct");
+            }
+            else {
+                nameField.getStyleClass().removeAll("correct");
+                nameField.getStyleClass().add("notCorrect");
+            }
+        });
 
+        idField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                idField.getStyleClass().removeAll("notCorrect");
+                idField.getStyleClass().add("correct");
+            }
+            else {
+                idField.getStyleClass().removeAll("correct");
+                idField.getStyleClass().add("notCorrect");
+            }
+        });
+
+
+    }
         public void stopFormBtn(ActionEvent actionEvent) {
             Stage stage = (Stage) cancelButton.getScene().getWindow();
             stage.close();

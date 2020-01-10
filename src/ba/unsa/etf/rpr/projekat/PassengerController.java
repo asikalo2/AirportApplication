@@ -23,7 +23,6 @@ public class PassengerController {
     public Label flightLabel;
     public TextField flightField;
     public Label qrCodeLabel;
-    //public TextField qrCodeField;
     public ComboBox<Flight> flight;
     public ImageView qrCodeView;
 
@@ -74,6 +73,7 @@ public class PassengerController {
             }
         });
 
+        addListeners();
         if (currentPassenger != null) {
             fillForm();
         }
@@ -101,7 +101,39 @@ public class PassengerController {
         qrCodeView.imageProperty().bindBidirectional(qrCodeProperty);
     }
 
-    private void dodajListenere() {
+    private void addListeners() {
+        nameField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isValidString(n)) {
+                nameField.getStyleClass().removeAll("notCorrect");
+                nameField.getStyleClass().add("correct");
+            }
+            else {
+                nameField.getStyleClass().removeAll("correct");
+                nameField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        idField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                idField.getStyleClass().removeAll("notCorrect");
+                idField.getStyleClass().add("correct");
+            }
+            else {
+                idField.getStyleClass().removeAll("correct");
+                idField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        flightField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isStringTooLong(n)) {
+                flightField.getStyleClass().removeAll("notCorrect");
+                flightField.getStyleClass().add("correct");
+            }
+            else {
+                flightField.getStyleClass().removeAll("correct");
+                flightField.getStyleClass().add("notCorrect");
+            }
+        });
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {
@@ -178,6 +210,44 @@ public class PassengerController {
     private boolean isFormValid() {
         return true;
     }
+
+/* VISENITNO
+ postanskiBrojField.focusedProperty().addListener(new ChangeListener<Boolean>() {
+            @Override
+            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
+                if (aBoolean && !t1) {
+                    validator.setBroj(postanskiBrojField.getText());
+
+                    Task<Boolean> task = new Task<Boolean>() {
+                        @Override
+                        protected Boolean call() throws Exception {
+                            //System.out.println("calling");
+                            return validator.provjeriPostanskiBroj(postanskiBrojField.getText());
+                        }
+                    };
+
+                    task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
+                        @Override
+                        public void handle(WorkerStateEvent workerStateEvent) {
+                            Boolean value = task.getValue();
+                            //System.out.println(value);
+                            if (value) {
+                                //System.out.println("test 1");
+                                postanskiBrojField.getStyleClass().removeAll("poljeNijeIspravno");
+                                postanskiBrojField.getStyleClass().add("poljeIspravno");
+                            } else {
+                                postanskiBrojField.getStyleClass().removeAll("poljeIspravno");
+                                postanskiBrojField.getStyleClass().add("poljeNijeIspravno");
+                            }
+                        }
+                    });
+
+                    new Thread(task).start();
+
+                }
+            }
+        });
+ */
 
 
 

@@ -2,6 +2,8 @@ package ba.unsa.etf.rpr.projekat;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -63,7 +65,7 @@ public class AirplaneController {
                 return newAirline;
             }
         });
-
+        addListeners();
         if (currentAirplane != null) {
             fillForm();
         }
@@ -85,7 +87,50 @@ public class AirplaneController {
         numberOfSeatsField.textProperty().bindBidirectional(numberOfSeatsProperty);
     }
 
-    private void dodajListenere() {
+    private void addListeners() {
+        manufacturerField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isValidString(n)) {
+                manufacturerField.getStyleClass().removeAll("notCorrect");
+                manufacturerField.getStyleClass().add("correct");
+            }
+            else {
+                manufacturerField.getStyleClass().removeAll("correct");
+                manufacturerField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        idField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                idField.getStyleClass().removeAll("notCorrect");
+                idField.getStyleClass().add("correct");
+            }
+            else {
+                idField.getStyleClass().removeAll("correct");
+                idField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        typeField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isStringTooLong(n)) {
+                typeField.getStyleClass().removeAll("notCorrect");
+                typeField.getStyleClass().add("correct");
+            }
+            else {
+                typeField.getStyleClass().removeAll("correct");
+                typeField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        numberOfSeatsField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                numberOfSeatsField.getStyleClass().removeAll("notCorrect");
+                numberOfSeatsField.getStyleClass().add("correct");
+            }
+            else {
+                numberOfSeatsField.getStyleClass().removeAll("correct");
+                numberOfSeatsField.getStyleClass().add("notCorrect");
+            }
+        });
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {
@@ -124,7 +169,7 @@ public class AirplaneController {
     }
 
     private boolean isFormValid() {
-        return true;
+        return Validation.isValidString(manufacturerField.getText());
     }
 
 

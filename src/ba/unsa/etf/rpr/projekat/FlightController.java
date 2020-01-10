@@ -86,7 +86,7 @@ public class FlightController {
 
         user.setItems(dao.getUsers());
         initializeDataBinding();
-
+        addListeners();
         user.setConverter(new StringConverter<User>() {
             @Override
             public String toString(User user) {
@@ -147,7 +147,50 @@ public class FlightController {
         user.valueProperty().bindBidirectional(userProperty);
     }
 
-    private void dodajListenere() {
+    private void addListeners() {
+        codeField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isValidString(n)) {
+                codeField.getStyleClass().removeAll("notCorrect");
+                codeField.getStyleClass().add("correct");
+            }
+            else {
+                codeField.getStyleClass().removeAll("correct");
+                codeField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        idField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                idField.getStyleClass().removeAll("notCorrect");
+                idField.getStyleClass().add("correct");
+            }
+            else {
+                idField.getStyleClass().removeAll("correct");
+                idField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        airplaneField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isStringTooLong(n)) {
+                airplaneField.getStyleClass().removeAll("notCorrect");
+                airplaneField.getStyleClass().add("correct");
+            }
+            else {
+                airplaneField.getStyleClass().removeAll("correct");
+                airplaneField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        flightTypeField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                flightTypeField.getStyleClass().removeAll("notCorrect");
+                flightTypeField.getStyleClass().add("correct");
+            }
+            else {
+                flightTypeField.getStyleClass().removeAll("correct");
+                flightTypeField.getStyleClass().add("notCorrect");
+            }
+        });
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {

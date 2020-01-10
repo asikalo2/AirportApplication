@@ -38,6 +38,7 @@ public class AirlineController {
     @FXML
     public void initialize() {
         initializeDataBinding();
+        addListeners();
         if (currentAirline != null) {
             fillForm();
         }
@@ -55,7 +56,40 @@ public class AirlineController {
         codeField.textProperty().bindBidirectional(codeProperty);
     }
 
-    private void dodajListenere() {
+    private void addListeners() {
+        nameField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isValidString2(n)) {
+                nameField.getStyleClass().removeAll("notCorrect");
+                nameField.getStyleClass().add("correct");
+            }
+            else {
+                nameField.getStyleClass().removeAll("correct");
+                nameField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        idField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.validateNumber(n)) {
+                idField.getStyleClass().removeAll("notCorrect");
+                idField.getStyleClass().add("correct");
+            }
+            else {
+                idField.getStyleClass().removeAll("correct");
+                idField.getStyleClass().add("notCorrect");
+            }
+        });
+
+        codeField.textProperty().addListener((observableValue, s, n) -> {
+            if (Validation.isStringTooLong(n)) {
+                codeField.getStyleClass().removeAll("notCorrect");
+                codeField.getStyleClass().add("correct");
+            }
+            else {
+                codeField.getStyleClass().removeAll("correct");
+                codeField.getStyleClass().add("notCorrect");
+            }
+        });
+
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {
@@ -116,7 +150,7 @@ public class AirlineController {
             nameField.getStyleClass().add("notCorrect");
         }
 
-        if (Validation.isStringTooLong2(codeField.getText())) {
+        if (Validation.isStringTooLong(codeField.getText())) {
             codeField.getStyleClass().removeAll("notCorrect");
             codeField.getStyleClass().add("correct");
         }
