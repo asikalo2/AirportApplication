@@ -1,7 +1,11 @@
 package ba.unsa.etf.rpr.projekat;
 
-import org.junit.jupiter.api.TestInstance;
+import org.junit.jupiter.api.Test;
 
-@TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class UserTest {
+
+    @Test
+    public void gettingUser(){
+
+    }
 }

@@ -78,7 +78,12 @@ public class FlightController {
 
             @Override
             public Airplane fromString(String string) {
-                Airplane newAirplane = new Airplane(0, null, string, "", 0);
+                Airplane newAirplane = null;
+                try {
+                    newAirplane = new Airplane(0, null, string, "", 0);
+                } catch (IllegalNumberOfSeats illegalNumberOfSeats) {
+                    illegalNumberOfSeats.printStackTrace();
+                }
 
                 return newAirplane;
             }

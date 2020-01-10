@@ -27,4 +27,6 @@ public class Luggage {
         this.passenger = passenger;
     }
     public String getPassengerName() { return passenger.getName(); }
+
+
 }

@@ -5,6 +5,8 @@ public class AdditionalLuggage extends Luggage {
     private double weight;
     private double payExtra;
 
+    private enum items {metal, clothes, money};
+
     public AdditionalLuggage(int id, Passenger passenger, double weight, double payExtra) {
         super(id, passenger);
         this.weight = weight;
