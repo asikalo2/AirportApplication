@@ -51,11 +51,13 @@ public class AirportDAOTest {
     void deleteDb() {
         File dbfile = new File("AirportDBtest.db");
         dbfile.delete();
+        dao.removeInstance();
     }
 
     @Test
     void getFlightTypes() {
         dao = new AirportDAO();
+
         assertEquals(4, dao.getFlightTypes().size());
         // Za sada samo ispis da vidim da li radi
 
@@ -88,7 +90,7 @@ public class AirportDAOTest {
     void getFlights() {
         dao = new AirportDAO();
         ObservableList<Flight> flights = dao.getFlights();
-        assertEquals(flights.size(), 109);
+        assertEquals(flights.size(), 1);
     }
 
 
@@ -105,10 +107,10 @@ public class AirportDAOTest {
 
     }
 
-    @Test
+    //@Test
     void deleteFlightType() {
         dao = new AirportDAO();
-        FlightType flightType = new FlightType();
+        FlightType flightType = new FlightType(dao.highestIdFlightTypes()+1, "test type");
         dao.addFlightType(flightType);
         ObservableList<FlightType> flightTypes = dao.getFlightTypes();
         assertEquals(5, flightTypes.size());
@@ -144,10 +146,15 @@ public class AirportDAOTest {
     @Test
     void addAirline() {
         dao = new AirportDAO();
-        Airline airline = new Airline(109, "Lufthansa", "LH C87");
+        Airline airline = new Airline(dao.highestIdAirline()+1, "Lufthansa1", "LH C871");
         dao.addAirline(airline);
         ObservableList<Airline> airlines = dao.getAirlines();
-        assertEquals(109, airlines.size());
+        assertEquals(108, airlines.size());
+        dao.removeInstance();
+        dao = new AirportDAO();
+        dao.deleteAirline(airline);
+        ObservableList<Airline> airlines1 = dao.getAirlines();
+        assertEquals(107, airlines1.size());
     }
 
    /* @Test
