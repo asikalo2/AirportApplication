@@ -30,7 +30,7 @@ public class Controller implements Initializable {
     public TableColumn idAirline;
     public TableColumn nameAirline;
     public TableColumn codeAirline;
-    public TableView tabelaAirplanes;
+    public TableView tableAirplanes;
     public TableColumn idAirplane;
     public TableColumn airlineAirplane;
     public TableColumn manufacturerAirplane;
@@ -49,7 +49,7 @@ public class Controller implements Initializable {
     public TableView tableLuggage;
     public TableColumn idLuggage;
     public TableColumn passengerLuggage;
-    public TableView tabelePassenger;
+    public TableView tablePassenger;
     public TableColumn idPassenger;
     public TableColumn namePassenger;
     public TableColumn flightPassenger;
@@ -101,7 +101,7 @@ public class Controller implements Initializable {
         fillTableAirplanes();
         fillTableFlights();
         fillTableFlightTypes();
-        fillTableLuggages();
+        fillTableLuggage();
         fillTablePassengers();
         fillTableRoles();
         fillTableUsers();
@@ -115,7 +115,7 @@ public class Controller implements Initializable {
         fillTableAirplanes();
         fillTableFlights();
         fillTableFlightTypes();
-        fillTableLuggages();
+        fillTableLuggage();
         fillTablePassengers();
         fillTableRoles();
         fillTableUsers();
@@ -138,7 +138,7 @@ public class Controller implements Initializable {
         manufacturerAirplane.setCellValueFactory(new PropertyValueFactory("manufacturer"));
         typeAirplane.setCellValueFactory(new PropertyValueFactory("type"));
         numberOfSeatsAirplane.setCellValueFactory(new PropertyValueFactory("numberOfSeats"));
-        tabelaAirplanes.setItems(listAirplanes);
+        tableAirplanes.setItems(listAirplanes);
     }
 
     private void fillTableFlights() {
@@ -161,7 +161,7 @@ public class Controller implements Initializable {
         tableFlightType.setItems(listFlightType);
     }
 
-    private void fillTableLuggages() {
+    private void fillTableLuggage() {
         ObservableList<Luggage> listLuggage = dao.getLuggages();
 
         idLuggage.setCellValueFactory(new PropertyValueFactory("id"));
@@ -176,7 +176,7 @@ public class Controller implements Initializable {
         namePassenger.setCellValueFactory(new PropertyValueFactory("name"));
         flightPassenger.setCellValueFactory(new PropertyValueFactory("flightName"));
         qrPassenger.setCellValueFactory(new PropertyValueFactory("checkedIn"));
-        tabelePassenger.setItems(listPassengers);
+        tablePassenger.setItems(listPassengers);
     }
 
     private void fillTableUsers() {
@@ -342,10 +342,10 @@ public class Controller implements Initializable {
             stage.setTitle("Airplane");
             stage.setScene(scene);
             stage.setOnCloseRequest(event-> {
-                tabelaAirplanes.setItems(dao.getAirplanes());
+                tableAirplanes.setItems(dao.getAirplanes());
             });
             stage.setOnHiding(event-> {
-                tabelaAirplanes.setItems(dao.getAirplanes());
+                tableAirplanes.setItems(dao.getAirplanes());
             });
             stage.show();
         }
@@ -361,7 +361,7 @@ public class Controller implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            if (tabelaAirplanes.getSelectionModel().getSelectedItems().size() == 0) {
+            if (tableAirplanes.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
                 alert.setContentText("Deleting is not possible!");
@@ -369,7 +369,7 @@ public class Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            Airplane airplane = (Airplane) tabelaAirplanes.getSelectionModel().getSelectedItem();
+            Airplane airplane = (Airplane) tableAirplanes.getSelectionModel().getSelectedItem();
 
             try {
                 dao.deleteAirplane(airplane);
@@ -384,13 +384,13 @@ public class Controller implements Initializable {
         } else {
             // ... user chose CANCEL or closed the dialog
         }
-        tabelaAirplanes.setItems(dao.getAirplanes());
+        tableAirplanes.setItems(dao.getAirplanes());
     }
 
     public void editAirplane(ActionEvent actionEvent) {
-        if (tabelaAirplanes.getSelectionModel().getSelectedItems() == null)
+        if (tableAirplanes.getSelectionModel().getSelectedItems() == null)
             return;
-        Airplane airplane = (Airplane) tabelaAirplanes.getSelectionModel().getSelectedItem();
+        Airplane airplane = (Airplane) tableAirplanes.getSelectionModel().getSelectedItem();
 
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -402,10 +402,10 @@ public class Controller implements Initializable {
             stage.setTitle("Airplane");
             stage.setScene(scene);
             stage.setOnCloseRequest(event-> {
-                tabelaAirplanes.setItems(dao.getAirplanes());
+                tableAirplanes.setItems(dao.getAirplanes());
             });
             stage.setOnHiding(event-> {
-                tabelaAirplanes.setItems(dao.getAirplanes());
+                tableAirplanes.setItems(dao.getAirplanes());
             });
             stage.show();
         }
@@ -627,10 +627,10 @@ public class Controller implements Initializable {
             stage.setTitle("Passenger");
             stage.setScene(scene);
             stage.setOnCloseRequest(event-> {
-                tabelePassenger.setItems(dao.getPassengers());
+                tablePassenger.setItems(dao.getPassengers());
             });
             stage.setOnHiding(event-> {
-                tabelePassenger.setItems(dao.getPassengers());
+                tablePassenger.setItems(dao.getPassengers());
             });
             stage.show();
         }
@@ -647,7 +647,7 @@ public class Controller implements Initializable {
 
         Optional<ButtonType> result = alert.showAndWait();
         if (result.get() == ButtonType.OK){
-            if (tabelePassenger.getSelectionModel().getSelectedItems().size() == 0) {
+            if (tablePassenger.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
                 alert.setContentText("Deleting is not possible!");
@@ -655,7 +655,7 @@ public class Controller implements Initializable {
                 alert.showAndWait();
                 return;
             }
-            Passenger passenger = (Passenger) tabelePassenger.getSelectionModel().getSelectedItem();
+            Passenger passenger = (Passenger) tablePassenger.getSelectionModel().getSelectedItem();
 
             try {
                 dao.deletePassenger(passenger);
@@ -670,13 +670,13 @@ public class Controller implements Initializable {
         } else {
             // ... user chose CANCEL or closed the dialog
         }
-        tabelePassenger.setItems(dao.getPassengers());
+        tablePassenger.setItems(dao.getPassengers());
     }
 
     public void editPassenger(ActionEvent actionEvent) {
-        if (tabelePassenger.getSelectionModel().getSelectedItems() == null)
+        if (tablePassenger.getSelectionModel().getSelectedItems() == null)
             return;
-        Passenger passenger = (Passenger) tabelePassenger.getSelectionModel().getSelectedItem();
+        Passenger passenger = (Passenger) tablePassenger.getSelectionModel().getSelectedItem();
 
         try {
             FXMLLoader loader = new FXMLLoader();
@@ -688,10 +688,10 @@ public class Controller implements Initializable {
             stage.setTitle("Passenger");
             stage.setScene(scene);
             stage.setOnCloseRequest(event-> {
-                tabelePassenger.setItems(dao.getPassengers());
+                tablePassenger.setItems(dao.getPassengers());
             });
             stage.setOnHiding(event-> {
-                tabelePassenger.setItems(dao.getPassengers());
+                tablePassenger.setItems(dao.getPassengers());
             });
             stage.show();
         }
@@ -903,12 +903,12 @@ public class Controller implements Initializable {
     }
 
 
-  /*  public void viewReportCountryAction(ActionEvent actionEvent) {
+    public void viewReportCountryAction(ActionEvent actionEvent) {
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             fxmlLoader.setResources(bundle);
-            fxmlLoader.setLocation(getClass().getResource("odabirDrzave.fxml"));
+            fxmlLoader.setLocation(getClass().getResource("languages.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             Stage stage = new Stage();
             stage.setTitle("New Window");
@@ -918,5 +918,5 @@ public class Controller implements Initializable {
             e.printStackTrace();
         }
 
-    }*/
+    }
 }

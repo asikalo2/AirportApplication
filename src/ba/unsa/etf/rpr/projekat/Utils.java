@@ -21,7 +21,6 @@ import java.io.IOException;
 
 public class Utils {
 
-
     public static byte[] getByteArrayFromImage(Image image) {
         if (image == null)
             return null;
@@ -33,8 +32,8 @@ public class Utils {
         return buf;
     }
 
-    public static int[] toIntArray(byte buf[]) {
-        int intArr[] = new int[buf.length / 4];
+    public static int[] toIntArray(byte[] buf) {
+        int[] intArr = new int[buf.length / 4];
         int offset = 0;
         for (int i = 0; i < intArr.length; i++) {
             intArr[i] = (buf[3 + offset] & 0xFF) | ((buf[2 + offset] & 0xFF) << 8)

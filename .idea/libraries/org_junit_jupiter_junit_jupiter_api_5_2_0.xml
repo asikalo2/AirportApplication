@@ -1,6 +1,9 @@
 <component name="libraryTable">
   <library name="org.junit.jupiter:junit-jupiter-api:5.2.0" type="repository">
     <properties maven-id="org.junit.jupiter:junit-jupiter-api:5.2.0" />
+    <ANNOTATIONS>
+      <root url="file://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.3.1" />
+    </ANNOTATIONS>
     <CLASSES>
       <root url="jar://$MAVEN_REPOSITORY$/org/junit/jupiter/junit-jupiter-api/5.2.0/junit-jupiter-api-5.2.0.jar!/" />
       <root url="jar://$MAVEN_REPOSITORY$/org/apiguardian/apiguardian-api/1.0.0/apiguardian-api-1.0.0.jar!/" />

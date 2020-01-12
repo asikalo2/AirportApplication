@@ -4,11 +4,8 @@ import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.image.Image;
 
-//import javax.jws.soap.SOAPBinding;
-import java.io.ByteArrayInputStream;
 import java.sql.*;
 import java.time.Instant;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.ZoneId;
 import java.util.ArrayList;
@@ -171,7 +168,7 @@ public class AirportDAO {
                 FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
                 Gate gate = new Gate(rs.getInt(11), rs.getString(12));
                 Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
-                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
+                                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
                 res.add(flight);
 
             }
@@ -200,9 +197,8 @@ public class AirportDAO {
                         TimeZone.getDefault().toZoneId());
                 FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
                 Gate gate = new Gate(rs.getInt(11), rs.getString(12));
-                Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
+                return new Flight(rs.getInt(1), rs.getString(2), airplane,
                         startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
-                return flight;
             }
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -226,7 +222,7 @@ public class AirportDAO {
                 res.add(luggage);
             }
             return FXCollections.observableArrayList(res);
-        } catch (SQLException ex) {
+        } catch (SQLException | IllegalCode ex) {
             ex.printStackTrace();
         }
         return null;
@@ -263,7 +259,7 @@ public class AirportDAO {
                 res.add(airplane);
             }
             return FXCollections.observableArrayList(res);
-        } catch (SQLException ex) {
+        } catch (SQLException | IllegalNumberOfSeats ex) {
             ex.printStackTrace();
         }
         return null;
@@ -289,7 +285,7 @@ public class AirportDAO {
 
             }
             return FXCollections.observableArrayList(res);
-        } catch (SQLException ex) {
+        } catch (SQLException | IllegalCode ex) {
             ex.printStackTrace();
         }
         return null;

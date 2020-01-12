@@ -58,11 +58,10 @@ public class AirlineController {
 
     private void addListeners() {
         nameField.textProperty().addListener((observableValue, s, n) -> {
-            if (Validation.isValidString2(n)) {
+            if (Validation.isValidString3(n)) {
                 nameField.getStyleClass().removeAll("notCorrect");
                 nameField.getStyleClass().add("correct");
-            }
-            else {
+            } else {
                 nameField.getStyleClass().removeAll("correct");
                 nameField.getStyleClass().add("notCorrect");
             }
@@ -72,8 +71,7 @@ public class AirlineController {
             if (Validation.validateNumber(n)) {
                 idField.getStyleClass().removeAll("notCorrect");
                 idField.getStyleClass().add("correct");
-            }
-            else {
+            } else {
                 idField.getStyleClass().removeAll("correct");
                 idField.getStyleClass().add("notCorrect");
             }
@@ -83,8 +81,7 @@ public class AirlineController {
             if (Validation.isStringTooLong(n)) {
                 codeField.getStyleClass().removeAll("notCorrect");
                 codeField.getStyleClass().add("correct");
-            }
-            else {
+            } else {
                 codeField.getStyleClass().removeAll("correct");
                 codeField.getStyleClass().add("notCorrect");
             }
@@ -117,17 +114,13 @@ public class AirlineController {
             // do what you have to do
             stage.close();
         }
-     //   else {
-        //    setFlags();
-       // }
     }
 
     private void setFlags() {
         if (Validation.isStringTooLong(nameField.getText())) {
             nameField.getStyleClass().removeAll("notCorrect");
             nameField.getStyleClass().add("correct");
-        }
-        else {
+        } else {
             nameField.getStyleClass().removeAll("correct");
             nameField.getStyleClass().add("notCorrect");
         }
@@ -135,8 +128,7 @@ public class AirlineController {
         if (Validation.isValidString(codeField.getText())) {
             codeField.getStyleClass().removeAll("notCorrect");
             codeField.getStyleClass().add("correct");
-        }
-        else {
+        } else {
             codeField.getStyleClass().removeAll("correct");
             codeField.getStyleClass().add("notCorrect");
         }
@@ -144,8 +136,7 @@ public class AirlineController {
         if (Validation.isValidString(nameField.getText())) {
             nameField.getStyleClass().removeAll("notCorrect");
             nameField.getStyleClass().add("correct");
-        }
-        else {
+        } else {
             nameField.getStyleClass().removeAll("correct");
             nameField.getStyleClass().add("notCorrect");
         }
@@ -153,8 +144,7 @@ public class AirlineController {
         if (Validation.isStringTooLong(codeField.getText())) {
             codeField.getStyleClass().removeAll("notCorrect");
             codeField.getStyleClass().add("correct");
-        }
-        else {
+        } else {
             codeField.getStyleClass().removeAll("correct");
             codeField.getStyleClass().add("notCorrect");
         }
@@ -168,10 +158,9 @@ public class AirlineController {
     }
 
     private boolean isFormValid() {
-        return true;//    Validation.isValidString(nameProperty.get()) &&
-                   //Validation.isValidString(codeProperty.get()) &&
-                   //Validation.isStringTooLong(nameProperty.get()) &&
-                   //Validation.isStringTooLong2(codeProperty.get());
+        return Validation.isValidString(nameProperty.get()) && Validation.isValidString(codeProperty.get()) &&
+                Validation.isStringTooLong(nameProperty.get()) &&
+                Validation.isStringTooLong(codeProperty.get());
     }
 }
 

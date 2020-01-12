@@ -1,0 +1,413 @@
+/*
+package ba.unsa.etf.rpr.projekat;
+
+import javafx.application.Platform;
+import javafx.collections.ObservableList;
+import javafx.fxml.FXMLLoader;
+import javafx.scene.Parent;
+import javafx.scene.Scene;
+import javafx.scene.control.Button;
+import javafx.scene.control.ButtonType;
+import javafx.scene.control.ComboBox;
+import javafx.scene.control.DialogPane;
+import javafx.scene.input.KeyCode;
+import javafx.stage.Stage;
+import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.extension.ExtendWith;
+import org.testfx.api.FxRobot;
+import org.testfx.framework.junit5.ApplicationExtension;
+
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
+
+public class MainTest {
+
+    @ExtendWith(ApplicationExtension.class)
+    class GlavnaTest {
+        Stage theStage;
+        AirportDAO dao;
+        Controller controller;
+
+        public void start (Stage stage) throws Exception {
+            File dbfile = new File("vozila.db");
+            ClassLoader classLoader = getClass().getClassLoader();
+            File srcfile = new File(classLoader.getResource("db/vozila.db").getFile());
+            try {
+                dbfile.delete();
+                Files.copy(srcfile.toPath(), dbfile.toPath());
+            } catch (IOException e) {
+                e.printStackTrace();
+                fail("Ne mogu kreirati bazu");
+            }
+
+            try {
+                initFile("mjesta.xml");
+                initFile("proizvodjaci.xml");
+                initFile("vlasnici.xml");
+                initFile("vozila.xml");
+            } catch (IOException e) {
+                e.printStackTrace();
+                fail("Ne mogu kreirati datoteku");
+            }
+
+            dao = new AirportDAO();
+
+            // Ovo bi trebalo da iskopira fajl iz resources u test-resources, a ipak radi i sa mavenom
+            File fxml = new File("resources/fxml/glavna.fxml");
+            if (fxml.exists()) {
+                File rsrc = new File("test-resources/fxml/glavna.fxml");
+                if (rsrc.exists()) rsrc.delete();
+                Files.copy(fxml.toPath(), rsrc.toPath());
+            }
+
+            Parent root = FXMLLoader.load(getClass().getResource("/fxml/glavna.fxml"));
+            stage.setTitle("Auto-moto klub");
+            stage.setScene(new Scene(root, 800, 600));
+            stage.show();
+            stage.toFront();
+
+            theStage = stage;
+        }
+
+        private void initFile(String file) throws IOException {
+            File dbfile = new File(file);
+            ClassLoader classLoader = getClass().getClassLoader();
+            File srcfile = new File(classLoader.getResource("xml/" + file).getFile());
+            dbfile.delete();
+            Files.copy(srcfile.toPath(), dbfile.toPath());
+        }
+
+        @Test
+        public void testRemoveAirline (FxRobot robot) {
+            robot.clickOn("#vlasniciTab");
+            robot.clickOn("#tabelaVlasnici");
+
+            // Selektujemo Mehu Mehića
+            //robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+            //robot.clickOn("#tabelaVlasnici");
+            //robot.clickOn("Meho Mehic");
+            // Meni ne prepoznaje Meho Mehic pa sam stavila samo Mehic
+            robot.clickOn("Mehic");
+
+            robot.clickOn("#tbRemoveVlasnik");
+
+            // Čekamo da dijalog postane vidljiv
+            robot.lookup(".dialog-pane").tryQuery().isPresent();
+
+            // Klik na dugme Ok
+            DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
+            Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+            robot.clickOn(okButton);
+
+
+            // Čekamo da se pojavi novi dijalog koji kaže da nije moguće brisati
+            robot.lookup(".dialog-pane").tryQuery().isPresent();
+            dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
+            System.out.println(dialogPane.getGraphic());
+
+            // Klik na dugme Ok
+            dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
+            okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+            robot.clickOn(okButton);
+
+            // Nije obrisan
+            ObservableList<Airline> airlines = dao.getAirlines();
+            assertEquals(1, airlines.size());
+        }
+
+        @Test
+        public void testAddRemoveVlasnik (FxRobot robot) {
+            robot.clickOn("#vlasniciTab");
+            robot.clickOn("#tbAddVlasnik");
+
+            // Čekamo da prozor postane vidljiv
+            robot.lookup("#imeField").tryQuery().isPresent();
+            robot.clickOn("#imeField");
+            robot.write("abc");
+            robot.clickOn("#prezimeField");
+            robot.write("d");
+            robot.clickOn("#imeRoditeljaField");
+            robot.write("e");
+            robot.clickOn("#adresaField");
+            robot.write("f");
+            robot.clickOn("#datumField");
+            robot.write("1/8/2003");
+            robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+            robot.clickOn("#jmbgField");
+            robot.write("0801003500007");
+
+            ComboBox mjestoRodjenja = robot.lookup("#mjestoRodjenja").queryAs(ComboBox.class);
+            Platform.runLater(() -> mjestoRodjenja.show());
+
+            // Čekamo da se pojavi meni
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            robot.clickOn("Sarajevo");
+
+            robot.clickOn("#adresaMjesto");
+            robot.write("Mostar");
+
+            robot.clickOn("#postanskiBrojField");
+            robot.write("88000");
+
+            // Sve validno, prozor se zatvara
+            robot.clickOn("#okButton");
+
+            // Čekamo da se doda korisnik
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            ObservableList<Airline> airlines = dao.getAirlines();
+            assertEquals(2, airlines.size());
+            assertEquals(2, airlines.get(1).getId());
+            assertEquals("abc", airlines.get(1).getName());
+            assertEquals("Mostar", airlines.get(1).getCode());
+
+            // Brišemo vlasnika
+            robot.clickOn("#vlasniciTab");
+            robot.clickOn("#tabelaVlasnici");
+
+            // Selektujemo Mehu Mehića
+            robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+            robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+            robot.clickOn("#tabelaVlasnici");
+
+            robot.clickOn("#tbRemoveVlasnik");
+
+            // Čekamo da dijalog postane vidljiv
+            robot.lookup(".dialog-pane").tryQuery().isPresent();
+
+            // Klik na dugme Ok
+            DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
+            Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+            robot.clickOn(okButton);
+
+            // Čekamo da se obriše korisnik
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Obrisan
+            ObservableList<Airline> airlines1 = dao.getAirlines();
+            assertEquals(1, airlines1.size());
+            assertEquals("Meho", airlines1.get(0).getName());
+
+            // Mostar je i dalje u bazi
+            ObservableList<Airplane> airplanes = dao.getAirplanes();
+            assertEquals(3, airplanes.size());
+            // Ovo će vratiti abecedno, tako da će Mostar biti na indeksu 0 (prije Tuzle i Sarajeva)
+            assertEquals("Mostar", mjesta.get(0).getNaziv());
+            assertEquals("88000", mjesta.get(0).getPostanskiBroj());
+        }
+
+        @Test
+        public void testAddRemoveVlasnikXml (FxRobot robot) {
+            // Prebacujemo na Xml
+            robot.clickOn("#menuOpcije");
+            robot.clickOn("#menuXml");
+
+            robot.clickOn("#vlasniciTab");
+            robot.clickOn("#tbAddVlasnik");
+
+            // Čekamo da prozor postane vidljiv
+            robot.lookup("#imeField").tryQuery().isPresent();
+            robot.clickOn("#imeField");
+            robot.write("abc");
+            robot.clickOn("#prezimeField");
+            robot.write("d");
+            robot.clickOn("#imeRoditeljaField");
+            robot.write("e");
+            robot.clickOn("#adresaField");
+            robot.write("f");
+            robot.clickOn("#datumField");
+            robot.write("1/8/2003");
+            robot.press(KeyCode.ENTER).release(KeyCode.ENTER);
+            robot.clickOn("#jmbgField");
+            robot.write("0801003500007");
+
+            ComboBox mjestoRodjenja = robot.lookup("#mjestoRodjenja").queryAs(ComboBox.class);
+            Platform.runLater(() -> mjestoRodjenja.show());
+
+            // Čekamo da se pojavi meni
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            robot.clickOn("Sarajevo");
+
+            robot.clickOn("#adresaMjesto");
+            robot.write("Mostar");
+
+            robot.clickOn("#postanskiBrojField");
+            robot.write("88000");
+
+            // Sve validno, prozor se zatvara
+            robot.clickOn("#okButton");
+
+            // Čekamo da se doda korisnik
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Provjerićemo broj vlasnika tako što ćemo napraviti posebnu instancu dao klase
+            // (u nekim implementacijama bi ovo moglo pasti, ali ne pada mi na pamet kojim)
+            AirportDAO mydao = new AirportDAOXML();
+
+            ObservableList<Airl> vlasnici = mydao.getVlasnici();
+            assertEquals(2, vlasnici.size());
+            assertEquals(2, vlasnici.get(1).getId());
+            assertEquals("abc", vlasnici.get(1).getIme());
+            assertEquals("Mostar", vlasnici.get(1).getMjestoPrebivalista().getNaziv());
+            mydao.close();
+
+            // Brišemo vlasnika
+            robot.clickOn("#vlasniciTab");
+            robot.clickOn("#tabelaVlasnici");
+
+            // Selektujemo Mehu Mehića
+            robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+            robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+            robot.clickOn("#tabelaVlasnici");
+
+            robot.clickOn("#tbRemoveVlasnik");
+
+            // Čekamo da dijalog postane vidljiv
+            robot.lookup(".dialog-pane").tryQuery().isPresent();
+
+            // Klik na dugme Ok
+            DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
+            Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+            robot.clickOn(okButton);
+
+            // Čekamo da se obriše korisnik
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            // Obrisan
+            mydao = new VozilaDAOXML();
+            ObservableList<Vlasnik> vlasnici2 = mydao.getVlasnici();
+            assertEquals(1, vlasnici2.size());
+            assertEquals("Meho", vlasnici2.get(0).getIme());
+
+            // Mostar je i dalje u bazi
+            ObservableList<Mjesto> mjesta = mydao.getMjesta();
+            assertEquals(3, mjesta.size());
+            // Ovo će vratiti abecedno, tako da će Mostar biti na indeksu 0 (prije Tuzle i Sarajeva)
+            assertEquals("Mostar", mjesta.get(0).getNaziv());
+            assertEquals("88000", mjesta.get(0).getPostanskiBroj());
+            mydao.close();
+
+            // Vraćam se na Db
+            robot.clickOn("#menuOpcije");
+            robot.clickOn("#menuDb");
+        }
+
+        @Test
+        public void testRemoveVozilo (FxRobot robot) {
+            // Ovaj close je prebacen dolje, jer sam napravila da se proizvodjacCombo
+            // puni iz baze, tako da test pada ako se zatvori prije.
+            //dao.close();
+
+            robot.clickOn("#vozilaTab");
+
+            // Dodajemo vozilo
+            robot.clickOn("#tbAddVozilo");
+
+            // Čekamo da se pojavi prozor
+            robot.lookup("#proizvodjacCombo").tryQuery().isPresent();
+
+            robot.clickOn("#proizvodjacCombo");
+            robot.write("Skoda");
+            robot.clickOn("#modelField");
+            robot.write("Fabia");
+            robot.clickOn("#brojSasijeField");
+            robot.write("1234193459845");
+            robot.clickOn("#brojTablicaField");
+            robot.write("M23-K-456");
+
+            ComboBox vlasnikCombo = robot.lookup("#vlasnikCombo").queryAs(ComboBox.class);
+            Platform.runLater(() -> vlasnikCombo.show());
+
+            // Čekamo da se pojavi meni
+            try {
+                Thread.sleep(200);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+
+            robot.clickOn("Mehic Meho");
+
+            robot.clickOn("#okButton");
+
+            // Čekamo da se doda vozilo
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            dao.close();
+            // Da li je dodano
+            dao = new VozilaDAOBaza();
+            ObservableList<Vozilo> vozila = dao.getVozila();
+            // Prebacila sam nize iz istog razloga kao u drugom testu obzirom da vlasnike populirm iz
+            // baze u vlasnikCombo
+            //dao.close();
+            assertEquals(2, vozila.size());
+            assertEquals("Skoda", vozila.get(1).getProizvodjac().getNaziv());
+            assertEquals("Fabia", vozila.get(1).getModel());
+            assertEquals("1234193459845", vozila.get(1).getBrojSasije());
+            assertEquals("M23-K-456", vozila.get(1).getBrojTablica());
+            assertEquals("Mehic", vozila.get(1).getVlasnik().getPrezime());
+
+            robot.clickOn("#tabelaVozila");
+
+            // Selektujemo Škodu
+            robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+            robot.press(KeyCode.DOWN).release(KeyCode.DOWN);
+            robot.clickOn("#tabelaVozila");
+
+            robot.clickOn("#tbRemoveVozilo");
+
+            // Čekamo da dijalog postane vidljiv
+            robot.lookup(".dialog-pane").tryQuery().isPresent();
+
+            // Klik na dugme Ok
+            DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);
+            Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
+            robot.clickOn(okButton);
+
+            // Čekamo da se obriše vozilo
+            try {
+                Thread.sleep(1000);
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+            dao.close();
+            // Nije obrisan
+            dao = new VozilaDAOBaza();
+            ObservableList<Vozilo> vozila2 = dao.getVozila();
+            assertEquals(1, vozila2.size());
+            assertEquals("Golf", vozila.get(0).getModel());
+        }
+}
+*/

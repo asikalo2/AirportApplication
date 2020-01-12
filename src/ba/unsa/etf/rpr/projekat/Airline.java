@@ -11,8 +11,7 @@ public class Airline {
     public Airline(int id, String name, String code) {
         this.id = id;
         this.name = name;
-        this.code = code;
-    }
+        this.code = code;    }
 
     public int getId() {
         return id;

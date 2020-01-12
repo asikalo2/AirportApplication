@@ -94,4 +94,8 @@ public class Validation {
             if (!justLetter(s.charAt(i)) || s.charAt(i) != ' ') return false;
         return true;
     }
+
+    public static boolean isValidString3(String n) {
+        return false;
+    }
 }

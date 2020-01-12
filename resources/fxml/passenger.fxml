@@ -64,7 +64,7 @@
             </GridPane.margin>
             <buttons>
                 <Button text="OK" fx:id="okButton" ButtonBar.buttonData="RIGHT" onAction="#okFormBtn" />
-                <Button text="Prekini" fx:id="cancelButton" ButtonBar.buttonData="LEFT" onAction="#cancelFormBtn" />
+                <Button text="Cancel" fx:id="cancelButton" ButtonBar.buttonData="LEFT" onAction="#cancelFormBtn" />
             </buttons>
         </ButtonBar>
 
