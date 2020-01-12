@@ -1,10 +1,6 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.collections.ObservableList;
-import javafx.fxml.FXMLLoader;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
-import javafx.stage.Stage;
 import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
@@ -14,7 +10,8 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.fail;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class AirportDAOTest {
