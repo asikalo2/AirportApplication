@@ -72,7 +72,7 @@
                             </HBox>
                         </items>
                     </ToolBar>
-                    <TableView fx:id="tabelaAirplanes" style="-fx-aligmnent: CENTER;">
+                    <TableView fx:id="tableAirplanes" style="-fx-aligmnent: CENTER;">
                         <columns>
                             <TableColumn fx:id="idAirplane" prefWidth="50.0" text="Id"/>
                             <TableColumn fx:id="airlineAirplane" prefWidth="180.0" text="Airline"/>
@@ -133,7 +133,7 @@
                 </VBox>
             </Tab>
 
-            <Tab text="Luggages" fx:id="luggageTab">
+            <Tab text="Luggage" fx:id="luggageTab">
                 <VBox>
                     <ToolBar>
                         <items>
@@ -167,7 +167,7 @@
                             </HBox>
                         </items>
                     </ToolBar>
-                    <TableView fx:id="tabelePassenger" style="-fx-aligmnent: CENTER;">
+                    <TableView fx:id="tablePassenger" style="-fx-aligmnent: CENTER;">
                         <columns>
                             <TableColumn fx:id="idPassenger" prefWidth="50.0" text="Id"/>
                             <TableColumn fx:id="namePassenger" prefWidth="180.0" text="Name"/>
