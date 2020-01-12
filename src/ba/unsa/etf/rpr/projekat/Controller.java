@@ -17,9 +17,11 @@ import javafx.stage.Stage;
 import net.sf.jasperreports.engine.JRException;
 import org.apache.commons.io.FilenameUtils;
 
+import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
+import java.util.Locale;
 import java.util.Optional;
 import java.util.ResourceBundle;
 
@@ -902,13 +904,104 @@ public class Controller implements Initializable {
         }
     }
 
+    public void changeToBosnian(ActionEvent actionEvent) {
+        //postavljamo novi Locale, sa defaultom bosanskog jezika i zatim pomoccu loadView osvjezavamo formu s novim jezikom
+        System.out.println("to bs");
+        Locale.setDefault(new Locale("bs", "BA"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void changeToEnglish(ActionEvent actionEvent) {
+        System.out.println("to en_US");
+        Locale.setDefault(new Locale("en", "US"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void changeToGerman(ActionEvent actionEvent) {
+        System.out.println("to de");
+        Locale.setDefault(new Locale("de", "DE"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+
+    public void changeToFrench(ActionEvent actionEvent) {
+        System.out.println("to fr");
+        Locale.setDefault(new Locale("fr", "FR"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void changeToArabian(ActionEvent actionEvent) {
+        System.out.println("to ar");
+        Locale.setDefault(new Locale("ar", "AR"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void changeToChinese(ActionEvent actionEvent) {
+        System.out.println("to zh");
+        Locale.setDefault(new Locale("zh", "ZH"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void changeToRussian(ActionEvent actionEvent) {
+        System.out.println("to ru");
+        Locale.setDefault(new Locale("ru", "RU"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
+
+    public void changeToSpanish(ActionEvent actionEvent) {
+        System.out.println("to es");
+        Locale.setDefault(new Locale("es", "ES"));
+        try {
+            Main.loadView(Locale.getDefault());
+        }
+        catch (IOException ex) {
+            ex.printStackTrace();
+        }
+    }
 
     public void viewReportCountryAction(ActionEvent actionEvent) {
+        //pozivamo novu formu za odabir drzave, i kada je odaberemo iz comboboxa, pritiskom na dugme se prikaze izvjestaj
+        //poziva se iz GeografijaDAO metoda drzave da napuni vrijednosti u comboboxu
         try {
             FXMLLoader fxmlLoader = new FXMLLoader();
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             fxmlLoader.setResources(bundle);
-            fxmlLoader.setLocation(getClass().getResource("languages.fxml"));
+         //   fxmlLoader.setLocation(getClass().getResource("glavma.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             Stage stage = new Stage();
             stage.setTitle("New Window");
