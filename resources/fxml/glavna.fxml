@@ -30,6 +30,23 @@
                     <MenuItem onAction="#viewReportAction" text="Flights Report" />
                     <MenuItem onAction="#viewReportActionPassenger" text="Passengers Report" />
                     <MenuItem onAction="#viewReportActionUser" text="Users Report" />
+                    <MenuItem fx:id="exitMenuItem" onAction="#exitAction" text="%exit" />
+                </items>
+            </Menu>
+
+            <Menu text="%view">
+                <items>
+                    <Menu text="%languages">
+                        <items>
+                            <MenuItem text="%bosnian" onAction="#changeToBosnian" />
+                            <MenuItem text="%english" onAction="#changeToEnglish"/>
+                            <MenuItem text="%german" onAction="#changeToGerman"/>
+                            <MenuItem text="%french" onAction="#changeToFrench"/>
+                            <MenuItem text="%spanish" onAction="#changeToSpanish"/>
+                            <MenuItem text="%chinese" onAction="#changeToChinese"/>
+                            <MenuItem text="%russian" onAction="#changeToRussian"/>
+                        </items>
+                    </Menu>
                 </items>
             </Menu>
         </menus>
