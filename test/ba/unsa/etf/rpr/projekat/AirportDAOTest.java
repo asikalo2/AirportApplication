@@ -23,12 +23,14 @@ public class AirportDAOTest {
     @BeforeAll
 
     void initDb() {
-        File dbfile = new File("AirportDBtest.db");
+        File dbfile = new File("AirportDB.db");
         ClassLoader classLoader = getClass().getClassLoader();
         File srcfile = new File(classLoader.getResource("AirportDBtest.db").getFile());
         try {
-            if (dbfile.exists())
+            if (dbfile.exists()) {
+                //System.out.println("Deleting file...");
                 dbfile.delete();
+            }
             Files.copy(srcfile.toPath(), dbfile.toPath());
         } catch (IOException e) {
             e.printStackTrace();
