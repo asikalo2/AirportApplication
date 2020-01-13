@@ -21,7 +21,10 @@ public class Main extends Application {
 
     @Override
     public void start(Stage primaryStage) throws Exception{
-        Parent root = FXMLLoader.load(getClass().getResource("/fxml/glavna.fxml"));
+        stage = primaryStage;
+        ResourceBundle bundle = ResourceBundle.getBundle("Translation");
+        //Parent root = FXMLLoader.load(getClass().getResource("/fxml/glavna.fxml"));
+        Parent root = FXMLLoader.load(getClass().getClassLoader().getResource("fxml/glavna.fxml"), bundle);
         primaryStage.setTitle("Airport");
         primaryStage.setScene(new Scene(root, 800, 600));
         primaryStage.show();
@@ -33,7 +36,7 @@ public class Main extends Application {
         // ponovno izgenerisana forma
         System.out.println("test");
         ResourceBundle bundle = ResourceBundle.getBundle("Translation", locale);
-        Parent root = FXMLLoader.load(Main.class.getResource("glavna.fxml"), bundle);
+        Parent root = FXMLLoader.load(Main.class.getResource("/fxml/glavna.fxml"), bundle);
         stage.setTitle("Airlines");
         stage.setScene(new Scene(root, 640, 480));
         stage.show();

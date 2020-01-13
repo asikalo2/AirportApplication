@@ -83,9 +83,9 @@
                         <items>
                             <Region styleClass="spacer"/>
                             <HBox styleClass="segmented-button-bar">
-                                <Button fx:id="tbAddAirplane" onAction="#addAirplane" text="Add" minWidth="50" styleClass="first"/>
-                                <Button fx:id="tbRemoveAirplane" onAction="#removeAirplane" text="Remove" minWidth="50"/>
-                                <Button fx:id="tbEditAirplane" onAction="#editAirplane" text="Edit" minWidth="50" styleClass="last"/>
+                                <Button fx:id="tbAddAirplane" onAction="#addAirplane" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveAirplane" onAction="#removeAirplane" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditAirplane" onAction="#editAirplane" text="%edit" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>

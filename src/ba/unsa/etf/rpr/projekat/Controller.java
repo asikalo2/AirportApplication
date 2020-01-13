@@ -906,7 +906,6 @@ public class Controller implements Initializable {
 
     public void changeToBosnian(ActionEvent actionEvent) {
         //postavljamo novi Locale, sa defaultom bosanskog jezika i zatim pomoccu loadView osvjezavamo formu s novim jezikom
-        System.out.println("to bs");
         Locale.setDefault(new Locale("bs", "BA"));
         try {
             Main.loadView(Locale.getDefault());

@@ -12,7 +12,7 @@ public class Passenger {
     }
 
     public Passenger(int id, String name, Flight flight, Image qrCode) throws IllegalCode {
-        if(qrCode == null) throw new IllegalCode("QR Code must be generated!");
+        //if(qrCode == null) throw new IllegalCode("QR Code must be generated!");
         this.id = id;
         this.name = name;
         this.flight = flight;
