@@ -45,6 +45,7 @@
                             <MenuItem text="%spanish" onAction="#changeToSpanish"/>
                             <MenuItem text="%chinese" onAction="#changeToChinese"/>
                             <MenuItem text="%russian" onAction="#changeToRussian"/>
+                            <MenuItem text="%arabian" onAction="#changeToArabian"/>
                         </items>
                     </Menu>
                 </items>

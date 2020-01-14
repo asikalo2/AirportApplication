@@ -17,7 +17,7 @@ public class GateController {
         public SimpleStringProperty idProperty;
         public SimpleStringProperty nameProperty;
         private AirportDAO dao;
-        private Gate currentgate = null;
+        private Gate currentGate = null;
 
         @FXML
         public Button cancelButton;
@@ -26,7 +26,7 @@ public class GateController {
 
         public GateController(AirportDAO dao, Gate gate) {
             this.dao = dao;
-            this.currentgate = gate;
+            this.currentGate = gate;
             idProperty = new SimpleStringProperty("");
             nameProperty = new SimpleStringProperty("");
         }
@@ -35,14 +35,14 @@ public class GateController {
         public void initialize() {
             initializeDataBinding();
             addListeners();
-            if (currentgate != null) {
+            if (currentGate != null) {
                 fillForm();
             }
         }
 
         private void fillForm() {
-            idProperty.set(String.valueOf(currentgate.getId()));
-            nameProperty.set(currentgate.getName());
+            idProperty.set(String.valueOf(currentGate.getId()));
+            nameProperty.set(currentGate.getName());
         }
 
         private void initializeDataBinding() {
@@ -82,18 +82,18 @@ public class GateController {
 
         public void okFormBtn(ActionEvent actionEvent) {
             if (isFormValid()) {
-                boolean adding = currentgate == null;
+                boolean adding = currentGate == null;
 
-                if (currentgate == null)
-                    currentgate = new Gate();
+                if (currentGate == null)
+                    currentGate = new Gate();
 
-                currentgate.setId(Integer.valueOf((idProperty.get())));
-                currentgate.setName(nameProperty.get());
+                currentGate.setId(Integer.valueOf((idProperty.get())));
+                currentGate.setName(nameProperty.get());
 
                 if (adding) {
-                    dao.addGate(currentgate);
+                    dao.addGate(currentGate);
                 } else {
-                    dao.changeGate(currentgate);
+                    dao.changeGate(currentGate);
                 }
                 Stage stage = (Stage) okButton.getScene().getWindow();
                 // do what you have to do
