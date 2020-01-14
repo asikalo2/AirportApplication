@@ -24,12 +24,12 @@
 
     <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
         <menus>
-            <Menu text="File">
+            <Menu text="%file">
                 <items>
-                    <MenuItem onAction="#saveAction" text="Save As" />
-                    <MenuItem onAction="#viewReportAction" text="Flights Report" />
-                    <MenuItem onAction="#viewReportActionPassenger" text="Passengers Report" />
-                    <MenuItem onAction="#viewReportActionUser" text="Users Report" />
+                    <MenuItem onAction="#saveAction" text="%Save As" />
+                    <MenuItem onAction="#viewReportAction" text="%Flights Report" />
+                    <MenuItem onAction="#viewReportActionPassenger" text="%Passengers Report" />
+                    <MenuItem onAction="#viewReportActionUser" text="%Users Report" />
                     <MenuItem fx:id="exitMenuItem" onAction="#exitAction" text="%exit" />
                 </items>
             </Menu>
