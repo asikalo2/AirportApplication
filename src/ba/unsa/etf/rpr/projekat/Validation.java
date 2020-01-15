@@ -40,9 +40,13 @@ public class Validation {
 
     public static boolean isValidString(String s) {
         if (s.length() < 1) return false;
-        int i = 0;
-        for (i = 0; i < s.length(); i++)
-            if (!justLetter(s.charAt(i)) || s.charAt(i) == ' ') return false;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isLetter(ch) || ch == ' ') {
+                continue;
+            }
+            return false;
+        }
         return true;
     }
 
@@ -54,15 +58,17 @@ public class Validation {
         return true;
     }
 
-    public static boolean name(String s) {
-        if (s.length() > 15) return false;
-        int i = 0;
-        for (i = 0; i < s.length(); i++) {
-            if (!justLetter(s.charAt(i))) return false;
+    public static boolean isValidName(String s) {
+        if (s.length() > 30) return false;
+        for (int i = 0; i < s.length(); i++) {
+            char ch = s.charAt(i);
+            if (Character.isLetter(ch) || ch == ' ') {
+                continue;
+            }
+            return false;
         }
         return true;
     }
-
 
     public static boolean flightNumberLength(String string) {
         int i = 0;

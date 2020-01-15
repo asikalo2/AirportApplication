@@ -1,6 +1,5 @@
 package ba.unsa.etf.rpr.projekat;
 
-import javafx.beans.property.SimpleIntegerProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
@@ -58,7 +57,7 @@ public class AirlineController {
 
     private void addListeners() {
         nameField.textProperty().addListener((observableValue, s, n) -> {
-            if (Validation.isValidString3(n)) {
+            if (Validation.isValidName(n)) {
                 nameField.getStyleClass().removeAll("notCorrect");
                 nameField.getStyleClass().add("correct");
             } else {
@@ -117,13 +116,13 @@ public class AirlineController {
     }
 
     private void setFlags() {
-        if (Validation.isStringTooLong(nameField.getText())) {
+        /*if (Validation.isStringTooLong(nameField.getText())) {
             nameField.getStyleClass().removeAll("notCorrect");
             nameField.getStyleClass().add("correct");
         } else {
             nameField.getStyleClass().removeAll("correct");
             nameField.getStyleClass().add("notCorrect");
-        }
+        }*/
 
         if (Validation.isValidString(codeField.getText())) {
             codeField.getStyleClass().removeAll("notCorrect");
@@ -133,7 +132,7 @@ public class AirlineController {
             codeField.getStyleClass().add("notCorrect");
         }
 
-        if (Validation.isValidString(nameField.getText())) {
+        if (!Validation.isValidName(nameField.getText())) {
             nameField.getStyleClass().removeAll("notCorrect");
             nameField.getStyleClass().add("correct");
         } else {
@@ -158,9 +157,7 @@ public class AirlineController {
     }
 
     private boolean isFormValid() {
-        return Validation.isValidString(nameProperty.get()) && Validation.isValidString(codeProperty.get()) &&
-                Validation.isStringTooLong(nameProperty.get()) &&
-                Validation.isStringTooLong(codeProperty.get());
+        return Validation.isValidName(nameProperty.get()) && Validation.isValidString(codeProperty.get());
     }
 }
 
