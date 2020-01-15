@@ -611,6 +611,10 @@ public class AirportDAO {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO planes(id, airline_company," +
                     "supplier, type, seats) VALUES(?,?,?,?,?)");
+
+            if (!doesAirlineExist(airplane.getAirline().getId())) {
+                addAirline(airplane.getAirline());
+            }
             stmt.setInt(1, airplane.getId());
             stmt.setInt(2, airplane.getAirline().getId());
             stmt.setString(3, airplane.getManufacturer());
