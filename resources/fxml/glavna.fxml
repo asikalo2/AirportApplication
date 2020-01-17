@@ -112,6 +112,8 @@
                                 <Button fx:id="tbAddFlight" onAction="#addFlight" text="%add" minWidth="50" styleClass="first"/>
                                 <Button fx:id="tbRemoveFlight" onAction="#removeFlight" text="%remove" minWidth="50"/>
                                 <Button fx:id="tbEditFlight" onAction="#editFlight" text="%edit" minWidth="50" styleClass="last"/>
+                                <Region styleClass="spacer" />
+                                <Button fx:id="tbPassengerList" onAction="#passengerListReport" text="%passengerList" minWidth="50" styleClass="last"/>
                             </HBox>
                         </items>
                     </ToolBar>

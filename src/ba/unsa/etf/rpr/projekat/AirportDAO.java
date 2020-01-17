@@ -291,6 +291,33 @@ public class AirportDAO {
         return null;
     }
 
+    public ObservableList<Passenger> getPassengersByFlightId(int flightId) {
+        ArrayList<Passenger> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("select * from passengers where flight=?");
+            stmt.setInt(1, flightId);
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Image img;
+                byte[] buf = rs.getBytes(4);
+                if (buf != null) {
+                    img = Utils.getImageFromByteArray(buf);
+                } else {
+                    img = null;
+                }
+                Flight flight = getFlightById(rs.getInt(3));
+                Passenger passenger = new Passenger(rs.getInt(1), rs.getString(2), flight,
+                        img);
+                res.add(passenger);
+
+            }
+            return FXCollections.observableArrayList(res);
+        } catch (SQLException | IllegalCode ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     int highestIdAirline() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from airline_companies");

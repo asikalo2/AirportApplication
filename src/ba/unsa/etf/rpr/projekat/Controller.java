@@ -14,16 +14,15 @@ import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.FileChooser;
 import javafx.stage.Stage;
-import net.sf.jasperreports.engine.JRException;
+import net.sf.jasperreports.engine.*;
+import net.sf.jasperreports.swing.JRViewer;
 import org.apache.commons.io.FilenameUtils;
 
 import org.apache.commons.io.FilenameUtils;
 import java.io.File;
 import java.io.IOException;
 import java.net.URL;
-import java.util.Locale;
-import java.util.Optional;
-import java.util.ResourceBundle;
+import java.util.*;
 
 public class Controller implements Initializable {
 
@@ -1007,6 +1006,22 @@ public class Controller implements Initializable {
             stage.setScene(scene);
             stage.show();
         } catch (IOException e) {
+            e.printStackTrace();
+        }
+
+    }
+
+    public void passengerListReport(ActionEvent actionEvent) {
+        System.out.println("Generating Report");
+        if (tableFlights.getSelectionModel().getSelectedItems() == null)
+            return;
+        Flight flight = (Flight) tableFlights.getSelectionModel().getSelectedItem();
+        List<Passenger> passengerList = dao.getPassengersByFlightId(flight.getId());
+        System.out.println(passengerList);
+        PassengerListReport report = new PassengerListReport();
+        try {
+            report.showReport(passengerList, flight);
+        } catch (JRException e) {
             e.printStackTrace();
         }
 
