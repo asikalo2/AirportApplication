@@ -44,6 +44,7 @@ public class Controller implements Initializable {
     public TableColumn startOfUsingTheRunwayFlight;
     public TableColumn endOfUsingTheRunwayFlight;
     public TableColumn userFlight;
+    public TableColumn flightGate;
     public TableView tableFlightType;
     public TableColumn idFT;
     public TableColumn nameFT;
@@ -151,6 +152,7 @@ public class Controller implements Initializable {
         startOfUsingTheRunwayFlight.setCellValueFactory(new PropertyValueFactory("startOfUsingTheRunway"));
         endOfUsingTheRunwayFlight.setCellValueFactory(new PropertyValueFactory("endOfUsingTheRunway"));
         userFlight.setCellValueFactory(new PropertyValueFactory("userName"));
+        flightGate.setCellValueFactory(new PropertyValueFactory("gateName"));
         tableFlights.setItems(listFlights);
     }
 

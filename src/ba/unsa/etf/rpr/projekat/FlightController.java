@@ -30,6 +30,7 @@ public class FlightController {
     public ComboBox<Airplane> airplane;
     public ComboBox<FlightType> flightType;
     public ComboBox<User> user;
+    public ComboBox<Gate> gate;
 
 
     public SimpleStringProperty idProperty;
@@ -39,6 +40,7 @@ public class FlightController {
     public SimpleObjectProperty<LocalDateTime> endOfUsingTheRunwayProperty;
     public SimpleObjectProperty<FlightType> flightTypeProperty;
     public SimpleObjectProperty<User> userProperty;
+    public SimpleObjectProperty<Gate> gateProperty;
 
     private AirportDAO dao;
     private Flight currentFlight = null;
@@ -58,6 +60,7 @@ public class FlightController {
         endOfUsingTheRunwayProperty = new SimpleObjectProperty<>();
         flightTypeProperty = new SimpleObjectProperty<>();
         userProperty = new SimpleObjectProperty<>();
+        gateProperty = new SimpleObjectProperty<>();
     }
 
 
@@ -66,6 +69,7 @@ public class FlightController {
     public void initialize() {
         airplane.setItems(dao.getAirplanes());
         flightType.setItems(dao.getFlightTypes());
+        gate.setItems(dao.getGates());
         initializeDataBinding();
 
         airplane.setConverter(new StringConverter<Airplane>() {
@@ -108,6 +112,21 @@ public class FlightController {
             }
         });
 
+        gate.setConverter(new StringConverter<Gate>() {
+            @Override
+            public String toString(Gate gate) {
+                if (gate == null)
+                    return "N/A";
+                return gate.getName();
+            }
+
+            @Override
+            public Gate fromString(String string) {
+                Gate newGate = new Gate(0, string);
+                return newGate;
+            }
+        });
+
         flightType.setConverter(new StringConverter<FlightType>() {
             @Override
             public String toString(FlightType flightType) {
@@ -124,7 +143,7 @@ public class FlightController {
             }
         });
 
-        //flightType.setItems(dao.getFlightTypes());
+        flightType.setItems(dao.getFlightTypes());
         initializeDataBinding();
 
         if (currentFlight != null) {
@@ -138,8 +157,14 @@ public class FlightController {
         airplaneProperty.setValue(currentFlight.getAirplane());
         startOfUsingTheRunwayProperty.setValue(currentFlight.getStartOfUsingTheRunway());
         endOfUsingTheRunwayProperty.setValue(currentFlight.getEndOfUsingTheRunway());
+
+        startOfUsingTheRunwayField.setDateTimeValue(currentFlight.getStartOfUsingTheRunway());
+        endOfUsingTheRunwayField.setDateTimeValue(currentFlight.getEndOfUsingTheRunway());
+
         flightTypeProperty.setValue(currentFlight.getFlightType());
         userProperty.setValue(currentFlight.getUser());
+        gateProperty.setValue(currentFlight.getGate());
+
     }
 
     private void initializeDataBinding() {
@@ -150,6 +175,7 @@ public class FlightController {
         //endOfUsingTheRunwayField.valueProperty().bindBidirectional(endOfUsingTheRunwayProperty);
         flightType.valueProperty().bindBidirectional(flightTypeProperty);
         user.valueProperty().bindBidirectional(userProperty);
+        gate.valueProperty().bindBidirectional(gateProperty);
     }
 
     private void addListeners() {
@@ -175,7 +201,7 @@ public class FlightController {
             }
         });
 
-        airplaneField.textProperty().addListener((observableValue, s, n) -> {
+        /*airplaneField.textProperty().addListener((observableValue, s, n) -> {
             if (Validation.isStringTooLong(n)) {
                 airplaneField.getStyleClass().removeAll("notCorrect");
                 airplaneField.getStyleClass().add("correct");
@@ -195,7 +221,7 @@ public class FlightController {
                 flightTypeField.getStyleClass().removeAll("correct");
                 flightTypeField.getStyleClass().add("notCorrect");
             }
-        });
+        });*/
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {
@@ -213,10 +239,11 @@ public class FlightController {
             currentFlight.setId(Integer.valueOf((idProperty.get())));
             currentFlight.setCode(codeProperty.get());
             currentFlight.setAirplane(airplaneProperty.get());
-            currentFlight.setStartOfUsingTheRunway(startOfUsingTheRunwayProperty.get());
-            currentFlight.setEndOfUsingTheRunway(endOfUsingTheRunwayProperty.get());
+            currentFlight.setStartOfUsingTheRunway(startOfUsingTheRunwayField.getDateTimeValue());
+            currentFlight.setEndOfUsingTheRunway(endOfUsingTheRunwayField.getDateTimeValue());
             currentFlight.setFlightType(flightTypeProperty.get());
             currentFlight.setUser(userProperty.get());
+            currentFlight.setGate(gateProperty.get());
 
 
             if (adding) {

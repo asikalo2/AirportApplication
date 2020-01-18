@@ -71,6 +71,13 @@
                   maxWidth="Infinity">
         </ComboBox>
 
+        <Label fx:id="gateLabel" GridPane.rowIndex="8" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Gate"/>
+
+        <ComboBox fx:id="gate" GridPane.rowIndex="8" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
+
         <ButtonBar GridPane.rowIndex="10" GridPane.columnSpan="2">
             <GridPane.margin>
                 <Insets top="25"/>

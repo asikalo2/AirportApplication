@@ -127,6 +127,7 @@
                             <TableColumn fx:id="endOfUsingTheRunwayFlight" prefWidth="150.0"
                                          text="%end of using the runway"/>
                             <TableColumn fx:id="userFlight" prefWidth="150.0" text="%user"/>
+                            <TableColumn fx:id="flightGate" prefWidth="150.0" text="%gate"/>
                         </columns>
                     </TableView>
                 </VBox>

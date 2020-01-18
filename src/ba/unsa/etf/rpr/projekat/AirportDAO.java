@@ -152,11 +152,27 @@ public class AirportDAO {
         return null;
     }
 
+    public ObservableList<Gate> getGates() {
+        ArrayList<Gate> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, name FROM gates");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                Gate m = new Gate(rs.getInt(1), rs.getString(2));
+                res.add(m);
+            }
+            return FXCollections.observableArrayList(res);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
     public ObservableList<Flight> getFlights() {
         ArrayList<Flight> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types, gates on \n" +
-                    "flights.flight_type=flight_types.id and flights.gate=gates.id");
+                PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types, gates on \n" +
+                        "flights.flight_type=flight_types.id and flights.gate=gates.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Airplane airplane = getPlaneById(rs.getInt(3));
@@ -165,8 +181,8 @@ public class AirportDAO {
                         TimeZone.getDefault().toZoneId());
                 LocalDateTime endOfUsingTheRunway = LocalDateTime.ofInstant(Instant.ofEpochSecond(rs.getLong(5)),
                         TimeZone.getDefault().toZoneId());
-                FlightType flightType = new FlightType(rs.getInt(8), rs.getString(9));
-                Gate gate = new Gate(rs.getInt(11), rs.getString(12));
+                FlightType flightType = new FlightType(rs.getInt(6), rs.getString(10));
+                Gate gate = new Gate(rs.getInt(8), rs.getString(12));
                 Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
                                         startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
                 res.add(flight);
@@ -692,7 +708,7 @@ public class AirportDAO {
     public void addFlight(Flight flight) {
         try {
             PreparedStatement stmt = conn.prepareStatement("INSERT INTO flights (id,flight_number, plane, " +
-                    "runway_occupy_start, runway_occupy_end,flight_type,reg_user VALUES(?,?,?,?,?,?,?)");
+                    "runway_occupy_start, runway_occupy_end,flight_type,reg_user, gate) VALUES(?,?,?,?,?,?,?,?)");
             stmt.setInt(1, flight.getId());
             stmt.setString(2, flight.getCode());
             stmt.setInt(3, flight.getAirplane().getId());
@@ -702,6 +718,7 @@ public class AirportDAO {
                     atZone(ZoneId.systemDefault()).toEpochSecond()));
             stmt.setInt(6, flight.getFlightType().getId());
             stmt.setInt(7, flight.getUser().getId());
+            stmt.setInt(8, flight.getGate().getId());
 
             stmt.executeUpdate();
         } catch (SQLException ex) {
@@ -768,8 +785,7 @@ public class AirportDAO {
     public void changeFlight(Flight flight) {
         try {
             PreparedStatement stmt = conn.prepareStatement("UPDATE flights SET flight_number=?," +
-                    "plane=?, runway_occupy_start=?, runway_occupy_end=?, flight_type=?, reg_user=? WHERE id=?");
-
+                    "plane=?, runway_occupy_start=?, runway_occupy_end=?, flight_type=?, reg_user=?, gate=? WHERE id=?");
 
             stmt.setString(1, flight.getCode());
             stmt.setInt(2, flight.getAirplane().getId());
@@ -779,7 +795,8 @@ public class AirportDAO {
                     atZone(ZoneId.systemDefault()).toEpochSecond()));
             stmt.setInt(5, flight.getFlightType().getId());
             stmt.setInt(6, flight.getUser().getId());
-            stmt.setInt(7, flight.getId());
+            stmt.setInt(7, flight.getGate().getId());
+            stmt.setInt(8, flight.getId());
             stmt.executeUpdate();
         } catch (SQLException ex) {
             ex.printStackTrace();
