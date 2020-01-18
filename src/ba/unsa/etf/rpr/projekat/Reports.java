@@ -32,5 +32,6 @@ public class Reports extends JFrame {
         this.add(viewer);
         this.setSize(700, 500);
         this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 }

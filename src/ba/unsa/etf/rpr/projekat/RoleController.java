@@ -39,6 +39,9 @@ public class RoleController {
         if (currentRole != null) {
             fillForm();
         }
+        else {
+            System.out.println(currentRole);
+        }
     }
 
     private void fillForm() {

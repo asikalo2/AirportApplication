@@ -843,11 +843,10 @@ public class Controller implements Initializable {
     }
 
     public void editRole(ActionEvent actionEvent) {
-        if (tableRole.getSelectionModel().getSelectedItems() == null)
-            return;
-        Role role = (Role) tableRole.getSelectionModel().getSelectedItem();
-        //System.out.println(airplane.get());
 
+        Role role = (Role) tableRole.getSelectionModel().getSelectedItem();
+        if (role == null)
+            return;
         try {
             FXMLLoader loader = new FXMLLoader();
             RoleController roleController = new RoleController(dao, role);
@@ -1012,10 +1011,10 @@ public class Controller implements Initializable {
     }
 
     public void passengerListReport(ActionEvent actionEvent) {
-        System.out.println("Generating Report");
-        if (tableFlights.getSelectionModel().getSelectedItems() == null)
-            return;
         Flight flight = (Flight) tableFlights.getSelectionModel().getSelectedItem();
+        if (flight == null)
+            return;
+
         List<Passenger> passengerList = dao.getPassengersByFlightId(flight.getId());
         System.out.println(passengerList);
         PassengerListReport report = new PassengerListReport();

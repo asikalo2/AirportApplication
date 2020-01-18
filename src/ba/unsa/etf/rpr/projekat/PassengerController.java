@@ -77,6 +77,10 @@ public class PassengerController {
         if (currentPassenger != null) {
             fillForm();
         }
+        else {
+            idField.setDisable(true);
+            idProperty.set(String.valueOf(dao.highestIdPassenger()+1));
+        }
     }
 
     private void fillForm() {
@@ -124,7 +128,7 @@ public class PassengerController {
             }
         });
 
-        flightField.textProperty().addListener((observableValue, s, n) -> {
+/*        flightField.textProperty().addListener((observableValue, s, n) -> {
             if (Validation.isStringTooLong(n)) {
                 flightField.getStyleClass().removeAll("notCorrect");
                 flightField.getStyleClass().add("correct");
@@ -133,7 +137,7 @@ public class PassengerController {
                 flightField.getStyleClass().removeAll("correct");
                 flightField.getStyleClass().add("notCorrect");
             }
-        });
+        });*/
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {
@@ -141,9 +145,13 @@ public class PassengerController {
         stage.close();
     }
 
+    public boolean isAdding() {
+        return currentPassenger == null;
+    }
+
     public void okFormBtn(ActionEvent actionEvent) {
         if (isFormValid()) {
-            boolean adding = currentPassenger == null;
+            boolean adding = isAdding();
 
             if (currentPassenger == null)
                 currentPassenger = new Passenger();
@@ -158,7 +166,8 @@ public class PassengerController {
             } else {
                 dao.changePassenger(currentPassenger);
             }
-            Utils.saveToFile(currentPassenger.getQrCode());
+            if (currentPassenger.getQrCode() != null)
+                Utils.saveToFile(currentPassenger.getQrCode());
             Reports reports = new Reports();
             try {
                 String boardingTime = currentPassenger.getFlight().getStartOfUsingTheRunway().

@@ -383,7 +383,7 @@ public class AirportDAO {
         return -1;
     }
 
-    private int highestIdPassenger() {
+    public int highestIdPassenger() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from passengers");
             ResultSet rs = stmt.executeQuery();
@@ -396,7 +396,7 @@ public class AirportDAO {
         return -1;
     }
 
-    private int highestIdRole() {
+    public int highestIdRole() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from roles");
             ResultSet rs = stmt.executeQuery();
@@ -409,7 +409,7 @@ public class AirportDAO {
         return -1;
     }
 
-    private int highestIdUser() {
+    public int highestIdUser() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from users");
             ResultSet rs = stmt.executeQuery();
