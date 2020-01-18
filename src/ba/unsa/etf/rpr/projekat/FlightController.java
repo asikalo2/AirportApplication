@@ -149,6 +149,10 @@ public class FlightController {
         if (currentFlight != null) {
             fillForm();
         }
+        else {
+            idField.setDisable(true);
+            idProperty.set(String.valueOf(dao.highestIdFlight()+1));
+        }
     }
 
     private void fillForm() {

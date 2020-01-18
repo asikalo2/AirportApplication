@@ -412,6 +412,19 @@ public class AirportDAO {
         return -1;
     }
 
+    public int highestIdFlight() {
+        try {
+            PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from flights");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                return rs.getInt(1);
+            }
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return -1;
+    }
+
     public int highestIdRole() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from roles");
