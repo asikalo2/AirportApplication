@@ -28,7 +28,6 @@ public class Flight {
         this.user = user;
         this.gate = gate;
     }
-
     public int getId() {
         return id;
     }

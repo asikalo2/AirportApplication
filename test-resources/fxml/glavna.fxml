@@ -1,0 +1,247 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import java.net.URL?>
+<?import javafx.geometry.Insets?>
+<VBox maxHeight="Infinity" minHeight="Infinity" xmlns="http://javafx.com/javafx/8.0.172-ea"
+      xmlns:fx="http://javafx.com/fxml/1"
+      fx:controller="ba.unsa.etf.rpr.projekat.Controller">
+
+    <stylesheets>
+        <URL value="@../css/style.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <fx:define>
+        <ToggleGroup fx:id="toggleGroup1"/>
+    </fx:define>
+
+    <MenuBar fx:id="menuBar" onKeyPressed="#handleKeyInput">
+        <menus>
+            <Menu text="%file">
+                <items>
+                    <MenuItem onAction="#saveAction" text="%Save As" />
+                    <MenuItem onAction="#viewReportAction" text="%Flights Report" />
+                    <MenuItem onAction="#viewReportActionPassenger" text="%Passengers Report" />
+                    <MenuItem onAction="#viewReportActionUser" text="%Users Report" />
+                    <MenuItem fx:id="exitMenuItem" onAction="#exitAction" text="%exit" />
+                </items>
+            </Menu>
+
+            <Menu text="%view">
+                <items>
+                    <Menu text="%languages">
+                        <items>
+                            <MenuItem text="%bosnian" onAction="#changeToBosnian" />
+                            <MenuItem text="%english" onAction="#changeToEnglish"/>
+                            <MenuItem text="%german" onAction="#changeToGerman"/>
+                            <MenuItem text="%french" onAction="#changeToFrench"/>
+                            <MenuItem text="%spanish" onAction="#changeToSpanish"/>
+                            <MenuItem text="%chinese" onAction="#changeToChinese"/>
+                            <MenuItem text="%russian" onAction="#changeToRussian"/>
+                            <MenuItem text="%arabian" onAction="#changeToArabian"/>
+                        </items>
+                    </Menu>
+                </items>
+            </Menu>
+        </menus>
+    </MenuBar>
+
+    <TabPane maxWidth="Infinity" maxHeight="Infinity">
+        <tabs>
+
+            <Tab text="%Airlines" fx:id="airlineTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddAirline" onAction="#addAirline" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveAirline" onAction="#removeAirline" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditAirline" onAction="#editAirline" text="%edit" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableAirline" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idAirline" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="nameAirline" prefWidth="180.0" text="%name"/>
+                            <TableColumn fx:id="codeAirline" prefWidth="200.0" text="%code"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="%Airplanes" fx:id="airplanesTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddAirplane" onAction="#addAirplane" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveAirplane" onAction="#removeAirplane" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditAirplane" onAction="#editAirplane" text="%edit" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableAirplanes" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idAirplane" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="airlineAirplane" prefWidth="180.0" text="%airline"/>
+                            <TableColumn fx:id="manufacturerAirplane" prefWidth="180.0" text="%manufacturer"/>
+                            <TableColumn fx:id="typeAirplane" prefWidth="200.0" text="%type"/>
+                            <TableColumn fx:id="numberOfSeatsAirplane" prefWidth="150.0" text="%number of seats"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+
+            <Tab text="%Flights" fx:id="flightsTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddFlight" onAction="#addFlight" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveFlight" onAction="#removeFlight" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditFlight" onAction="#editFlight" text="%edit" minWidth="50" styleClass="last"/>
+                                <Region styleClass="spacer" />
+                                <Button fx:id="tbPassengerList" onAction="#passengerListReport" text="%passengerList" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableFlights" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idFlight" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="airplaneFlight" prefWidth="180.0" text="%airplane"/>
+                            <TableColumn fx:id="codeFlight" prefWidth="200.0" text="%code"/>
+                            <TableColumn fx:id="startOfUsingTheRunwayFlight" prefWidth="150.0"
+                                         text="%start of using the runway"/>
+                            <TableColumn fx:id="endOfUsingTheRunwayFlight" prefWidth="150.0"
+                                         text="%end of using the runway"/>
+                            <TableColumn fx:id="userFlight" prefWidth="150.0" text="%user"/>
+                            <TableColumn fx:id="flightGate" prefWidth="150.0" text="%gate"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="%Flight Types" fx:id="flightTypeTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddFlightType" onAction="#addFlightType" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveFlightType" onAction="#removeFlightType" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditFlightType" onAction="#editFlightType" text="%edit" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableFlightType" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idFT" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="nameFT" prefWidth="180.0" text="%flight type name"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="%Luggage" fx:id="luggageTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddLuggage" onAction="#addLuggage" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveLuggage" onAction="#removeLuggage" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditLuggage" onAction="#editLuggage" text="%edit" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableLuggage" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idLuggage" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="passengerLuggage" prefWidth="50.0" text="%passenger"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+
+            <Tab text="%Passengers" fx:id="passengersTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddPassenger" onAction="#addPassenger" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemovePassenger" onAction="#removePassenger" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditPassenger" onAction="#editPassenger" text="%edit" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tablePassenger" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idPassenger" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="namePassenger" prefWidth="180.0" text="%name"/>
+                            <TableColumn fx:id="flightPassenger" prefWidth="180.0" text="%flight"/>
+                            <TableColumn fx:id="qrPassenger" prefWidth="180.0" text="%checked In"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="%Users" fx:id="userTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddUser" onAction="#addUser" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveUser" onAction="#removeUser" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditUser" onAction="#editUser" text="%edit" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableUsers" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idUser" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="nameUser" prefWidth="50.0" text="%name"/>
+                            <TableColumn fx:id="roleUser" prefWidth="50.0" text="%role"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+            <Tab text="%roles" fx:id="rolesTab">
+                <VBox>
+                    <ToolBar>
+                        <items>
+                            <Region styleClass="spacer"/>
+                            <HBox styleClass="segmented-button-bar">
+                                <Button fx:id="tbAddRole" onAction="#addRole" text="%add" minWidth="50" styleClass="first"/>
+                                <Button fx:id="tbRemoveRole" onAction="#removeRole" text="%remove" minWidth="50"/>
+                                <Button fx:id="tbEditRole" onAction="#editRole" text="%edit" minWidth="50" styleClass="last"/>
+                            </HBox>
+                        </items>
+                    </ToolBar>
+                    <TableView fx:id="tableRole" style="-fx-aligmnent: CENTER;">
+                        <columns>
+                            <TableColumn fx:id="idRole" prefWidth="50.0" text="%id"/>
+                            <TableColumn fx:id="nameRole" prefWidth="180.0" text="%name"/>
+                        </columns>
+                    </TableView>
+                </VBox>
+            </Tab>
+
+        </tabs>
+    </TabPane>
+</VBox>
