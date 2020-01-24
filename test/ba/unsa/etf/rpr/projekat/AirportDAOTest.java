@@ -123,6 +123,12 @@ public class AirportDAOTest {
         assertEquals(passengers.size(), 4);
     }
 
+    @Test
+    public void getGate() {
+        dao = new AirportDAO();
+        ObservableList<Gate> gates = dao.getGates();
+        assertEquals(gates.size(), 5);
+    }
 
     @Test
     void addDeleteRole() {

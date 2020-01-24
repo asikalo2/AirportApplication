@@ -171,8 +171,8 @@ public class AirportDAO {
     public ObservableList<Flight> getFlights() {
         ArrayList<Flight> res = new ArrayList<>();
         try {
-                PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types, gates on \n" +
-                        "flights.flight_type=flight_types.id and flights.gate=gates.id");
+            PreparedStatement stmt = conn.prepareStatement("select * from flights join flight_types, gates on \n" +
+                    "flights.flight_type=flight_types.id and flights.gate=gates.id");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 Airplane airplane = getPlaneById(rs.getInt(3));
@@ -184,7 +184,7 @@ public class AirportDAO {
                 FlightType flightType = new FlightType(rs.getInt(6), rs.getString(10));
                 Gate gate = new Gate(rs.getInt(8), rs.getString(12));
                 Flight flight = new Flight(rs.getInt(1), rs.getString(2), airplane,
-                                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
+                        startOfUsingTheRunway, endOfUsingTheRunway, flightType, user, gate);
                 res.add(flight);
 
             }

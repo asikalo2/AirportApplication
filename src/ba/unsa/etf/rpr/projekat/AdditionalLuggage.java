@@ -13,6 +13,8 @@ public class AdditionalLuggage extends Luggage {
         this.payExtra = payExtra;
     }
 
+    public AdditionalLuggage(){}
+
     public double getWeight() {
         return weight;
     }

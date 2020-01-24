@@ -66,6 +66,13 @@ public class FlightTest {
     }
 
     @Test
+    public void gettingAirlineNameFromAirplane1() throws IllegalNumberOfSeats {
+        Flight flight = new Flight();
+        flight.setAirplane(new Airplane(150, new Airline(5, "NewNew", "HZ76"), "Airbus", "CV67Z",200));
+        assertEquals(flight.getAirlineName(), "NewNew");
+    }
+
+    @Test
     public void gettingAirlineFromAirplane2() throws IllegalNumberOfSeats {
         Flight flight = new Flight();
         flight.setAirplane(new Airplane(150, new Airline(5, "NewNew", "HZ76"), "Airbus", "CV67Z",200));
@@ -162,4 +169,30 @@ public class FlightTest {
         assertNotEquals(flight.getCode(), 231);
     }
 
+    @Test
+    public void gettingFlightType(){
+        Flight flight = new Flight();
+        flight.setFlightType(new FlightType(6,"Regular"));
+        assertEquals(flight.getFlightType().getName(), "Regular");
+    }
+
+    @Test
+    public void gettingFlightType2(){
+        Flight flight = new Flight();
+        flight.setFlightType(new FlightType(6,"Regular"));
+        assertNotEquals(flight.getFlightType().getName(), "");
+    }
+
+    @Test
+    public void gettingFlightType3(){
+        Flight flight = new Flight();
+        flight.setFlightType(new FlightType(6,"Regular"));
+        assertEquals(flight.getFlightType().getId(), 6);
+    }
+    @Test
+    public void gettingFlightType4(){
+        Flight flight = new Flight();
+        flight.setFlightType(new FlightType(6,"Regular"));
+        assertNotEquals(flight.getFlightType().getId(), 7);
+    }
 }
