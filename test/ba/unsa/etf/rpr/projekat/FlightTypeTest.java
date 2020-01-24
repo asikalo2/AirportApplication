@@ -48,4 +48,10 @@ public class FlightTypeTest {
         flightType.setId(5);
         assertNotEquals(flightType.getId(), "5");
     }
+
+    @Test
+    public void gettingFlightTypeToString(){
+        FlightType flightType = new FlightType(5, "Regular");
+        assertEquals(flightType.toString(), "5 Regular");
+    }
 }

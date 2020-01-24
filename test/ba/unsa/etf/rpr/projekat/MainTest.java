@@ -105,7 +105,7 @@
 //    public void testRemoveAirplane(FxRobot robot) {
 //
 //        ObservableList<Airplane> airplanes = dao.getAirplanes();
-//        robot.clickOn("#tableAirplane");
+//        robot.clickOn("#tableAirplanes");
 //        robot.clickOn("JP");
 //
 //        robot.clickOn("#tbRemoveAirplane");
@@ -123,7 +123,7 @@
 //    public void testEditAirplane(FxRobot robot) {
 //
 //        ObservableList<Airplane> airplanes = dao.getAirplanes();
-//        robot.clickOn("#tableAirplane");
+//        robot.clickOn("#tableAirplanes");
 //        robot.clickOn("JP");
 //
 //        robot.clickOn("#tbEditAirplane");
@@ -175,10 +175,10 @@
 //    public void testRemoveFlightType(FxRobot robot) {
 //
 //        ObservableList<FlightType> flightTypes = dao.getFlightTypes();
-//        robot.clickOn("#tableFlightTypes");
+//        robot.clickOn("#tableFlightType");
 //        robot.clickOn("JP");
 //
-//        robot.clickOn("#tbRemoveFlightTypes");
+//        robot.clickOn("#tbRemoveFlightType");
 //        robot.lookup(".dialog-pane").tryQuery().isPresent();
 //
 //        DialogPane dialogPane = robot.lookup(".dialog-pane").queryAs(DialogPane.class);

@@ -2,6 +2,8 @@ package ba.unsa.etf.rpr.projekat;
 
 import org.junit.jupiter.api.Test;
 
+import java.time.LocalDateTime;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertNotEquals;
 
@@ -77,25 +79,87 @@ public class FlightTest {
         assertEquals(flight.getAirplane().getNumberOfSeats(), 200);
     }
 
-//    @Test
-//    public void gettingAirplaneType(){
-//        Airplane airplane = new Airplane();
-//        airplane.setType("BHZ628");
-//        assertEquals(airplane.getType(), "BHZ628");
-//    }
-//
-//    @Test
-//    public void gettingAirplaneType2(){
-//        Airplane airplane = new Airplane();
-//        airplane.setType("");
-//        assertNotEquals(airplane.getType(), "NewAirline2");
-//    }
-//
-//    @Test
-//    public void gettingAirplaneType3(){
-//        Airplane airplane = new Airplane();
-//        airplane.setType("321");
-//        assertNotEquals(airplane.getType(), 231);
-//    }
+    @Test
+    public void gettingSOURofFight1() throws IllegalNumberOfSeats {
+        Flight flight = new Flight();
+        flight.setStartOfUsingTheRunway(LocalDateTime.of(2020, 01,10,14,16,10));
+        assertEquals(flight.getStartOfUsingTheRunway(), LocalDateTime.of(2020, 01,10,14,16,10));
+    }
+
+    @Test
+    public void gettingSOURofFight2() throws IllegalNumberOfSeats {
+        Flight flight = new Flight();
+        flight.setStartOfUsingTheRunway(LocalDateTime.of(2020, 01,10,14,16,10));
+        assertNotEquals(flight.getStartOfUsingTheRunway(), LocalDateTime.of(2020, 10,01,14,16,10));
+    }
+
+    @Test
+    public void gettingEOURofFight1() throws IllegalNumberOfSeats {
+        Flight flight = new Flight();
+        flight.setEndOfUsingTheRunway(LocalDateTime.of(2020, 01,10,14,16,10));
+        assertEquals(flight.getEndOfUsingTheRunway(), LocalDateTime.of(2020, 01,10,14,16,10));
+    }
+
+    @Test
+    public void gettingEOURofFight2() throws IllegalNumberOfSeats {
+        Flight flight = new Flight();
+        flight.setEndOfUsingTheRunway(LocalDateTime.of(2020, 01,10,14,16,10));
+        assertNotEquals(flight.getEndOfUsingTheRunway(), LocalDateTime.of(2020, 10,01,14,16,10));
+    }
+
+    @Test
+    public void gettingUserFromFlight1() throws IllegalNumberOfSeats {
+        Flight flight = new Flight();
+        flight.setUser(new User(3, "Dea", new Role (6, "CEO")));
+        assertEquals(flight.getUser().getId(), 3);
+    }
+
+    @Test
+    public void gettingUserFromFlight2(){
+        Flight flight = new Flight();
+        flight.setUser(new User(3, "Dea", new Role (6, "CEO")));
+        assertNotEquals(flight.getUser().getRole().getId(), 3);
+    }
+
+    @Test
+    public void gettingGateFromFlight1(){
+        Flight flight = new Flight();
+        flight.setGate(new Gate(3, "NewGate"));
+        assertEquals(flight.getGate().getId(), 3);
+    }
+
+    @Test
+    public void gettingGateFromFlight2(){
+        Flight flight = new Flight();
+        flight.setGate(new Gate(3, "NewGate"));
+        assertNotEquals(flight.getGate().getName(), "Gate");
+    }
+
+    @Test
+    public void gettingGateFromFlight3(){
+        Flight flight = new Flight();
+        flight.setGate(new Gate(3, "NewGate"));
+        assertEquals(flight.getGateName(), "NewGate");
+    }
+    @Test
+    public void gettingFlightCode(){
+        Flight flight = new Flight();
+        flight.setCode("BHZ628");
+        assertEquals(flight.getCode(), "BHZ628");
+    }
+
+    @Test
+    public void gettingFlightCode2(){
+        Flight flight = new Flight();
+        flight.setCode("");
+        assertNotEquals(flight.getCode(), "NewAirline2");
+    }
+
+    @Test
+    public void gettingFlightCode3(){
+        Flight flight = new Flight();
+        flight.setCode("321");
+        assertNotEquals(flight.getCode(), 231);
+    }
 
 }

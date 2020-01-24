@@ -11,22 +11,6 @@ import java.util.List;
 
 public class Validation {
 
-    public static boolean isDateValid(String s) {
-        DateFormat format = new SimpleDateFormat("M/d/yyyy");
-        format.setLenient(false);
-
-        try {
-            Date t = format.parse(s);
-            //System.out.println(t);
-            if (t.compareTo(Date.from(LocalDate.now().atStartOfDay(ZoneId.systemDefault()).toInstant())) != -1)
-                return false;
-        } catch (ParseException e) {
-            return false;
-        }
-
-        return true;
-    }
-
     public static boolean charCheck(char charx) {
         if ((charx >= '0') && (charx <= '9'))
             return true;
@@ -83,12 +67,12 @@ public class Validation {
     }
 
     public static boolean isStringTooLong(String s) {
-        int i = 0, brojac = 0;
+        int i = 0, counter = 0;
         for (i = 0; i < s.length(); i++) {
-            brojac++;
+            counter++;
             if (!s.equals(s.toUpperCase())) return false;
         }
-        if (brojac > 5) return false;
+        if (counter > 5) return false;
 
         return true;
     }
@@ -99,9 +83,5 @@ public class Validation {
         for (i = 0; i < s.length(); i++)
             if (!justLetter(s.charAt(i)) || s.charAt(i) != ' ') return false;
         return true;
-    }
-
-    public static boolean isValidString3(String n) {
-        return false;
     }
 }

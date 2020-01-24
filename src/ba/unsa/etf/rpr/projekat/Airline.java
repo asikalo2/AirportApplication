@@ -4,7 +4,7 @@ public class Airline {
     private int id;
     private String name;
     private String code;
-    private enum TypeOfAirline {regular, lowCost}
+   // private enum TypeOfAirline {regular, lowCost}
 
     public Airline(){}
 

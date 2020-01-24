@@ -1,9 +1,9 @@
 package ba.unsa.etf.rpr.projekat;
 
 import org.junit.jupiter.api.Test;
+import org.junit.jupiter.api.function.Executable;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertNotEquals;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class AirplaneTest {
 
@@ -104,5 +104,11 @@ public class AirplaneTest {
         airplane.setType("321");
         assertNotEquals(airplane.getType(), 231);
     }
+
+//    @Test
+//    public void gettingException1() throws IllegalNumberOfSeats {
+//        assertDoesNotThrow((Executable) new Airplane(7,new Airline(),"Manu", "M7HZ", 200));
+//
+//    }
 
 }

@@ -9,11 +9,109 @@ public class ValidationTest {
     @Test
     public void charCheck1() {
         Validation unit = new Validation();
-        char c='S';
-        Boolean result = unit.charCheck(c);
-
+        Boolean result = unit.charCheck('S');
         assertEquals(false, result);
-
     }
 
+    @Test
+    public void charCheck2() {
+        Validation unit = new Validation();
+        Boolean result = unit.charCheck('9');
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void validateChar1(){
+        Validation unit = new Validation();
+        Boolean result = unit.justLetter('S');
+        assertEquals(true, result);
+    }
+    @Test
+    public void validateChar2(){
+        Validation unit = new Validation();
+        Boolean result = unit.justLetter('9');
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void validateString1(){
+        Validation unit = new Validation();
+        Boolean result = unit.isValidString("");
+        assertEquals(false, result);
+    }
+    @Test
+    public void validateString2(){
+        Validation unit = new Validation();
+        Boolean result = unit.isValidString("String");
+        assertEquals(true, result);
+    }
+    @Test
+    public void validateNumber1(){
+        Validation unit = new Validation();
+        Boolean result = unit.validateNumber("");
+        assertEquals(false, result);
+    }
+    @Test
+    public void validateNumber2(){
+        Validation unit = new Validation();
+        Boolean result = unit.validateNumber("9876");
+        assertEquals(true, result);
+    }
+
+    @Test
+    public void tooLongString1(){
+        Validation unit = new Validation();
+        Boolean result = unit.isValidString2("");
+        assertEquals(false, result);
+    }
+    @Test
+    public void tooLongString2(){
+        Validation unit = new Validation();
+        Boolean result = unit.isValidString2("LongString");
+        assertEquals(false, result);
+    }
+    @Test
+    public void tooLongString3(){
+        Validation unit = new Validation();
+        Boolean result = unit.isStringTooLong("JHGTF2");
+        assertEquals(false, result);
+    }
+    @Test
+    public void tooLongString4(){
+        Validation unit = new Validation();
+        Boolean result = unit.isStringTooLong("HTBH2");
+        assertEquals(true, result);
+    }
+    @Test
+    public void tooLongString5(){
+        Validation unit = new Validation();
+        Boolean result = unit.isStringTooLong("hzgt7");
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void flightNumberLength(){
+        Validation unit = new Validation();
+        Boolean result = unit.flightNumberLength("HTBH2");
+        assertEquals(true, result);
+    }
+    @Test
+    public void flightNumberLength2(){
+        Validation unit = new Validation();
+        Boolean result = unit.flightNumberLength("");
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void flightNumberLength3(){
+        Validation unit = new Validation();
+        Boolean result = unit.flightNumberLength("768");
+        assertEquals(true, result);
+    }
+    @Test
+    public void flightNumberLength4(){
+        Validation unit = new Validation();
+        Boolean result = unit.flightNumberLength("HZK");
+        assertEquals(false, result);
+    }
 }
