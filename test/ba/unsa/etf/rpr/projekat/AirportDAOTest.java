@@ -51,9 +51,14 @@ public class AirportDAOTest {
     @Test
     void getFlightTypes() {
         dao = new AirportDAO();
-
         assertEquals(3, dao.getFlightTypes().size());
-        // Za sada samo ispis da vidim da li radi
+
+    }
+
+    @Test
+    public void getAirlines() {
+        dao = new AirportDAO();
+        assertEquals(107, dao.getAirlines().size());
 
     }
 
@@ -61,38 +66,6 @@ public class AirportDAOTest {
     void getUsers() {
         dao = new AirportDAO();
         assertEquals(1, dao.getUsers().size());
-        // Za sada samo ispis da vidim da li radi
-    }
-
-    @Test
-    void getPlaneById() {
-        dao = new AirportDAO();
-        Airplane plane = dao.getPlaneById(1);
-        assertEquals(plane.getId(), 1);
-        assertEquals(plane.getAirline().getName(), "Adria Airways");
-    }
-
-    @Test
-    void getUserById() {
-        dao = new AirportDAO();
-        User user = dao.getUserById(1);
-        assertEquals(user.getId(), 1);
-        assertEquals(user.getRole().getName(), "Administrator");
-    }
-
-    @Test
-    void getFlights() {
-        dao = new AirportDAO();
-        ObservableList<Flight> flights = dao.getFlights();
-        assertEquals(flights.size(), 1);
-    }
-
-    @Test
-    void getFlightsById() {
-        dao = new AirportDAO();
-        Flight flight = dao.getFlightById(1);
-        assertEquals(flight.getId(), 1);
-        assertEquals(flight.getCode(), "LH 876");
     }
 
     @Test
@@ -128,6 +101,38 @@ public class AirportDAOTest {
         dao = new AirportDAO();
         ObservableList<Gate> gates = dao.getGates();
         assertEquals(gates.size(), 5);
+    }
+
+    @Test
+    void getFlights() {
+        dao = new AirportDAO();
+        ObservableList<Flight> flights = dao.getFlights();
+        assertEquals(flights.size(), 1);
+    }
+
+    @Test
+    void getFlightsById() {
+        dao = new AirportDAO();
+        Flight flight = dao.getFlightById(1);
+        assertEquals(flight.getId(), 1);
+        assertEquals(flight.getCode(), "LH 876");
+    }
+
+
+    @Test
+    void getPlaneById() {
+        dao = new AirportDAO();
+        Airplane plane = dao.getPlaneById(1);
+        assertEquals(plane.getId(), 1);
+        assertEquals(plane.getAirline().getName(), "Adria Airways");
+    }
+
+    @Test
+    void getUserById() {
+        dao = new AirportDAO();
+        User user = dao.getUserById(1);
+        assertEquals(user.getId(), 1);
+        assertEquals(user.getRole().getName(), "Administrator");
     }
 
     @Test
@@ -198,5 +203,47 @@ public class AirportDAOTest {
         dao.deleteAirline(airline);
         ObservableList<Airline> airlines1 = dao.getAirlines();
         assertEquals(107, airlines1.size());
+    }
+
+    @Test
+    void addDeleteUser() {
+        dao = new AirportDAO();
+        User user = new User(dao.highestIdUser() + 1, "Lufthansa1", new Role(6, "NewHehe"));
+        dao.addUser(user);
+        ObservableList<User> users = dao.getUsers();
+        assertEquals(1, users.size());
+        dao.removeInstance();
+        dao = new AirportDAO();
+        dao.deleteUser(user);
+        ObservableList<User> users1 = dao.getUsers();
+        assertEquals(1, users1.size());
+    }
+
+    @Test
+    void addDeleteGate() {
+        dao = new AirportDAO();
+        Gate gate = new Gate();
+        dao.addGate(gate);
+        ObservableList<Gate> gates = dao.getGates();
+        assertEquals(5, gates.size());
+        dao.removeInstance();
+        dao = new AirportDAO();
+        dao.deleteGate(gate);
+        ObservableList<Gate> gates1 = dao.getGates();
+        assertEquals(4, gates1.size());
+    }
+
+    @Test
+    void addDeleteFlight() {
+        dao = new AirportDAO();
+        Flight flight = new Flight(dao.highestIdFlight() + 1, "7657", null, null,null,null,null,null);
+        dao.addFlight(flight);
+        ObservableList<Flight> flights = dao.getFlights();
+        assertEquals(108, flights.size());
+        dao.removeInstance();
+        dao = new AirportDAO();
+        dao.deleteFlight(flight);
+        ObservableList<Flight> flights1 = dao.getFlights();
+        assertEquals(107, flights.size());
     }
 }
