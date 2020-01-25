@@ -346,5 +346,14 @@ public class MainTest {
         assertEquals(user.getName(), "Amila Sikaloabc");
     }
 
+    @Test
+    public void testGermanLanguage(FxRobot robot) {
+
+        ObservableList<Airline> airlines = dao.getAirlines();
+        robot.clickOn("#clickView");
+        robot.clickOn("#clickLanguages");
+        robot.clickOn("#clickGerman");
+      }
+
 
 }

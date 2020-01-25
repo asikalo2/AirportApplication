@@ -33,8 +33,6 @@ public class LuggageController {
         passengerProperty = new SimpleObjectProperty<>();
     }
 
-
-
     @FXML
     public void initialize() {
         passenger.setItems(dao.getPassengers());

@@ -34,18 +34,18 @@
                 </items>
             </Menu>
 
-            <Menu text="%view">
+            <Menu text="%view" fx:id="clickView">
                 <items>
-                    <Menu text="%languages">
+                    <Menu text="%languages" fx:id="clickLanguages">
                         <items>
-                            <MenuItem text="%bosnian" onAction="#changeToBosnian" />
-                            <MenuItem text="%english" onAction="#changeToEnglish"/>
-                            <MenuItem text="%german" onAction="#changeToGerman"/>
-                            <MenuItem text="%french" onAction="#changeToFrench"/>
-                            <MenuItem text="%spanish" onAction="#changeToSpanish"/>
-                            <MenuItem text="%chinese" onAction="#changeToChinese"/>
-                            <MenuItem text="%russian" onAction="#changeToRussian"/>
-                            <MenuItem text="%arabian" onAction="#changeToArabian"/>
+                            <MenuItem text="%bosnian" onAction="#changeToBosnian" fx:id="clickBosnian" />
+                            <MenuItem text="%english" onAction="#changeToEnglish" fx:id="clickEnglish" />
+                            <MenuItem text="%german" onAction="#changeToGerman" fx:id="clickGerman"/>
+                            <MenuItem text="%french" onAction="#changeToFrench" fx:id="clickFrench"/>
+                            <MenuItem text="%spanish" onAction="#changeToSpanish" fx:id="clickSpanish"/>
+                            <MenuItem text="%chinese" onAction="#changeToChinese" fx:id="clickChinese"/>
+                            <MenuItem text="%russian" onAction="#changeToRussian" fx:id="clickRussian"/>
+                            <MenuItem text="%arabian" onAction="#changeToArabian" fx:id="clickArabian"/>
                         </items>
                     </Menu>
                 </items>
