@@ -31,4 +31,18 @@ public class LuggageTest {
         Luggage luggage = new Luggage(5, passenger);
         assertEquals(luggage.getPassenger(), passenger);
     }
+
+    @Test
+    public void gettingLuggagePassenger3()  {
+        Passenger passenger = new Passenger();
+        Luggage luggage = new Luggage();
+        luggage.setPassenger(passenger);
+        assertEquals(luggage.getPassenger(), passenger);
+    }
+    @Test
+    public void gettingLuggagePassenger4()  {
+        Luggage luggage = new Luggage();
+        luggage.setId(4);
+        assertEquals(luggage.getId(), 4);
+    }
 }

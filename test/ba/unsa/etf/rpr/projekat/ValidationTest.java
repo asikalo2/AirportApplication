@@ -114,4 +114,23 @@ public class ValidationTest {
         Boolean result = unit.flightNumberLength("HZK");
         assertEquals(false, result);
     }
+
+    @Test
+    public void isValidNameTest(){
+        Validation unit = new Validation();
+        Boolean result = unit.isValidName("HZdsadasdasdasdasdasdasdasdaskd");
+        assertEquals(false, result);
+    }
+    @Test
+    public void isValidNameTest2(){
+        Validation unit = new Validation();
+        Boolean result = unit.isValidName("HZdsadasdasdasdadasdasdasdaisd");
+        assertEquals(true, result);
+    }
+    @Test
+    public void isValidNameTest3(){
+        Validation unit = new Validation();
+        Boolean result = unit.isValidName("454");
+        assertEquals(false, result);
+    }
 }

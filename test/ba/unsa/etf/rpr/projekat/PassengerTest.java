@@ -6,6 +6,9 @@ import org.assertj.core.internal.bytebuddy.asm.Advice;
 import org.junit.jupiter.api.Test;
 
 import javax.swing.*;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.InputStream;
 import java.time.LocalDateTime;
 
@@ -119,11 +122,12 @@ public class PassengerTest {
         Passenger passenger = new Passenger();
         passenger.setFlight(new Flight(10, "LH78",
                 new Airplane(150, new Airline(5, "NewNew",
-                        "HZ76"), "Airbus", "CV67Z",200),null,null,
+                        "HZ76"), "Airbus", "CV67Z",200),
+                LocalDateTime.MIN,LocalDateTime.MAX,
                 new FlightType(5, "Regular"),
                 new User(3, "Dea", new Role (6, "CEO")),
                 new Gate(1, "FirstGate")));
-        assertEquals(passenger.getFlight().getStartOfUsingTheRunway(), null);
+        assertEquals(passenger.getFlight().getStartOfUsingTheRunway(), LocalDateTime.MIN);
     }
 
     @Test
@@ -136,5 +140,49 @@ public class PassengerTest {
                 new User(3, "Dea", new Role (6, "CEO")),
                 new Gate(1, "FirstGate")));
         assertEquals(passenger.getFlight().getEndOfUsingTheRunway(), null);
+    }
+
+    @Test
+    public void qrCode(){
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("qrcode.png").getFile());
+        Image image = null;
+        try
+        {
+            image = new Image(new FileInputStream(file.getAbsoluteFile()));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Passenger passenger=new Passenger();
+        passenger.setQrCode(image);
+        assertEquals(image,passenger.getQrCode());
+    }
+
+    @Test
+    public void getFName() throws IllegalNumberOfSeats {
+        Passenger passenger = new Passenger();
+        passenger.setFlight(new Flight(10, "LH78",
+                new Airplane(150, new Airline(5, "NewNew",
+                        "HZ76"), "Airbus", "CV67Z",200),null,null,
+                new FlightType(5, "Regular"),
+                new User(3, "Dea", new Role (6, "CEO")),
+                new Gate(1, "FirstGate")));
+        assertEquals(passenger.getFlightName(),"NewNew  |  LH78");
+    }
+
+    @Test
+    public void getCheckedIn() {
+        ClassLoader classLoader = getClass().getClassLoader();
+        File file = new File(classLoader.getResource("qrcode.png").getFile());
+        Image image = null;
+        try
+        {
+            image = new Image(new FileInputStream(file.getAbsoluteFile()));
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+        Passenger passenger=new Passenger();
+        passenger.setQrCode(image);
+        assertEquals(passenger.getCheckedIn(),"Yes");
     }
 }
