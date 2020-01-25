@@ -334,7 +334,7 @@ public class AirportDAO {
         return null;
     }
 
-    int highestIdAirline() {
+    public int highestIdAirline() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from airline_companies");
             ResultSet rs = stmt.executeQuery();
@@ -347,7 +347,7 @@ public class AirportDAO {
         return -1;
     }
 
-    private int highestIdAirplane() {
+    public int highestIdAirplane() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from planes");
             ResultSet rs = stmt.executeQuery();
@@ -373,7 +373,7 @@ public class AirportDAO {
         return -1;
     }
 
-    int highestIdFlightTypes() {
+    public int highestIdFlightTypes() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from flight_types");
             ResultSet rs = stmt.executeQuery();
@@ -386,7 +386,7 @@ public class AirportDAO {
         return -1;
     }
 
-    private int highestIdLuggage() {
+    public int highestIdLuggage() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from luggages");
             ResultSet rs = stmt.executeQuery();
@@ -451,7 +451,7 @@ public class AirportDAO {
         return -1;
     }
 
-    private Boolean doesAirlineExist(int id) {
+    public Boolean doesAirlineExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from airline_companies WHERE id=?");
             stmt.setInt(1, id);
@@ -465,7 +465,7 @@ public class AirportDAO {
         return false;
     }
 
-    private Boolean doesAirplaneExist(int id) {
+    public Boolean doesAirplaneExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from planes WHERE id=?");
             stmt.setInt(1, id);
@@ -479,7 +479,7 @@ public class AirportDAO {
         return false;
     }
 
-    private Boolean doesFlightExist(int id) {
+    public Boolean doesFlightExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from flights WHERE id=?");
             stmt.setInt(1, id);
@@ -493,7 +493,7 @@ public class AirportDAO {
         return false;
     }
 
-    private Boolean doesLuggageExist(int id) {
+    public Boolean doesLuggageExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from luggages WHERE id=?");
             stmt.setInt(1, id);
@@ -507,7 +507,7 @@ public class AirportDAO {
         return false;
     }
 
-    private Boolean doesRoleExist(int id) {
+    public Boolean doesRoleExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from roles WHERE id=?");
             stmt.setInt(1, id);
@@ -521,7 +521,7 @@ public class AirportDAO {
         return false;
     }
 
-    private Boolean doesPassengerExist(int id) {
+    public Boolean doesPassengerExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from passengers WHERE id=?");
             stmt.setInt(1, id);
@@ -535,7 +535,7 @@ public class AirportDAO {
         return false;
     }
 
-    private Boolean doesUserExist(int id) {
+    public Boolean doesUserExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from users WHERE id=?");
             stmt.setInt(1, id);
@@ -549,7 +549,7 @@ public class AirportDAO {
         return false;
     }
 
-    private Boolean doesFlightTypeExist(int id) {
+    public Boolean doesFlightTypeExist(int id) {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id from flight_types WHERE id=?");
             stmt.setInt(1, id);

@@ -34,14 +34,6 @@ public class AirportDAOTest {
         }
     }
 
-/*
-    @Test
-    public void okButton (FxRobot robot) {
-        robot.write("anonymous");
-        robot.clickOn("#prijavaBtn");
-        assertEquals("anonymous", prijavaBtn.getText());
-    }*/
-
     @AfterEach
     void deleteDb() {
         File dbfile = new File("AirportDBtest.db");
@@ -250,5 +242,85 @@ public class AirportDAOTest {
         dao.deleteFlight(flight);
         ObservableList<Flight> flights1 = dao.getFlights();
         assertEquals(1, flights1.size());
+    }
+
+    @Test
+    public void testHighestIdAirplane(){
+        dao = new AirportDAO();
+        assertEquals(dao.highestIdAirplane(), 7);
+    }
+
+    @Test
+    public void testHighestIdFlightType(){
+        dao = new AirportDAO();
+        assertEquals(dao.highestIdFlightTypes(), 3);
+    }
+
+    @Test
+    public void testHighestIdLuggage(){
+        dao = new AirportDAO();
+        assertEquals(dao.highestIdLuggage(), 3);
+    }
+
+    @Test
+    public void testHighestIdPassenger(){
+        dao = new AirportDAO();
+        assertEquals(dao.highestIdPassenger(), 4);
+    }
+
+    @Test
+    public void testHighestIdFlight(){
+        dao = new AirportDAO();
+        assertEquals(dao.highestIdFlight(), 1);
+    }
+
+    @Test
+    public void testHighestIdRole(){
+        dao = new AirportDAO();
+        assertEquals(dao.highestIdRole(), 2);
+    }
+
+    @Test
+    public void testHighestIdUser(){
+        dao = new AirportDAO();
+        assertEquals(dao.highestIdUser(), 1);
+    }
+
+    @Test
+    public void testDoesAirExist(){
+        dao = new AirportDAO();
+        assertEquals(dao.doesAirlineExist(1), true);
+    }
+    @Test
+    public void testDoesFliExist(){
+        dao = new AirportDAO();
+        assertEquals(dao.doesFlightExist(1), true);
+    }
+    @Test
+    public void testDoesLuggExist(){
+        dao = new AirportDAO();
+        assertEquals(dao.doesLuggageExist(1), true);
+    }
+
+    @Test
+    public void testDoesRoleExist(){
+        dao = new AirportDAO();
+        assertEquals(dao.doesRoleExist(1), true);
+    }
+    @Test
+    public void testDoesPassExist(){
+        dao = new AirportDAO();
+        assertEquals(dao.doesPassengerExist(1), true);
+    }
+
+    @Test
+    public void testDoesFTExist(){
+        dao = new AirportDAO();
+        assertEquals(dao.doesFlightTypeExist(1), true);
+    }
+    @Test
+    public void testDoesUserExist(){
+        dao = new AirportDAO();
+        assertEquals(dao.doesUserExist(1), true);
     }
 }
