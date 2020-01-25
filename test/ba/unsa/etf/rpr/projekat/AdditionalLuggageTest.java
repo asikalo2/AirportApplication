@@ -9,25 +9,25 @@ public class AdditionalLuggageTest {
 
     @Test
     public void gettingAdditionalLuggage(){
-    AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10);
+    AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10,null);
     assertEquals(luggage.getPayExtra(), 10);
     }
 
     @Test
     public void gettingAdditionalLuggage2(){
-        AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10);
+        AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10,null);
         assertEquals(luggage.getWeight(), 30);
     }
 
     @Test
     public void gettingAdditionalLuggage3(){
-        AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10);
+        AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10,null);
         assertEquals(luggage.getId(), 6);
     }
 
     @Test
     public void gettingAdditionalLuggage4(){
-        AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10);
+        AdditionalLuggage luggage = new AdditionalLuggage(6,new Passenger(), 30, 10,null);
         assertNotEquals(luggage.getId(), 10);
     }
     @Test

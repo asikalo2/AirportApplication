@@ -44,7 +44,7 @@ public class RoleController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentRole.getId()));
         nameProperty.set(currentRole.getName());
     }

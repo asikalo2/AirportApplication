@@ -155,16 +155,17 @@ public class FlightController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentFlight.getId()));
         codeProperty.set(currentFlight.getCode());
         airplaneProperty.setValue(currentFlight.getAirplane());
         startOfUsingTheRunwayProperty.setValue(currentFlight.getStartOfUsingTheRunway());
         endOfUsingTheRunwayProperty.setValue(currentFlight.getEndOfUsingTheRunway());
 
-        startOfUsingTheRunwayField.setDateTimeValue(currentFlight.getStartOfUsingTheRunway());
-        endOfUsingTheRunwayField.setDateTimeValue(currentFlight.getEndOfUsingTheRunway());
-
+        if(startOfUsingTheRunwayField!= null && endOfUsingTheRunwayField!=null) {
+            startOfUsingTheRunwayField.setDateTimeValue(currentFlight.getStartOfUsingTheRunway());
+            endOfUsingTheRunwayField.setDateTimeValue(currentFlight.getEndOfUsingTheRunway());
+        }
         flightTypeProperty.setValue(currentFlight.getFlightType());
         userProperty.setValue(currentFlight.getUser());
         gateProperty.setValue(currentFlight.getGate());

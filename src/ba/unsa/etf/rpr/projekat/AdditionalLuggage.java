@@ -5,12 +5,15 @@ public class AdditionalLuggage extends Luggage {
     private double weight;
     private double payExtra;
 
-    private enum items {metal, clothes, money};
+    public enum Type {METAL, CLOTHES, MONEY};
 
-    public AdditionalLuggage(int id, Passenger passenger, double weight, double payExtra) {
+    private Type addLuggageType;
+
+    public AdditionalLuggage(int id, Passenger passenger, double weight, double payExtra, Type addLuggageType) {
         super(id, passenger);
         this.weight = weight;
         this.payExtra = payExtra;
+        this.addLuggageType = addLuggageType;
     }
 
     public AdditionalLuggage(){}

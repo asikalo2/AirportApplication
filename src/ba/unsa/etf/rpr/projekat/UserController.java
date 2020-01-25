@@ -65,7 +65,7 @@ public class UserController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentUser.getId()));
         nameProperty.set(currentUser.getName());
         roleProperty.set(currentUser.getRole());

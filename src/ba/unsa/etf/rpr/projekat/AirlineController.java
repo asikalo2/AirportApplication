@@ -43,7 +43,7 @@ public class AirlineController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentAirline.getId()));
         nameProperty.set(currentAirline.getName());
         codeProperty.set(currentAirline.getCode());

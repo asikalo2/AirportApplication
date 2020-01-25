@@ -40,7 +40,7 @@ public class GateController {
             }
         }
 
-        private void fillForm() {
+        public void fillForm() {
             idProperty.set(String.valueOf(currentGate.getId()));
             nameProperty.set(currentGate.getName());
         }

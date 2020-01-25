@@ -71,7 +71,7 @@ public class AirplaneController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentAirplane.getId()));
         airlineProperty.setValue(currentAirplane.getAirline());
         manufacturerProperty.set(currentAirplane.getManufacturer());

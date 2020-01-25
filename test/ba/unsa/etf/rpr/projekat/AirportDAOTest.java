@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.sql.SQLException;
+import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -222,28 +223,32 @@ public class AirportDAOTest {
     @Test
     void addDeleteGate() {
         dao = new AirportDAO();
-        Gate gate = new Gate();
+        Gate gate = new Gate(7,"Name");
         dao.addGate(gate);
         ObservableList<Gate> gates = dao.getGates();
-        assertEquals(5, gates.size());
+        assertEquals(6, gates.size());
         dao.removeInstance();
         dao = new AirportDAO();
         dao.deleteGate(gate);
         ObservableList<Gate> gates1 = dao.getGates();
-        assertEquals(4, gates1.size());
+        assertEquals(5, gates1.size());
     }
 
     @Test
-    void addDeleteFlight() {
+    void addDeleteFlight() throws IllegalNumberOfSeats {
         dao = new AirportDAO();
-        Flight flight = new Flight(dao.highestIdFlight() + 1, "7657", null, null,null,null,null,null);
+        LocalDateTime sour = LocalDateTime.MIN;
+        LocalDateTime eur = LocalDateTime.MAX;
+        Flight flight = new Flight(dao.highestIdFlight() + 1, "7657", dao.getPlaneById(2),
+                             sour, eur, dao.getFlightTypes().get(0), dao.getUserById(1),
+                                dao.getGates().get(0));
         dao.addFlight(flight);
         ObservableList<Flight> flights = dao.getFlights();
-        assertEquals(108, flights.size());
+        assertEquals(2, flights.size());
         dao.removeInstance();
         dao = new AirportDAO();
         dao.deleteFlight(flight);
         ObservableList<Flight> flights1 = dao.getFlights();
-        assertEquals(107, flights.size());
+        assertEquals(1, flights1.size());
     }
 }

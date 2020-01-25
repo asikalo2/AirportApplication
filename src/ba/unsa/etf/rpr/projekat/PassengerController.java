@@ -83,13 +83,13 @@ public class PassengerController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentPassenger.getId()));
         nameProperty.set(currentPassenger.getName());
         flightProperty.setValue(currentPassenger.getFlight());
         qrCodeProperty.set(currentPassenger.getQrCode());
         //qrCodeView.setImage(currentPassenger.getQrCode());
-        if (currentPassenger.getCheckedIn() == "Yes") {
+        if (checkInToggle != null && currentPassenger.getCheckedIn() == "Yes") {
             checkInToggle.setSelected(true);
             checkInToggle.setText("Yes");
         }

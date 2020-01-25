@@ -7,12 +7,30 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class AirlineControllerTest {
 
+    @Test
+    public void checkFillForm(){
+        AirportDAO dao = new AirportDAO();
+        Airline airline = new Airline(7,"Air","COD3");
+        AirlineController airlineController = new AirlineController(dao, airline);
+        airlineController.fillForm();
+        assertEquals(airlineController.idProperty.get(),"7");
+    }
 
     @Test
-    public void controllerInit(){
+    public void checkFillForm2(){
         AirportDAO dao = new AirportDAO();
-        Airline airline = new Airline(130, "New airline", "78HGT");
-        dao.addAirline(airline);
-        assertEquals(airline.getName(), "New airline");
+        Airline airline = new Airline(7,"Air","COD3");
+        AirlineController airlineController = new AirlineController(dao, airline);
+        airlineController.fillForm();
+        assertEquals(airlineController.nameProperty.get(), "Air");
+    }
+
+    @Test
+    public void checkFillForm3(){
+        AirportDAO dao = new AirportDAO();
+        Airline airline = new Airline(7,"Air","COD3");
+        AirlineController airlineController = new AirlineController(dao, airline);
+        airlineController.fillForm();
+        assertEquals(airlineController.codeProperty.get(), "COD3");
     }
 }

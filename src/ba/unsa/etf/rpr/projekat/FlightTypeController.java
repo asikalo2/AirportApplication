@@ -41,12 +41,12 @@ public class FlightTypeController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentFlightType.getId()));
         nameProperty.set(currentFlightType.getName());
     }
 
-    private void initializeDataBinding() {
+    public void initializeDataBinding() {
         idField.textProperty().bindBidirectional(idProperty);
         nameField.textProperty().bindBidirectional(nameProperty);
     }
@@ -107,7 +107,7 @@ public class FlightTypeController {
     }
 
 
-    private boolean isFormValid() {
+    public boolean isFormValid() {
         return true;
     }
 

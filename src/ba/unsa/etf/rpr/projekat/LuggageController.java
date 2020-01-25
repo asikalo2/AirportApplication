@@ -67,7 +67,7 @@ public class LuggageController {
         }
     }
 
-    private void fillForm() {
+    public void fillForm() {
         idProperty.set(String.valueOf(currentLuggage.getId()));
         passengerProperty.setValue(currentLuggage.getPassenger());
     }
