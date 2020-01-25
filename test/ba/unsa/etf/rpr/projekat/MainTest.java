@@ -224,6 +224,23 @@ public class MainTest {
         assertEquals(luggages.size() - 1, luggages1.size());
     }
 
+        @Test
+        public void testAddRole(FxRobot robot) {
+        ObservableList<Role> roles = dao.getRoles();
+        robot.clickOn("#rolesTab");
+        robot.clickOn("#tbAddRole");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("3");
+        robot.clickOn("#nameField");
+        robot.write("Regular");
+        robot.clickOn("#okButton");
+        Role role = dao.getRoles().get(2);
+        assertEquals(role.getId(), 3);
+    }
+
+
+
 //    @Test
 //    public void testEditLuggage(FxRobot robot) {
 //
@@ -346,14 +363,30 @@ public class MainTest {
         assertEquals(user.getName(), "Amila Sikaloabc");
     }
 
-    @Test
-    public void testGermanLanguage(FxRobot robot) {
+//    @Test
+//    public void testAddUser(FxRobot robot) {
+//        ObservableList<User> users = dao.getUsers();
+//        robot.clickOn("#userTab");
+//        robot.clickOn("#tbAddUser");
+//        robot.lookup("#idField").tryQuery().isPresent();
+//        robot.clickOn("#idField");
+//        robot.write("2");
+//        robot.clickOn("#nameField");
+//        robot.write("Amila");
+//      //  robot.clickOn("#role");
+//    //    robot.clickOn(String.valueOf(2));
+//        User user = dao.getUsers().get(1);
+//        assertEquals(user.getName(), "Amila");
+//    }
 
-        ObservableList<Airline> airlines = dao.getAirlines();
-        robot.clickOn("#clickView");
-        robot.clickOn("#clickLanguages");
-        robot.clickOn("#clickGerman");
-      }
+//    @Test
+//    public void testGermanLanguage(FxRobot robot) {
+//
+//        ObservableList<Airline> airlines = dao.getAirlines();
+//        robot.clickOn("#clickView");
+//        robot.clickOn("#clickLanguages");
+//        robot.clickOn("#clickGerman");
+//      }
 
 
 }

@@ -238,7 +238,7 @@ public class AirportDAO {
                 res.add(luggage);
             }
             return FXCollections.observableArrayList(res);
-        } catch (SQLException | IllegalCode ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
@@ -301,7 +301,7 @@ public class AirportDAO {
 
             }
             return FXCollections.observableArrayList(res);
-        } catch (SQLException | IllegalCode ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;
@@ -328,7 +328,7 @@ public class AirportDAO {
 
             }
             return FXCollections.observableArrayList(res);
-        } catch (SQLException | IllegalCode ex) {
+        } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return null;

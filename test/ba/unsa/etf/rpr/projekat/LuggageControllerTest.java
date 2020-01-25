@@ -12,7 +12,7 @@ import static org.junit.jupiter.api.Assertions.assertEquals;
 public class LuggageControllerTest {
 
     @Test
-    public void checkFillForm() throws IllegalCode {
+    public void checkFillForm() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("qrcode.png").getFile());
         Image image = null;
@@ -29,7 +29,7 @@ public class LuggageControllerTest {
         assertEquals(luggageController.idProperty.get(), "4");
     }
     @Test
-    public void checkFillForm2() throws IllegalCode {
+    public void checkFillForm2() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("qrcode.png").getFile());
         Image image = null;
@@ -47,7 +47,7 @@ public class LuggageControllerTest {
     }
 
     @Test
-    public void checkFillForm3() throws IllegalCode {
+    public void checkFillForm3() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("qrcode.png").getFile());
         Image image = null;
@@ -65,7 +65,7 @@ public class LuggageControllerTest {
     }
 
     @Test
-    public void checkFillForm4() throws IllegalCode {
+    public void checkFillForm4() {
         ClassLoader classLoader = getClass().getClassLoader();
         File file = new File(classLoader.getResource("qrcode.png").getFile());
         Image image = null;

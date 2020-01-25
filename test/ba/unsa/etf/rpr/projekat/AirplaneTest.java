@@ -3,6 +3,8 @@ package ba.unsa.etf.rpr.projekat;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.function.Executable;
 
+import java.util.ArrayList;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 public class AirplaneTest {
@@ -12,6 +14,13 @@ public class AirplaneTest {
         Airplane airplane = new Airplane();
         airplane.setManufacturer("NewAirplane");
         assertEquals(airplane.getManufacturer(), "NewAirplane");
+    }
+
+    @Test
+    public void doStuffThrowsIndexOutOfBoundsException() {
+        Throwable exception = assertThrows(IllegalNumberOfSeats.class, ()
+                -> new Airplane(1,new Airline(5,"Asda","JHDS"),"JEH","JEEE",400));
+        assertEquals("Illegal number of seats!", exception.getMessage());
     }
 
     @Test

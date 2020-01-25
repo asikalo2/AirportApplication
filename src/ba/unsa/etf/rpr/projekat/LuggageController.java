@@ -49,11 +49,8 @@ public class LuggageController {
             @Override
             public Passenger fromString(String string) {
                 Passenger newPassenger = null;
-                try {
+
                     newPassenger = new Passenger(0, string, null, null);
-                } catch (IllegalCode illegalCode) {
-                    illegalCode.printStackTrace();
-                }
 
                 return newPassenger;
             }

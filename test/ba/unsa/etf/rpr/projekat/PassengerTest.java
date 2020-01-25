@@ -185,4 +185,5 @@ public class PassengerTest {
         passenger.setQrCode(image);
         assertEquals(passenger.getCheckedIn(),"Yes");
     }
+
 }

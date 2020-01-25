@@ -46,8 +46,7 @@ public class Airplane {
         return numberOfSeats;
     }
 
-    public void setNumberOfSeats(int numberOfSeats) {
-        this.numberOfSeats = numberOfSeats;
+    public void setNumberOfSeats(int numberOfSeats)  { this.numberOfSeats = numberOfSeats;
     }
 
     public Airline getAirline() {
