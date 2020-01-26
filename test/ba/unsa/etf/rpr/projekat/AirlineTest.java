@@ -22,10 +22,23 @@ public class AirlineTest {
     }
 
     @Test
+    public void gettingAirlineName9(){
+        Airline airline = new Airline();
+        airline.setCountry("Germany");
+        assertEquals(airline.getCountry(), "Germany");
+    }
+
+    @Test
     public void gettingAirlineName3(){
         Airline airline = new Airline();
         airline.setName("Airlinenew");
         assertNotEquals(airline.getName(), 1234567);
+    }
+
+    @Test
+    public void gettingAirlineName5(){
+        Airline airline = new Airline(7,"New","NZTH7","Germany");
+        assertEquals(airline.getCountry(), "Germany");
     }
 
     @Test

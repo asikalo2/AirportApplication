@@ -6,9 +6,15 @@ public class Airline {
     private String code;
 
     private String country;
-   // private enum TypeOfAirline {regular, lowCost}
 
     public Airline(){}
+
+    public Airline(int id, String name, String code, String country) {
+        this.id = id;
+        this.name = name;
+        this.code = code;
+        this.country=country;
+    }
 
     public Airline(int id, String name, String code) {
         this.id = id;

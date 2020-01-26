@@ -24,9 +24,7 @@ public class Luggage extends AbstractLuggage {
     }
 
     @Override
-    public void setWeight(double weight) {
-
-    }
+    public void setWeight(double weight) { }
 
     @Override
     public Double getPayExtra() {
@@ -35,7 +33,6 @@ public class Luggage extends AbstractLuggage {
 
     @Override
     public void setPayExtra(double payExtra) {
-
     }
 
     @Override
@@ -47,5 +44,4 @@ public class Luggage extends AbstractLuggage {
     public void setAddLuggageType(AdditionalLuggage.Type addLuggageType) {
 
     }
-
 }

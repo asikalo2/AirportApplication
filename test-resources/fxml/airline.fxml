@@ -8,10 +8,13 @@
 
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
+
+
 <GridPane alignment="CENTER" vgap="4" hgap="4"
           xmlns="http://javafx.com/javafx"
             xmlns:fx="http://javafx.com/fxml">
 
+    <ProgressIndicator fx:id="indicator"/>
     <stylesheets>
         <URL value="@../css/style.css"/>
     </stylesheets>
@@ -24,7 +27,6 @@
     </columnConstraints>
 
     <children>
-
 
         <Label fx:id="idLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="ID"/>
@@ -41,6 +43,13 @@
                maxHeight="Infinity" maxWidth="Infinity" text="Code"/>
 
         <TextField fx:id="codeField" GridPane.rowIndex="3" GridPane.columnIndex="1" maxWidth="Infinity"/>
+
+        <Label fx:id="countryLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Country"/>
+
+        <ComboBox fx:id="countryBox" GridPane.rowIndex="4" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
 
 
         <ButtonBar GridPane.rowIndex="10" GridPane.columnSpan="2">

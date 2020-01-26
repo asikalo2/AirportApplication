@@ -43,4 +43,12 @@ public class AdditionalLuggageTest {
         luggage.setPayExtra(10);
         assertEquals(luggage.getPayExtra(), 10);
     }
+
+    @Test
+    public void gettingAdditionalV2(){
+        AdditionalLuggage luggage = new AdditionalLuggage();
+        luggage.setAddLuggageType(AdditionalLuggage.Type.METAL);
+        assertEquals(luggage.getAddLuggageType(), AdditionalLuggage.Type.METAL);
+    }
+
 }

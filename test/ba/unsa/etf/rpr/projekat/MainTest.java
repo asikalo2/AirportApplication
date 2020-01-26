@@ -85,7 +85,7 @@ public class MainTest {
     }
 
     @Test
-    public void testEditAirline(FxRobot robot) {
+    public void testEditAirline(FxRobot robot) throws InterruptedException {
 
         ObservableList<Airline> airlines = dao.getAirlines();
         robot.clickOn("#tableAirline");
@@ -93,9 +93,12 @@ public class MainTest {
 
         robot.clickOn("#tbEditAirline");
         robot.lookup("#nameField").tryQuery().isPresent();
+
         robot.clickOn("#nameField");
         robot.write("abc");
-
+        Thread.sleep(8000);
+        robot.clickOn("#countryBox");
+        robot.clickOn("#okButton");
         robot.clickOn("#okButton");
         Airline airline = dao.getAirlines().get(0);
         assertEquals(airline.getName(), "Adria Airwaysabc");
