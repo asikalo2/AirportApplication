@@ -94,6 +94,13 @@ public class Flight {
     public void setGate(Gate gate) {
         this.gate = gate;
     }
+
+    public String getUserName() {
+        if (user == null)
+            return "";
+        return user.getName();
+    }
+
     public String getGateName() {
         if (gate == null)
             return "N/A";

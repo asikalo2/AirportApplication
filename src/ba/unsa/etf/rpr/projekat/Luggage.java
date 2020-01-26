@@ -27,5 +27,11 @@ public class Luggage {
         this.passenger = passenger;
     }
 
+    public String getPassengerName() {
+        if (passenger == null)
+            return "";
+        return passenger.getName();
+    }
+
 
 }

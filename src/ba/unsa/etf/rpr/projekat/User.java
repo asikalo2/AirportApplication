@@ -38,4 +38,10 @@ public class User {
     public void setRole(Role role) {
         this.role = role;
     }
+
+    public String getRoleName() {
+        if (role == null)
+            return "";
+        return role.getName();
+    }
 }
