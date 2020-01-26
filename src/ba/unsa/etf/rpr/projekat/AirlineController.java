@@ -1,12 +1,25 @@
 package ba.unsa.etf.rpr.projekat;
 
+import com.fasterxml.jackson.databind.util.JSONPObject;
+import javafx.application.Platform;
+import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
+import javafx.collections.ObservableList;
+import javafx.concurrent.Task;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
+import org.json.JSONArray;
+import org.json.JSONObject;
+
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.util.ArrayList;
+import java.util.Scanner;
 
 public class AirlineController {
     public Label idLabel;
@@ -15,9 +28,13 @@ public class AirlineController {
     public TextField nameField;
     public Label codeLabel;
     public TextField codeField;
+    public Label countryLabel;
+    public ProgressIndicator indicator;
+    public ComboBox<String> countryBox;
     public SimpleStringProperty idProperty;
     public SimpleStringProperty nameProperty;
     public SimpleStringProperty codeProperty;
+    public SimpleObjectProperty<String> countryBoxProperty;
     private AirportDAO dao;
     private Airline currentAirline = null;
 
@@ -32,15 +49,48 @@ public class AirlineController {
         idProperty = new SimpleStringProperty("");
         nameProperty = new SimpleStringProperty("");
         codeProperty = new SimpleStringProperty("");
+        countryBoxProperty = new SimpleObjectProperty<>();
+        indicator = new ProgressIndicator();
     }
 
     @FXML
     public void initialize() {
         initializeDataBinding();
         addListeners();
+        okButton.setDisable(true);
         if (currentAirline != null) {
             fillForm();
         }
+        indicator.setVisible(true);
+        Task<Void> task = new Task<Void>() {
+            @Override
+            protected Void call() throws Exception {
+                try {
+                    ObservableList<String> countryNames = fillCountryBox();
+                    countryBox.setItems(countryNames);
+                } catch (InterruptedException ex) {
+                    ex.printStackTrace();
+                }
+                Platform.runLater(new Runnable() {
+                    public void run() {
+                        indicator.setVisible(false);
+                        okButton.setDisable(false);
+                        System.out.println("Finished!");
+                    }
+                });
+
+                return null;
+            }
+        };
+        new Thread(task).start();
+
+        /*try {
+            ObservableList<String> countryNames = fillCountryBox();
+            countryBox.setItems(countryNames);
+        }
+        catch (Exception ex) {
+            System.out.println(ex.getMessage());
+        }*/
     }
 
     public void fillForm() {
@@ -49,10 +99,38 @@ public class AirlineController {
         codeProperty.set(currentAirline.getCode());
     }
 
+    private ObservableList<String> fillCountryBox() throws Exception {
+        URL link = new URL("https://restcountries.eu/rest/v2/all");
+        HttpURLConnection conn = (HttpURLConnection) link.openConnection();
+        conn.setRequestMethod("GET");
+        conn.connect();
+        String inline = "";
+        int response = conn.getResponseCode();
+        System.out.println(response);
+        if (response == 200) {
+            ArrayList<String> names = new ArrayList<>();
+            Scanner sc = new Scanner(link.openStream());
+            while (sc.hasNext()) {
+                inline += sc.nextLine();
+            }
+            sc.close();
+            JSONArray jsonarray = new JSONArray(inline);
+            for (int i = 0; i < jsonarray.length(); i++) {
+                JSONObject jsonobject = jsonarray.getJSONObject(i);
+                String name = jsonobject.getString("name");
+                names.add(name);
+                //System.out.println(name);
+            }
+            return FXCollections.observableArrayList(names);
+        }
+        return null;
+    }
+
     private void initializeDataBinding() {
         idField.textProperty().bindBidirectional(idProperty);
         nameField.textProperty().bindBidirectional(nameProperty);
         codeField.textProperty().bindBidirectional(codeProperty);
+        countryBox.valueProperty().bindBidirectional(countryBoxProperty);
     }
 
     private void addListeners() {
@@ -103,6 +181,7 @@ public class AirlineController {
             currentAirline.setId(Integer.valueOf((idProperty.get())));
             currentAirline.setName(nameProperty.get());
             currentAirline.setCode(codeProperty.get());
+            currentAirline.setCountry(countryBoxProperty.get());
 
             if (adding) {
                 dao.addAirline(currentAirline);

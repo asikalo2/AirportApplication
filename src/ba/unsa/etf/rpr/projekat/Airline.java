@@ -4,6 +4,8 @@ public class Airline {
     private int id;
     private String name;
     private String code;
+
+    private String country;
    // private enum TypeOfAirline {regular, lowCost}
 
     public Airline(){}
@@ -35,5 +37,13 @@ public class Airline {
 
     public void setCode(String code) {
         this.code = code;
+    }
+
+    public String getCountry() {
+        return country;
+    }
+
+    public void setCountry(String country) {
+        this.country = country;
     }
 }
