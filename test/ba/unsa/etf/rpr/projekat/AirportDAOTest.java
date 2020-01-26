@@ -75,15 +75,6 @@ public class AirportDAOTest {
     }
 
     @Test
-    void getHandLuggages() {
-        dao = new AirportDAO();
-        ObservableList<HandLuggage> luggages = dao.getHandLuggages();
-        assertEquals(luggages.size(), 3);
-        System.out.println(luggages.get(0));
-        //assertEquals(luggages.get(1).getPassengerName(), null);
-    }
-
-    @Test
     void getAirplanes() {
         dao = new AirportDAO();
         ObservableList<Airplane> planes = dao.getAirplanes();

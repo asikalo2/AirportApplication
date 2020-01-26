@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
@@ -19,11 +20,17 @@ public class LuggageController {
     public Label payExtraLabel;
     public TextField payExtraField;
     public ComboBox<String> optionsLuggage;
+
+    public Label typeLabel;
+    public ComboBox<AdditionalLuggage.Type> addLuggageType;
+
     public SimpleStringProperty idProperty;
     public SimpleObjectProperty<Passenger> passengerProperty;
     public SimpleObjectProperty<String> optionsLuggageProperty;
     public SimpleStringProperty weightProperty;
     public SimpleStringProperty payExtraProperty;
+
+    public SimpleObjectProperty<AdditionalLuggage.Type> addLuggageTypeProperty;
 
     private AirportDAO dao;
     private Luggage currentLuggage = null;
@@ -41,11 +48,13 @@ public class LuggageController {
         optionsLuggageProperty = new SimpleObjectProperty<>();
         weightProperty = new SimpleStringProperty("");
         payExtraProperty = new SimpleStringProperty("");
+        addLuggageTypeProperty = new SimpleObjectProperty<>();
     }
 
     @FXML
     public void initialize() {
         passenger.setItems(dao.getPassengers());
+        addLuggageType.setItems(FXCollections.observableArrayList(AdditionalLuggage.Type.values()));
         initializeDataBinding();
 
         passenger.setConverter(new StringConverter<Passenger>() {
@@ -70,6 +79,8 @@ public class LuggageController {
         weightField.setVisible(false);
         payExtraLabel.setVisible(false);
         payExtraField.setVisible(false);
+        typeLabel.setVisible(false);
+        addLuggageType.setVisible(false);
         addListeners();
         if (currentLuggage != null) {
             fillForm();
@@ -77,9 +88,23 @@ public class LuggageController {
     }
 
     public void fillForm() {
+        //System.out.println(currentLuggage.getClass());
         idProperty.set(String.valueOf(currentLuggage.getId()));
         passengerProperty.setValue(currentLuggage.getPassenger());
         optionsLuggageProperty.setValue("Standard");
+        if (currentLuggage.getClass().equals(HandLuggage.class)) {
+            optionsLuggageProperty.setValue("Hand Luggage");
+            weightProperty.setValue(String.valueOf(currentLuggage.getWeight()));
+            payExtraProperty.setValue(String.valueOf(currentLuggage.getPayExtra()));
+        }
+        else if (currentLuggage.getClass().equals(AdditionalLuggage.class)) {
+            optionsLuggageProperty.setValue("Additional Luggage");
+            weightProperty.setValue(String.valueOf(currentLuggage.getWeight()));
+            payExtraProperty.setValue(String.valueOf(currentLuggage.getPayExtra()));
+            addLuggageTypeProperty.setValue(currentLuggage.getAddLuggageType());
+        }
+
+
     }
 
     private void initializeDataBinding() {
@@ -88,6 +113,7 @@ public class LuggageController {
         optionsLuggage.valueProperty().bindBidirectional(optionsLuggageProperty);
         weightField.textProperty().bindBidirectional(weightProperty);
         payExtraField.textProperty().bindBidirectional(payExtraProperty);
+        addLuggageType.valueProperty().bindBidirectional(addLuggageTypeProperty);
     }
 
     private void addListeners() {
@@ -108,16 +134,21 @@ public class LuggageController {
                 weightField.setVisible(true);
                 payExtraLabel.setVisible(true);
                 payExtraField.setVisible(true);
+                if (isAdditionalLuggage(t1)) {
+                    typeLabel.setVisible(true);
+                    addLuggageType.setVisible(true);
+                }
             }
             else if (!isHandLuggage(t1) && !isAdditionalLuggage(t1)) {
                 weightLabel.setVisible(false);
                 weightField.setVisible(false);
                 payExtraLabel.setVisible(false);
                 payExtraField.setVisible(false);
+                typeLabel.setVisible(false);
+                addLuggageType.setVisible(false);
             }
-
-
         });
+
     }
 
     public void stopFormBtn(ActionEvent actionEvent) {
@@ -129,11 +160,31 @@ public class LuggageController {
         if (isFormValid()) {
             boolean adding = currentLuggage == null;
 
-            if (currentLuggage == null)
+            if (currentLuggage == null) {
                 currentLuggage = new Luggage();
+                if (optionsLuggage.getSelectionModel().getSelectedItem().equals("Hand Luggage")) {
+                    currentLuggage = new HandLuggage();
+                }
+
+                if (optionsLuggage.getSelectionModel().getSelectedItem().equals("Additional Luggage")) {
+                    currentLuggage = new AdditionalLuggage();
+                }
+            }
+
 
             currentLuggage.setId(Integer.valueOf((idProperty.get())));
             currentLuggage.setPassenger(passengerProperty.get());
+
+            if (currentLuggage.getClass().equals(HandLuggage.class)) {
+                currentLuggage.setWeight(Double.valueOf(weightProperty.get()));
+                currentLuggage.setPayExtra(Double.valueOf(payExtraProperty.get()));
+            }
+
+            if (currentLuggage.getClass().equals(AdditionalLuggage.class)) {
+                currentLuggage.setWeight(Double.valueOf(weightProperty.get()));
+                currentLuggage.setPayExtra(Double.valueOf(payExtraProperty.get()));
+
+            }
 
             if (adding) {
                 dao.addLuggage(currentLuggage);

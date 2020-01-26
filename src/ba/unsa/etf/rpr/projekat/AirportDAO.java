@@ -234,30 +234,26 @@ public class AirportDAO {
                 Flight flight = getFlightById(rs.getInt(8));
                 Passenger passenger = new Passenger(rs.getInt(6), rs.getString(7), flight,
                         null);
+                Double weight = rs.getDouble(3);
+                if (rs.wasNull()) {
+                    weight = null;
+                }
+                Double payExtra = rs.getDouble(4);
+                if (rs.wasNull()) {
+                    payExtra = null;
+                }
+                String type = rs.getString(5);
+                if (rs.wasNull()) {
+                    type = null;
+                }
                 Luggage luggage = new Luggage(rs.getInt(1), passenger);
-                res.add(luggage);
-            }
-            return FXCollections.observableArrayList(res);
-        } catch (SQLException ex) {
-            ex.printStackTrace();
-        }
-        return null;
-    }
-
-    public ObservableList<HandLuggage> getHandLuggages() {
-        ArrayList<HandLuggage> res = new ArrayList<>();
-        try {
-            PreparedStatement stmt = conn.prepareStatement("select * from luggages join passengers p " +
-                    "on luggages.passenger = p.id");
-            ResultSet rs = stmt.executeQuery();
-            while (rs.next()) {
-                //Image img = new Image(new ByteArrayInputStream(rs.getBytes(6)));
-                Flight flight = getFlightById(rs.getInt(5));
-                Passenger passenger = new Passenger(rs.getInt(3), rs.getString(4), flight,
-                        null);
-                double weight = rs.getDouble(3);
-                double payExtra = rs.getDouble(4);
-                HandLuggage luggage = new HandLuggage(rs.getInt(1), passenger, weight, payExtra);
+                if (weight != null && payExtra != null && type == null) {
+                    luggage = new HandLuggage(rs.getInt(1), passenger, weight, payExtra);
+                }
+                else if (weight != null && payExtra != null && type != null) {
+                    luggage = new AdditionalLuggage(rs.getInt(1), passenger, weight, payExtra,
+                            AdditionalLuggage.Type.valueOf(type));
+                }
                 res.add(luggage);
             }
             return FXCollections.observableArrayList(res);
@@ -719,13 +715,27 @@ public class AirportDAO {
     }
 
     public void addLuggage(Luggage luggage) {
-        try {
-            PreparedStatement stmt = conn.prepareStatement("INSERT INTO luggages(id, passenger) VALUES(?,?)");
-            stmt.setInt(1, luggage.getId());
-            stmt.setInt(2, luggage.getPassenger().getId());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        if (luggage.getClass().equals(Luggage.class)) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO luggages(id, passenger) VALUES(?,?)");
+                stmt.setInt(1, luggage.getId());
+                stmt.setInt(2, luggage.getPassenger().getId());
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else if (luggage.getClass().equals(HandLuggage.class)) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO luggages(id, passenger, weight, payExtra) VALUES(?,?,?,?)");
+                stmt.setInt(1, luggage.getId());
+                stmt.setInt(2, luggage.getPassenger().getId());
+                stmt.setDouble(3, luggage.getWeight());
+                stmt.setDouble(4, luggage.getPayExtra());
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

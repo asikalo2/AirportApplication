@@ -5,7 +5,17 @@ public class AdditionalLuggage extends Luggage {
     private double weight;
     private double payExtra;
 
-    public enum Type {METAL, CLOTHES, MONEY};
+    public enum Type {
+        METAL("Metal"),
+        CLOTHES("Clothes"),
+        MONEY("Money");
+
+        private String name;
+
+        private Type(String theType) {
+            this.name = theType;
+        }
+    };
 
     private Type addLuggageType;
 
@@ -18,7 +28,7 @@ public class AdditionalLuggage extends Luggage {
 
     public AdditionalLuggage(){}
 
-    public double getWeight() {
+    public Double getWeight() {
         return weight;
     }
 
@@ -26,11 +36,19 @@ public class AdditionalLuggage extends Luggage {
         this.weight = weight;
     }
 
-    public double getPayExtra() {
+    public Double getPayExtra() {
         return payExtra;
     }
 
     public void setPayExtra(double payExtra) {
         this.payExtra = payExtra;
+    }
+
+    public Type getAddLuggageType() {
+        return addLuggageType;
+    }
+
+    public void setAddLuggageType(Type addLuggageType) {
+        this.addLuggageType = addLuggageType;
     }
 }

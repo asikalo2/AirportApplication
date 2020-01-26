@@ -1,37 +1,41 @@
 package ba.unsa.etf.rpr.projekat;
 
-public class Luggage {
-    private int id;
-    private Passenger passenger;
+public class Luggage extends AbstractLuggage {
 
-    public Luggage(){}
+    public Luggage() {};
 
     public Luggage(int id, Passenger passenger) {
-        this.id = id;
-        this.passenger = passenger;
+        super(id, passenger);
     }
 
-    public int getId() {
-        return id;
+    @Override
+    public Double getWeight() {
+        return null;
     }
 
-    public void setId(int id) {
-        this.id = id;
+    @Override
+    public void setWeight(double weight) {
+
     }
 
-    public Passenger getPassenger() {
-        return passenger;
+    @Override
+    public Double getPayExtra() {
+        return null;
     }
 
-    public void setPassenger(Passenger passenger) {
-        this.passenger = passenger;
+    @Override
+    public void setPayExtra(double payExtra) {
+
     }
 
-    public String getPassengerName() {
-        if (passenger == null)
-            return "";
-        return passenger.getName();
+    @Override
+    public AdditionalLuggage.Type getAddLuggageType() {
+        return null;
     }
 
+    @Override
+    public void setAddLuggageType(AdditionalLuggage.Type addLuggageType) {
+
+    }
 
 }

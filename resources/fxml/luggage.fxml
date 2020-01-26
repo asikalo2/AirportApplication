@@ -61,6 +61,13 @@
 
         <TextField fx:id="payExtraField" GridPane.rowIndex="5" GridPane.columnIndex="1" maxWidth="Infinity"/>
 
+        <Label fx:id="typeLabel" GridPane.rowIndex="6" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Type"/>
+
+        <ComboBox fx:id="addLuggageType" GridPane.rowIndex="6" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
+
         <ButtonBar GridPane.rowIndex="10" GridPane.columnSpan="2">
             <GridPane.margin>
                 <Insets top="25"/>
