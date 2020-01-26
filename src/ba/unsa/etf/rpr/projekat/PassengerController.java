@@ -220,44 +220,4 @@ public class PassengerController {
         return true;
     }
 
-/* VISENITNO
- postanskiBrojField.focusedProperty().addListener(new ChangeListener<Boolean>() {
-            @Override
-            public void changed(ObservableValue<? extends Boolean> observableValue, Boolean aBoolean, Boolean t1) {
-                if (aBoolean && !t1) {
-                    validator.setBroj(postanskiBrojField.getText());
-
-                    Task<Boolean> task = new Task<Boolean>() {
-                        @Override
-                        protected Boolean call() throws Exception {
-                            //System.out.println("calling");
-                            return validator.provjeriPostanskiBroj(postanskiBrojField.getText());
-                        }
-                    };
-
-                    task.setOnSucceeded(new EventHandler<WorkerStateEvent>() {
-                        @Override
-                        public void handle(WorkerStateEvent workerStateEvent) {
-                            Boolean value = task.getValue();
-                            //System.out.println(value);
-                            if (value) {
-                                //System.out.println("test 1");
-                                postanskiBrojField.getStyleClass().removeAll("poljeNijeIspravno");
-                                postanskiBrojField.getStyleClass().add("poljeIspravno");
-                            } else {
-                                postanskiBrojField.getStyleClass().removeAll("poljeIspravno");
-                                postanskiBrojField.getStyleClass().add("poljeNijeIspravno");
-                            }
-                        }
-                    });
-
-                    new Thread(task).start();
-
-                }
-            }
-        });
- */
-
-
-
 }

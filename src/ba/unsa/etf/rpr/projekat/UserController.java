@@ -19,7 +19,6 @@ public class UserController {
     public TextField idField;
     public Label nameLabel;
     public TextField nameField;
-    public Label roleLabel;
     public SimpleStringProperty idProperty;
     public SimpleStringProperty nameProperty;
     public SimpleObjectProperty<Role> roleProperty;
@@ -50,6 +49,8 @@ public class UserController {
         role.setConverter(new StringConverter<Role>() {
             @Override
             public String toString(Role role) {
+                if (role == null)
+                    return "";
                 return role.getName();
             }
 

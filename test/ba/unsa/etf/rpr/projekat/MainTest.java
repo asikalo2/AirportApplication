@@ -1,8 +1,10 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
+import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
@@ -10,7 +12,9 @@ import javafx.scene.control.ButtonType;
 import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
 import javafx.scene.input.KeyCode;
+import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
+import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -23,8 +27,7 @@ import java.io.IOException;
 import java.nio.file.Files;
 import java.util.ResourceBundle;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.fail;
+import static org.junit.jupiter.api.Assertions.*;
 
 
 @ExtendWith(ApplicationExtension.class)
@@ -366,22 +369,137 @@ public class MainTest {
         assertEquals(user.getName(), "Amila Sikaloabc");
     }
 
-//    @Test
-//    public void testAddUser(FxRobot robot) {
-//        ObservableList<User> users = dao.getUsers();
-//        robot.clickOn("#userTab");
-//        robot.clickOn("#tbAddUser");
-//        robot.lookup("#idField").tryQuery().isPresent();
-//        robot.clickOn("#idField");
-//        robot.write("2");
-//        robot.clickOn("#nameField");
-//        robot.write("Amila");
-//      //  robot.clickOn("#role");
-//    //    robot.clickOn(String.valueOf(2));
-//        User user = dao.getUsers().get(1);
-//        assertEquals(user.getName(), "Amila");
-//    }
+    @Test
+    public void testAddAirlineWithExistingID(FxRobot robot) throws InterruptedException {
 
+        ObservableList<Airline> airlines = dao.getAirlines();
+        robot.clickOn("#tableAirline");
+        robot.clickOn("JP");
+
+        robot.clickOn("#tbAddAirline");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("2");
+        robot.lookup("#nameField").tryQuery().isPresent();
+        robot.clickOn("#nameField");
+        robot.write("NewAirline");
+        robot.lookup("#codeField").tryQuery().isPresent();
+        robot.clickOn("#codeField");
+        robot.write("HZTR");
+        Thread.sleep(8000);
+        robot.clickOn("#countryBox");
+        robot.clickOn("#okButton");
+        robot.clickOn("#okButton");
+
+        ObservableList<Airline> airlines1 = dao.getAirlines();
+        assertNotEquals(airlines.size(), airlines1.size()-1);
+    }
+
+    @Test
+    public void testAddAirline(FxRobot robot) throws InterruptedException {
+
+        ObservableList<Airline> airlines = dao.getAirlines();
+        robot.clickOn("#tableAirline");
+        robot.clickOn("JP");
+
+        robot.clickOn("#tbAddAirline");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("200");
+        robot.lookup("#nameField").tryQuery().isPresent();
+        robot.clickOn("#nameField");
+        robot.write("NewAirline");
+        robot.lookup("#codeField").tryQuery().isPresent();
+        robot.clickOn("#codeField");
+        robot.write("HZTR");
+        Thread.sleep(6000);
+        robot.clickOn("#countryBox");
+        Thread.sleep(2000);
+        robot.lookup("Algeria").tryQuery().isPresent();
+        robot.clickOn("Algeria");
+        robot.clickOn("#okButton");
+
+        ObservableList<Airline> airlines1 = dao.getAirlines();
+        assertEquals(airlines.size(), airlines1.size()-1);
+    }
+
+    @Test
+    public void testAddUser(FxRobot robot) throws InterruptedException {
+        ObservableList<User> users = dao.getUsers();
+        robot.clickOn("#userTab");
+        robot.clickOn("#tbAddUser");
+        Thread.sleep(1000);
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("4");
+        robot.lookup("#nameField").tryQuery().isPresent();
+        robot.clickOn("#nameField");
+        robot.write("NewName");
+        robot.clickOn("#role");
+        Thread.sleep(2000);
+        robot.lookup("Operator").tryQuery().isPresent();
+        robot.clickOn("Operator");
+
+        robot.clickOn("#okButton");
+        ObservableList<User> users1 = dao.getUsers();
+        assertEquals(users.size(), users1.size()-1);
+    }
+    @Test
+    public void testAddLuggage(FxRobot robot) throws InterruptedException {
+        ObservableList<Luggage> luggages = dao.getLuggages();
+        robot.clickOn("#luggageTab");
+        robot.clickOn("#tbAddLuggage");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("4");
+        robot.clickOn("#optionsLuggage");
+        Thread.sleep(2000);
+        robot.clickOn("Hand Luggage");
+        robot.lookup("#weightField").tryQuery().isPresent();
+        robot.clickOn("#weightField");
+        robot.write("4");
+        robot.lookup("#payExtraField").tryQuery().isPresent();
+        robot.clickOn("#payExtraField");
+        robot.write("4");
+        robot.clickOn("#passenger");
+        robot.lookup("#Novi Noovic").tryQuery().isPresent();
+        robot.clickOn("Novi Noovic");
+
+        robot.clickOn("#okButton");
+        ObservableList<Luggage> luggages1 = dao.getLuggages();
+        assertEquals(luggages.size(), luggages1.size()-1);
+    }
+
+    @Test
+    public void testAddLuggage2(FxRobot robot) throws InterruptedException {
+        ObservableList<Luggage> luggages = dao.getLuggages();
+        robot.clickOn("#luggageTab");
+        robot.clickOn("#tbAddLuggage");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("4");
+        robot.clickOn("#optionsLuggage");
+        Thread.sleep(2000);
+        robot.clickOn("Additional Luggage");
+        robot.lookup("#weightField").tryQuery().isPresent();
+        robot.clickOn("#weightField");
+        robot.write("4");
+        robot.lookup("#payExtraField").tryQuery().isPresent();
+        robot.clickOn("#payExtraField");
+        robot.write("4");
+        robot.clickOn("#passenger");
+        robot.lookup("#Novi Noovic").tryQuery().isPresent();
+        robot.clickOn("Novi Noovic");
+
+        robot.clickOn("#addLuggageType");
+        robot.lookup("METAL").tryQuery().isPresent();
+        robot.clickOn("METAL");
+
+
+        robot.clickOn("#okButton");
+        ObservableList<Luggage> luggages1 = dao.getLuggages();
+        assertEquals(luggages.size(), luggages1.size()-1);
+    }
 //    @Test
 //    public void testGermanLanguage(FxRobot robot) {
 //
