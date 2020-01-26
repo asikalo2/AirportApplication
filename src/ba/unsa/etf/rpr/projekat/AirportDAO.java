@@ -737,6 +737,19 @@ public class AirportDAO {
                 ex.printStackTrace();
             }
         }
+        else if (luggage.getClass().equals(AdditionalLuggage.class)) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement("INSERT INTO luggages(id, passenger, weight, payExtra, type) VALUES(?,?,?,?,?)");
+                stmt.setInt(1, luggage.getId());
+                stmt.setInt(2, luggage.getPassenger().getId());
+                stmt.setDouble(3, luggage.getWeight());
+                stmt.setDouble(4, luggage.getPayExtra());
+                stmt.setString(5, luggage.getAddLuggageType().toString());
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
     }
 
     public void addFlightType(FlightType flightType) {
@@ -863,15 +876,40 @@ public class AirportDAO {
     }
 
     public void changeLuggage(Luggage luggage) {
-        try {
-            PreparedStatement stmt = conn.prepareStatement("UPDATE luggages SET passenger=? WHERE id=?");
-
-
-            stmt.setInt(1, luggage.getPassenger().getId());
-            stmt.setInt(2, luggage.getId());
-            stmt.executeUpdate();
-        } catch (SQLException ex) {
-            ex.printStackTrace();
+        if (luggage.getClass().equals(Luggage.class)) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement("UPDATE luggages SET passenger=?, weight=NULL, payExtra=NULL, type=NULL WHERE id=?");
+                stmt.setInt(1, luggage.getPassenger().getId());
+                stmt.setInt(2, luggage.getId());
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else if (luggage.getClass().equals(HandLuggage.class)) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement("UPDATE luggages SET passenger=?, weight=?, payExtra=?, type=NULL WHERE id=?");
+                stmt.setInt(1, luggage.getPassenger().getId());
+                stmt.setInt(4, luggage.getId());
+                stmt.setDouble(2, luggage.getWeight());
+                stmt.setDouble(3, luggage.getPayExtra());
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
+        }
+        else if (luggage.getClass().equals(AdditionalLuggage.class)) {
+            try {
+                PreparedStatement stmt = conn.prepareStatement("UPDATE luggages SET passenger=?, weight=?, payExtra=?, type=? WHERE id=?");
+                stmt.setInt(1, luggage.getPassenger().getId());
+                stmt.setInt(5, luggage.getId());
+                stmt.setDouble(2, luggage.getWeight());
+                stmt.setDouble(3, luggage.getPayExtra());
+                stmt.setString(4,luggage.getAddLuggageType().toString());
+                stmt.executeUpdate();
+            } catch (SQLException ex) {
+                ex.printStackTrace();
+            }
         }
     }
 

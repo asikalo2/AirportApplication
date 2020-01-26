@@ -183,12 +183,28 @@ public class LuggageController {
             if (currentLuggage.getClass().equals(AdditionalLuggage.class)) {
                 currentLuggage.setWeight(Double.valueOf(weightProperty.get()));
                 currentLuggage.setPayExtra(Double.valueOf(payExtraProperty.get()));
+                currentLuggage.setAddLuggageType(addLuggageTypeProperty.get());
 
             }
 
             if (adding) {
                 dao.addLuggage(currentLuggage);
             } else {
+                if (optionsLuggage.getSelectionModel().getSelectedItem().equals("Standard")) {
+                    currentLuggage = new Luggage(currentLuggage.getId(),
+                            currentLuggage.getPassenger());
+                }
+                else if (optionsLuggage.getSelectionModel().getSelectedItem().equals("Hand Luggage")) {
+                    currentLuggage = new HandLuggage(currentLuggage.getId(),
+                            currentLuggage.getPassenger(), Double.valueOf(weightProperty.get()),
+                            Double.valueOf(payExtraProperty.get()));
+                }
+                else if (optionsLuggage.getSelectionModel().getSelectedItem().equals("Additional Luggage")) {
+                    currentLuggage = new AdditionalLuggage(currentLuggage.getId(),
+                            currentLuggage.getPassenger(), Double.valueOf(weightProperty.get()),
+                            Double.valueOf(payExtraProperty.get()),
+                            addLuggageTypeProperty.get());
+                }
                 dao.changeLuggage(currentLuggage);
             }
             Stage stage = (Stage) okButton.getScene().getWindow();
@@ -208,12 +224,10 @@ public class LuggageController {
     }
 
     public boolean isHandLuggage(String test) {
-        System.out.println("testing...");
         return test.equals("Hand Luggage");
     }
 
     public boolean isAdditionalLuggage(String test) {
-        System.out.println("testing...");
         return test.equals("Additional Luggage");
     }
 

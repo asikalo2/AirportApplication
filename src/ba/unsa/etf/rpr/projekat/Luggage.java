@@ -8,6 +8,16 @@ public class Luggage extends AbstractLuggage {
         super(id, passenger);
     }
 
+    public String getLuggageType() {
+        if (this.getClass().equals(Luggage.class))
+            return "Standard";
+        else if (this.getClass().equals(HandLuggage.class)) {
+            return "Hand Luggage";
+        }
+        else
+            return "Additional Luggage";
+    }
+
     @Override
     public Double getWeight() {
         return null;

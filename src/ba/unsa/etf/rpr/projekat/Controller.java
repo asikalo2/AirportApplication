@@ -51,6 +51,7 @@ public class Controller implements Initializable {
     public TableView tableLuggage;
     public TableColumn idLuggage;
     public TableColumn passengerLuggage;
+    public TableColumn luggageType;
     public TableView tablePassenger;
     public TableColumn idPassenger;
     public TableColumn namePassenger;
@@ -169,6 +170,7 @@ public class Controller implements Initializable {
 
         idLuggage.setCellValueFactory(new PropertyValueFactory("id"));
         passengerLuggage.setCellValueFactory(new PropertyValueFactory("passengerName"));
+        luggageType.setCellValueFactory(new PropertyValueFactory("luggageType"));
         tableLuggage.setItems(listLuggage);
     }
 
