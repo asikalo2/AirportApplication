@@ -2,30 +2,30 @@ package ba.unsa.etf.rpr.projekat;
 
 public class HandLuggage extends Luggage
 {
-    private Double weight;
-    private Double payExtra;
+    private double weight;
+    private double payExtra;
 
     public HandLuggage() {}
 
-    public HandLuggage(int id, Passenger passenger, Double weight, Double payExtra) {
+    public HandLuggage(int id, Passenger passenger, double weight, double payExtra) {
         super(id, passenger);
         this.weight = weight;
         this.payExtra = payExtra;
     }
 
-    public Double getWeight() {
+    public double getWeight() {
         return weight;
     }
 
-    public void setWeight(Double weight) {
+    public void setWeight(double weight) {
         this.weight = weight;
     }
 
-    public Double getPayExtra() {
+    public double getPayExtra() {
         return payExtra;
     }
 
-    public void setPayExtra(Double payExtra) {
+    public void setPayExtra(double payExtra) {
         this.payExtra = payExtra;
     }
 }

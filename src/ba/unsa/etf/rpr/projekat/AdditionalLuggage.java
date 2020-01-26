@@ -28,7 +28,7 @@ public class AdditionalLuggage extends Luggage {
 
     public AdditionalLuggage(){}
 
-    public Double getWeight() {
+    public double getWeight() {
         return weight;
     }
 
@@ -36,7 +36,7 @@ public class AdditionalLuggage extends Luggage {
         this.weight = weight;
     }
 
-    public Double getPayExtra() {
+    public double getPayExtra() {
         return payExtra;
     }
 

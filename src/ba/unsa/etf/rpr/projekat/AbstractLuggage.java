@@ -33,11 +33,11 @@ public abstract class AbstractLuggage {
         return passenger.getName();
     }
 
-    public abstract Double getWeight();
+    public abstract double getWeight();
 
     public abstract void setWeight(double weight);
 
-    public abstract Double getPayExtra();
+    public abstract double getPayExtra();
 
     public abstract void setPayExtra(double payExtra);
 

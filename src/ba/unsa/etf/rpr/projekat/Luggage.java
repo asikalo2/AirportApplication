@@ -19,16 +19,16 @@ public class Luggage extends AbstractLuggage {
     }
 
     @Override
-    public Double getWeight() {
-        return null;
+    public double getWeight() {
+        return 0;
     }
 
     @Override
     public void setWeight(double weight) { }
 
     @Override
-    public Double getPayExtra() {
-        return null;
+    public double getPayExtra() {
+        return 0;
     }
 
     @Override

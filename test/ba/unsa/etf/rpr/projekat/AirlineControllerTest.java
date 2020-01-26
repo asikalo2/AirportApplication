@@ -10,7 +10,7 @@ public class AirlineControllerTest {
     @Test
     public void checkFillForm(){
         AirportDAO dao = new AirportDAO();
-        Airline airline = new Airline(7,"Air","COD3");
+        Airline airline = new Airline(7,"Air","COD3","Germany");
         AirlineController airlineController = new AirlineController(dao, airline);
         airlineController.fillForm();
         assertEquals(airlineController.idProperty.get(),"7");
@@ -19,7 +19,7 @@ public class AirlineControllerTest {
     @Test
     public void checkFillForm2(){
         AirportDAO dao = new AirportDAO();
-        Airline airline = new Airline(7,"Air","COD3");
+        Airline airline = new Airline(7,"Air","COD3","Germany");
         AirlineController airlineController = new AirlineController(dao, airline);
         airlineController.fillForm();
         assertEquals(airlineController.nameProperty.get(), "Air");
@@ -28,7 +28,7 @@ public class AirlineControllerTest {
     @Test
     public void checkFillForm3(){
         AirportDAO dao = new AirportDAO();
-        Airline airline = new Airline(7,"Air","COD3");
+        Airline airline = new Airline(7,"Air","COD3","Germany");
         AirlineController airlineController = new AirlineController(dao, airline);
         airlineController.fillForm();
         assertEquals(airlineController.codeProperty.get(), "COD3");

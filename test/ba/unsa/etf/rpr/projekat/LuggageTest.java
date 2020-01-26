@@ -85,14 +85,14 @@ public class LuggageTest {
     public void gettingType9(){
         HandLuggage luggage1 = new HandLuggage(5,new Passenger(),10.0,10.0);
         luggage1.setPayExtra(11.6);
-        assertNotEquals(luggage1.getPayExtra(), 11.6);
+        assertEquals(luggage1.getPayExtra(), 11.6);
     }
 
     @Test
     public void gettingType10(){
         HandLuggage luggage1 = new HandLuggage();
         luggage1.setWeight(10);
-        assertNotEquals(luggage1.getWeight(), 10);
+        assertEquals(luggage1.getWeight(), 10);
     }
 
     @Test
