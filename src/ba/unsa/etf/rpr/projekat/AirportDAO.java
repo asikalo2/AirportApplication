@@ -231,10 +231,33 @@ public class AirportDAO {
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 //Image img = new Image(new ByteArrayInputStream(rs.getBytes(6)));
+                Flight flight = getFlightById(rs.getInt(8));
+                Passenger passenger = new Passenger(rs.getInt(6), rs.getString(7), flight,
+                        null);
+                Luggage luggage = new Luggage(rs.getInt(1), passenger);
+                res.add(luggage);
+            }
+            return FXCollections.observableArrayList(res);
+        } catch (SQLException ex) {
+            ex.printStackTrace();
+        }
+        return null;
+    }
+
+    public ObservableList<HandLuggage> getHandLuggages() {
+        ArrayList<HandLuggage> res = new ArrayList<>();
+        try {
+            PreparedStatement stmt = conn.prepareStatement("select * from luggages join passengers p " +
+                    "on luggages.passenger = p.id");
+            ResultSet rs = stmt.executeQuery();
+            while (rs.next()) {
+                //Image img = new Image(new ByteArrayInputStream(rs.getBytes(6)));
                 Flight flight = getFlightById(rs.getInt(5));
                 Passenger passenger = new Passenger(rs.getInt(3), rs.getString(4), flight,
                         null);
-                Luggage luggage = new Luggage(rs.getInt(1), passenger);
+                double weight = rs.getDouble(3);
+                double payExtra = rs.getDouble(4);
+                HandLuggage luggage = new HandLuggage(rs.getInt(1), passenger, weight, payExtra);
                 res.add(luggage);
             }
             return FXCollections.observableArrayList(res);

@@ -8,6 +8,7 @@
 
 <?import javafx.geometry.Insets?>
 <?import java.net.URL?>
+<?import javafx.collections.FXCollections?>
 <GridPane alignment="CENTER" vgap="4" hgap="4"
           xmlns="http://javafx.com/javafx"
           xmlns:fx="http://javafx.com/fxml">
@@ -35,6 +36,30 @@
         <ComboBox fx:id="passenger" GridPane.rowIndex="2" GridPane.columnIndex="1" editable="false"
                   maxWidth="Infinity">
         </ComboBox>
+
+        <Label fx:id="optionsLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Options"/>
+
+        <ComboBox fx:id="optionsLuggage" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+            <items>
+                <FXCollections fx:factory="observableArrayList">
+                    <String fx:value="Standard"/>
+                    <String fx:value="Hand Luggage"/>
+                    <String fx:value="Additional Luggage"/>
+                </FXCollections>
+            </items>
+        </ComboBox>
+
+        <Label fx:id="weightLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Weight"/>
+
+        <TextField fx:id="weightField" GridPane.rowIndex="4" GridPane.columnIndex="1" maxWidth="Infinity"/>
+
+        <Label fx:id="payExtraLabel" GridPane.rowIndex="5" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Pay Extra Amount"/>
+
+        <TextField fx:id="payExtraField" GridPane.rowIndex="5" GridPane.columnIndex="1" maxWidth="Infinity"/>
 
         <ButtonBar GridPane.rowIndex="10" GridPane.columnSpan="2">
             <GridPane.margin>

@@ -2,12 +2,11 @@ package ba.unsa.etf.rpr.projekat;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
-import javafx.scene.control.Button;
-import javafx.scene.control.ComboBox;
-import javafx.scene.control.Label;
-import javafx.scene.control.TextField;
+import javafx.scene.control.*;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
@@ -15,8 +14,16 @@ public class LuggageController {
     public Label idLabel;
     public TextField idField;
     public ComboBox<Passenger> passenger;
+    public Label weightLabel;
+    public TextField weightField;
+    public Label payExtraLabel;
+    public TextField payExtraField;
+    public ComboBox<String> optionsLuggage;
     public SimpleStringProperty idProperty;
     public SimpleObjectProperty<Passenger> passengerProperty;
+    public SimpleObjectProperty<String> optionsLuggageProperty;
+    public SimpleStringProperty weightProperty;
+    public SimpleStringProperty payExtraProperty;
 
     private AirportDAO dao;
     private Luggage currentLuggage = null;
@@ -31,6 +38,9 @@ public class LuggageController {
         this.currentLuggage = luggage;
         idProperty = new SimpleStringProperty("");
         passengerProperty = new SimpleObjectProperty<>();
+        optionsLuggageProperty = new SimpleObjectProperty<>();
+        weightProperty = new SimpleStringProperty("");
+        payExtraProperty = new SimpleStringProperty("");
     }
 
     @FXML
@@ -56,6 +66,10 @@ public class LuggageController {
             }
         });
 
+        weightLabel.setVisible(false);
+        weightField.setVisible(false);
+        payExtraLabel.setVisible(false);
+        payExtraField.setVisible(false);
         addListeners();
         if (currentLuggage != null) {
             fillForm();
@@ -65,16 +79,18 @@ public class LuggageController {
     public void fillForm() {
         idProperty.set(String.valueOf(currentLuggage.getId()));
         passengerProperty.setValue(currentLuggage.getPassenger());
+        optionsLuggageProperty.setValue("Standard");
     }
 
     private void initializeDataBinding() {
         idField.textProperty().bindBidirectional(idProperty);
         passenger.valueProperty().bindBidirectional(passengerProperty);
+        optionsLuggage.valueProperty().bindBidirectional(optionsLuggageProperty);
+        weightField.textProperty().bindBidirectional(weightProperty);
+        payExtraField.textProperty().bindBidirectional(payExtraProperty);
     }
 
     private void addListeners() {
-
-
         idField.textProperty().addListener((observableValue, s, n) -> {
             if (Validation.validateNumber(n)) {
                 idField.getStyleClass().removeAll("notCorrect");
@@ -84,6 +100,23 @@ public class LuggageController {
                 idField.getStyleClass().removeAll("correct");
                 idField.getStyleClass().add("notCorrect");
             }
+        });
+        optionsLuggage.valueProperty().addListener((observableValue, s, t1) -> {
+            //System.out.println(t1);
+            if (isHandLuggage(t1) || isAdditionalLuggage(t1)) {
+                weightLabel.setVisible(true);
+                weightField.setVisible(true);
+                payExtraLabel.setVisible(true);
+                payExtraField.setVisible(true);
+            }
+            else if (!isHandLuggage(t1) && !isAdditionalLuggage(t1)) {
+                weightLabel.setVisible(false);
+                weightField.setVisible(false);
+                payExtraLabel.setVisible(false);
+                payExtraField.setVisible(false);
+            }
+
+
         });
     }
 
@@ -121,6 +154,16 @@ public class LuggageController {
 
     private boolean isFormValid() {
         return true;
+    }
+
+    public boolean isHandLuggage(String test) {
+        System.out.println("testing...");
+        return test.equals("Hand Luggage");
+    }
+
+    public boolean isAdditionalLuggage(String test) {
+        System.out.println("testing...");
+        return test.equals("Additional Luggage");
     }
 
 

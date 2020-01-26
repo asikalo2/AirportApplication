@@ -6,7 +6,6 @@ import org.junit.jupiter.api.*;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.sql.SQLException;
 import java.time.LocalDateTime;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -73,6 +72,15 @@ public class AirportDAOTest {
         dao = new AirportDAO();
         ObservableList<Luggage> luggages = dao.getLuggages();
         assertEquals(luggages.size(), 3);
+    }
+
+    @Test
+    void getHandLuggages() {
+        dao = new AirportDAO();
+        ObservableList<HandLuggage> luggages = dao.getHandLuggages();
+        assertEquals(luggages.size(), 3);
+        System.out.println(luggages.get(0));
+        //assertEquals(luggages.get(1).getPassengerName(), null);
     }
 
     @Test

@@ -169,7 +169,7 @@
                     <TableView fx:id="tableLuggage" style="-fx-aligmnent: CENTER;">
                         <columns>
                             <TableColumn fx:id="idLuggage" prefWidth="50.0" text="%id"/>
-                            <TableColumn fx:id="passengerLuggage" prefWidth="50.0" text="%passenger"/>
+                            <TableColumn fx:id="passengerLuggage" prefWidth="100.0" text="%passenger"/>
                         </columns>
                     </TableView>
                 </VBox>
