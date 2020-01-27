@@ -99,9 +99,11 @@ public class MainTest {
 
         robot.clickOn("#nameField");
         robot.write("abc");
-        Thread.sleep(8000);
+        Thread.sleep(5000);
         robot.clickOn("#countryBox");
-        robot.clickOn("#okButton");
+        Thread.sleep(2000);
+        robot.clickOn("Algeria");
+        Thread.sleep(1000);
         robot.clickOn("#okButton");
         Airline airline = dao.getAirlines().get(0);
         assertEquals(airline.getName(), "Adria Airwaysabc");
@@ -126,7 +128,7 @@ public class MainTest {
     }
 
     @Test
-    public void testEditAirplane(FxRobot robot) {
+    public void testEditAirplane(FxRobot robot) throws InterruptedException {
 
         ObservableList<Airplane> airplanes = dao.getAirplanes();
         robot.clickOn("#airplanesTab");
@@ -136,7 +138,7 @@ public class MainTest {
         robot.lookup("#manufacturerField").tryQuery().isPresent();
         robot.clickOn("#manufacturerField");
         robot.write("abc");
-
+        Thread.sleep(2000);
         robot.clickOn("#okButton");
         Airplane airplane = dao.getAirplanes().get(0);
         assertEquals(airplane.getManufacturer(), "Airbusabc");
@@ -394,6 +396,113 @@ public class MainTest {
         ObservableList<Airline> airlines1 = dao.getAirlines();
         assertNotEquals(airlines.size(), airlines1.size()-1);
     }
+    @Test
+    public void testAddAirplane(FxRobot robot) throws InterruptedException {
+
+        ObservableList<Airplane> airplanes = dao.getAirplanes();
+        robot.clickOn("#airplanesTab");
+        robot.clickOn("#tbAddAirline");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("10");
+        robot.lookup("#manufacturerField").tryQuery().isPresent();
+        robot.clickOn("#manufacturerField");
+        robot.write("Airbus");
+        Thread.sleep(1000);
+        robot.lookup("#typeField").tryQuery().isPresent();
+        robot.clickOn("#typeField");
+        robot.write("A380");
+        Thread.sleep(1000);
+        robot.lookup("#numberOfSeatsField").tryQuery().isPresent();
+        robot.clickOn("#numberOfSeatsField");
+        robot.write("200");
+        robot.clickOn("#airline");
+        Thread.sleep(1000);
+        robot.lookup("Adria Airways").tryQuery().isPresent();
+        robot.clickOn("Adria Airways");
+        Thread.sleep(1000);
+        robot.clickOn("#okButton");
+
+        ObservableList<Airplane> airplanes1 = dao.getAirplanes();
+        assertEquals(airplanes.size(), airplanes1.size()-1);
+    }
+
+    @Test
+    public void testAddFlight(FxRobot robot) throws InterruptedException {
+
+        ObservableList<Flight> flights = dao.getFlights();
+        robot.clickOn("#flightsTab");
+        robot.clickOn("#tbAddFlight");
+        robot.lookup("#codeField").tryQuery().isPresent();
+        robot.clickOn("#codeField");
+        robot.write("HZTRS");
+        robot.lookup("#startOfUsingTheRunwayField").tryQuery().isPresent();
+        robot.clickOn("#startOfUsingTheRunwayField");
+        robot.write("2020-01-06 01:05");
+        Thread.sleep(1000);
+        robot.lookup("#endOfUsingTheRunwayField").tryQuery().isPresent();
+        robot.clickOn("#endOfUsingTheRunwayField");
+        robot.write("2020-01-06 01:10");
+        Thread.sleep(1000);
+        robot.clickOn("#flightType");
+        robot.lookup("Regular").tryQuery().isPresent();
+        robot.clickOn("Regular");
+        Thread.sleep(1000);
+        robot.clickOn("#airplane");
+        robot.lookup("Air Algerie").tryQuery().isPresent();
+        robot.clickOn("Air Algerie");
+        Thread.sleep(1000);
+        robot.clickOn("#user");
+        robot.lookup("Amila Sikalo").tryQuery().isPresent();
+        robot.clickOn("Amila Sikalo");
+        Thread.sleep(1000);
+        robot.clickOn("#gate");
+        robot.lookup("G01").tryQuery().isPresent();
+        robot.clickOn("G01");
+
+        robot.clickOn("#okButton");
+
+        ObservableList<Flight> flights1 = dao.getFlights();
+        assertEquals(flights.size(), flights1.size()-1);
+    }
+
+    @Test
+    public void testAddFlightTypeWithExistingID(FxRobot robot) throws InterruptedException {
+
+        ObservableList<FlightType> flightTypes = dao.getFlightTypes();
+        robot.clickOn("#flightTypeTab");
+        robot.clickOn("#tbAddFlightType");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("3");
+        robot.lookup("#nameField").tryQuery().isPresent();
+        robot.clickOn("#nameField");
+        robot.write("Private Jet");
+
+        robot.clickOn("#okButton");
+
+        ObservableList<FlightType> flightTypes1 = dao.getFlightTypes();
+        assertNotEquals(flightTypes.size(), flightTypes1.size()-1);
+    }
+
+    @Test
+    public void testAddFlightType(FxRobot robot) throws InterruptedException {
+
+        ObservableList<FlightType> flightTypes = dao.getFlightTypes();
+        robot.clickOn("#flightTypeTab");
+        robot.clickOn("#tbAddFlightType");
+        robot.lookup("#idField").tryQuery().isPresent();
+        robot.clickOn("#idField");
+        robot.write("4");
+        robot.lookup("#nameField").tryQuery().isPresent();
+        robot.clickOn("#nameField");
+        robot.write("Private Jet");
+
+        robot.clickOn("#okButton");
+
+        ObservableList<FlightType> flightTypes1 = dao.getFlightTypes();
+        assertEquals(flightTypes.size(), flightTypes1.size()-1);
+    }
 
     @Test
     public void testAddAirline(FxRobot robot) throws InterruptedException {
@@ -412,7 +521,7 @@ public class MainTest {
         robot.lookup("#codeField").tryQuery().isPresent();
         robot.clickOn("#codeField");
         robot.write("HZTR");
-        Thread.sleep(6000);
+        Thread.sleep(5000);
         robot.clickOn("#countryBox");
         Thread.sleep(2000);
         robot.lookup("Algeria").tryQuery().isPresent();
@@ -435,11 +544,11 @@ public class MainTest {
         robot.lookup("#nameField").tryQuery().isPresent();
         robot.clickOn("#nameField");
         robot.write("NewName");
+        Thread.sleep(1000);
         robot.clickOn("#role");
-        Thread.sleep(2000);
         robot.lookup("Operator").tryQuery().isPresent();
         robot.clickOn("Operator");
-
+        Thread.sleep(1000);
         robot.clickOn("#okButton");
         ObservableList<User> users1 = dao.getUsers();
         assertEquals(users.size(), users1.size()-1);
@@ -462,8 +571,10 @@ public class MainTest {
         robot.clickOn("#payExtraField");
         robot.write("4");
         robot.clickOn("#passenger");
-        robot.lookup("#Novi Noovic").tryQuery().isPresent();
+        Thread.sleep(1000);
+        robot.lookup("Novi Noovic").tryQuery().isPresent();
         robot.clickOn("Novi Noovic");
+
 
         robot.clickOn("#okButton");
         ObservableList<Luggage> luggages1 = dao.getLuggages();
