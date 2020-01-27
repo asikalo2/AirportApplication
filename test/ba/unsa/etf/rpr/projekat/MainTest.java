@@ -25,6 +25,7 @@ import org.testfx.framework.junit5.Start;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
+import java.util.ArrayList;
 import java.util.ResourceBundle;
 
 import static org.junit.jupiter.api.Assertions.*;
@@ -72,7 +73,7 @@ public class MainTest {
     @Test
     public void testRemoveAirline(FxRobot robot) {
 
-        ObservableList<Airline> airlines = dao.getAirlines();
+        ArrayList<Airline> airlines = dao.getAirlines();
         robot.clickOn("#tableAirline");
         robot.clickOn("JP");
 
@@ -83,14 +84,14 @@ public class MainTest {
         Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
         robot.clickOn(okButton);
 
-        ObservableList<Airline> airlines1 = dao.getAirlines();
+        ArrayList<Airline> airlines1 = dao.getAirlines();
         assertEquals(airlines.size() - 1, airlines1.size());
     }
 
     @Test
     public void testEditAirline(FxRobot robot) throws InterruptedException {
 
-        ObservableList<Airline> airlines = dao.getAirlines();
+        ArrayList<Airline> airlines = dao.getAirlines();
         robot.clickOn("#tableAirline");
         robot.clickOn("JP");
 
@@ -374,7 +375,7 @@ public class MainTest {
     @Test
     public void testAddAirlineWithExistingID(FxRobot robot) throws InterruptedException {
 
-        ObservableList<Airline> airlines = dao.getAirlines();
+        ArrayList<Airline> airlines = dao.getAirlines();
         robot.clickOn("#tableAirline");
         robot.clickOn("JP");
 
@@ -393,7 +394,7 @@ public class MainTest {
         robot.clickOn("#okButton");
         robot.clickOn("#okButton");
 
-        ObservableList<Airline> airlines1 = dao.getAirlines();
+        ArrayList<Airline> airlines1 = dao.getAirlines();
         assertNotEquals(airlines.size(), airlines1.size()-1);
     }
     @Test
@@ -507,7 +508,7 @@ public class MainTest {
     @Test
     public void testAddAirline(FxRobot robot) throws InterruptedException {
 
-        ObservableList<Airline> airlines = dao.getAirlines();
+        ArrayList<Airline> airlines = dao.getAirlines();
         robot.clickOn("#tableAirline");
         robot.clickOn("JP");
 
@@ -528,7 +529,7 @@ public class MainTest {
         robot.clickOn("Algeria");
         robot.clickOn("#okButton");
 
-        ObservableList<Airline> airlines1 = dao.getAirlines();
+        ArrayList<Airline> airlines1 = dao.getAirlines();
         assertEquals(airlines.size(), airlines1.size()-1);
     }
 

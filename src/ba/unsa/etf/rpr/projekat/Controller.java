@@ -1,6 +1,7 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.application.Platform;
+import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -126,12 +127,12 @@ public class Controller implements Initializable {
     }
 
     private void fillTableAirlines() {
-        ObservableList<Airline> listAirlines = dao.getAirlines();
+        ArrayList<Airline> listAirlines = dao.getAirlines();
 
         idAirline.setCellValueFactory(new PropertyValueFactory("id"));
         nameAirline.setCellValueFactory(new PropertyValueFactory("name"));
         codeAirline.setCellValueFactory(new PropertyValueFactory("code"));
-        tableAirline.setItems(listAirlines);
+        tableAirline.setItems(FXCollections.observableArrayList(listAirlines));
     }
 
     private void fillTableAirplanes() {
@@ -213,10 +214,10 @@ public class Controller implements Initializable {
             stage.setTitle("Airline");
             stage.setScene(scene);
             stage.setOnCloseRequest(event-> {
-                tableAirline.setItems(dao.getAirlines());
+                tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
             stage.setOnHiding(event-> {
-                tableAirline.setItems(dao.getAirlines());
+                tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
             stage.show();
         }
@@ -280,7 +281,7 @@ public class Controller implements Initializable {
         } else {
             // ... user chose CANCEL or closed the dialog
         }
-        tableAirline.setItems(dao.getAirlines());
+        tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
     }
 
     public void editAirline(ActionEvent actionEvent) {
@@ -298,10 +299,10 @@ public class Controller implements Initializable {
             stage.setTitle("Airline");
             stage.setScene(scene);
             stage.setOnCloseRequest(event-> {
-                tableAirline.setItems(dao.getAirlines());
+                tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
             stage.setOnHiding(event-> {
-                tableAirline.setItems(dao.getAirlines());
+                tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
             stage.show();
         }

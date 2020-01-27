@@ -7,6 +7,7 @@ import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 
 import static org.junit.jupiter.api.Assertions.*;
 
@@ -188,12 +189,12 @@ public class AirportDAOTest {
         dao = new AirportDAO();
         Airline airline = new Airline(dao.highestIdAirline() + 1, "Lufthansa1", "LH C871");
         dao.addAirline(airline);
-        ObservableList<Airline> airlines = dao.getAirlines();
+        ArrayList<Airline> airlines = dao.getAirlines();
         assertEquals(108, airlines.size());
         dao.removeInstance();
         dao = new AirportDAO();
         dao.deleteAirline(airline);
-        ObservableList<Airline> airlines1 = dao.getAirlines();
+        ArrayList<Airline> airlines1 = dao.getAirlines();
         assertEquals(107, airlines1.size());
     }
 

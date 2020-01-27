@@ -4,6 +4,7 @@ import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.value.ChangeListener;
 import javafx.beans.value.ObservableValue;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -48,7 +49,7 @@ public class AirplaneController {
 
     @FXML
     public void initialize() {
-        airline.setItems(dao.getAirlines());
+        airline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
         initializeDataBinding();
 
         airline.setConverter(new StringConverter<Airline>() {
