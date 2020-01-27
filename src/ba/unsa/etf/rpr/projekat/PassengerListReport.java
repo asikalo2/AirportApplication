@@ -33,4 +33,26 @@ public class PassengerListReport extends JFrame {
         this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
     }
 
+    public void showReport( List<Passenger> passengerList) throws JRException {
+        String reportSrcFile = getClass().getResource("/reports/PassengersReport.jrxml").getFile();
+        String reportsDir = getClass().getResource("/reports/").getFile();
+
+        JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
+
+        HashMap<String, Object> parameters = new HashMap<String, Object>();
+        parameters.put("flightName", "All Flights");
+
+        JRBeanCollectionDataSource jrBeanList = new
+                JRBeanCollectionDataSource(passengerList);
+
+        JasperPrint print = JasperFillManager.fillReport(jasperReport, parameters, jrBeanList);
+        JRViewer viewer = new JRViewer(print);
+        viewer.setOpaque(true);
+        viewer.setVisible(true);
+        this.add(viewer);
+        this.setSize(700, 500);
+        this.setVisible(true);
+        this.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
+    }
+
 }

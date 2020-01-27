@@ -101,6 +101,13 @@ public class Flight {
         return user.getName();
     }
 
+    public String getAirplaneName() {
+        if (airplane == null)
+            return "";
+        return airplane.getManufacturer() + " " + airplane.getType();
+
+    }
+
     public String getGateName() {
         if (gate == null)
             return "N/A";

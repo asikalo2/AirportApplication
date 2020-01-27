@@ -23,6 +23,7 @@ import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
 
@@ -67,7 +68,7 @@ public class Controller implements Initializable {
     private AirportDAO dao;
 
 
-    public void saveAction(ActionEvent actionEvent) throws IOException {
+    /*public void saveAction(ActionEvent actionEvent) throws IOException {
         FileChooser fileChooser = new FileChooser();
 
         FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
@@ -92,7 +93,7 @@ public class Controller implements Initializable {
             }
 
         }
-    }
+    }*/
 
     public void exitAction(ActionEvent actionEvent) {
         Platform.exit();
@@ -877,19 +878,20 @@ public class Controller implements Initializable {
     }
 
     public void viewReportAction(ActionEvent actionEvent) {
-        FlightsReport flightsReport = new FlightsReport();
+        List<Flight> flightsList = dao.getFlights();
+        FlightsReport report = new FlightsReport();
         try {
-            flightsReport.showReport(AirportDAO.getConn());
-        }
-        catch (JRException ex) {
-            ex.printStackTrace();
+            report.showReport(flightsList);
+        } catch (JRException e) {
+            e.printStackTrace();
         }
     }
 
     public void viewReportActionUser(ActionEvent actionEvent) {
         UsersReport usersReport = new UsersReport();
+        ArrayList<User> users = new ArrayList<User>(dao.getUsers());
         try {
-            usersReport.showReport(AirportDAO.getConn());
+            usersReport.showReport(users);
         }
         catch (JRException ex) {
             ex.printStackTrace();
@@ -897,12 +899,13 @@ public class Controller implements Initializable {
     }
 
     public void viewReportActionPassenger(ActionEvent actionEvent) {
-        PassengerReport passengerReport = new PassengerReport();
+        List<Passenger> passengerList = dao.getPassengers();
+        System.out.println(passengerList);
+        PassengerListReport report = new PassengerListReport();
         try {
-            passengerReport.showReport(AirportDAO.getConn());
-        }
-        catch (JRException ex) {
-            ex.printStackTrace();
+            report.showReport(passengerList);
+        } catch (JRException e) {
+            e.printStackTrace();
         }
     }
 
