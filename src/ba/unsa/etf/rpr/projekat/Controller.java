@@ -1033,4 +1033,14 @@ public class Controller implements Initializable {
         }
 
     }
+
+    public void searchAirplane(ActionEvent actionEvent) {
+        Map<Airline, Airplane> map = new HashMap<Airline, Airplane>();
+        List<Airplane> airplanes = dao.getAirplanes();
+        List<Airline> airlines = dao.getAirlines();
+        for(int i = 0; i<airlines.size(); i++){
+            map.put(airlines.get(i), null);
+        }
+
+    }
 }

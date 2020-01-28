@@ -4,7 +4,7 @@ import javafx.scene.control.DatePicker;
 
 import java.time.LocalDateTime;
 
-public class Flight {
+public class Flight implements FlightInterface{
     private int id;
     private String code;
     private Airplane airplane;
@@ -114,4 +114,10 @@ public class Flight {
         return gate.getName();
     }
 
+    @Override
+    public void informOfFlight() {
+        LocalDateTime beforeBoarding = LocalDateTime.now();
+        if(beforeBoarding.equals(getStartOfUsingTheRunway().toLocalTime().getMinute()-30))
+        System.out.println("Boarding starts!");
+    }
 }
