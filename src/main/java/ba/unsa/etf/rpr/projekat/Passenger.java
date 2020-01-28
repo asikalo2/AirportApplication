@@ -11,8 +11,8 @@ public class Passenger {
     public Passenger() {
     }
 
-    public Passenger(int id, String name, Flight flight, Image qrCode)  {
-   //     if(qrCode == null) throw new IllegalCode("QR Code must be generated!");
+    public Passenger(int id, String name, Flight flight, Image qrCode) {
+        //     if(qrCode == null) throw new IllegalCode("QR Code must be generated!");
         this.id = id;
         this.name = name;
         this.flight = flight;
@@ -56,8 +56,10 @@ public class Passenger {
     }
 
     public String getFlightName() {
-        return this.flight.getAirlineName() + "  |  " +
-                this.flight.getCode();
+        if (flight != null)
+            return this.flight.getAirlineName() + "  |  " +
+                    this.flight.getCode();
+        return "";
     }
 
 }
