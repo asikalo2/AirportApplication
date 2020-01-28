@@ -1,0 +1,7 @@
+.correct {
+    -fx-control-inner-background: greenyellow;
+}
+
+.notCorrect {
+    -fx-control-inner-background: lightpink;
+}
