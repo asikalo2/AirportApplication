@@ -2,5 +2,8 @@ package ba.unsa.etf.rpr.projekat;
 
 public interface FlightInterface {
 
-    public void informOfFlight();
+
+    void informOfFlight1();
+
+    void informOfFlight2();
 }

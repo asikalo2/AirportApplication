@@ -115,9 +115,16 @@ public class Flight implements FlightInterface{
     }
 
     @Override
-    public void informOfFlight() {
+    public void informOfFlight1() {
+        LocalDateTime beforeBoarding = LocalDateTime.now();
+        if(beforeBoarding.equals(getStartOfUsingTheRunway().toLocalTime().getMinute()-60))
+        System.out.println("Boarding starts!");
+    }
+
+    @Override
+    public void informOfFlight2() {
         LocalDateTime beforeBoarding = LocalDateTime.now();
         if(beforeBoarding.equals(getStartOfUsingTheRunway().toLocalTime().getMinute()-30))
-        System.out.println("Boarding starts!");
+            System.out.println("Last call for boarding!");
     }
 }
