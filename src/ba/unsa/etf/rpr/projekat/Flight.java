@@ -1,8 +1,10 @@
 package ba.unsa.etf.rpr.projekat;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.temporal.ChronoUnit;
 
-public class Flight implements FlightInterface{
+public class Flight implements FlightInterface {
     private int id;
     private String code;
     private Airplane airplane;
@@ -12,7 +14,7 @@ public class Flight implements FlightInterface{
     private User user;
     private Gate gate;
 
-    public Flight(){
+    public Flight() {
     }
 
     public Flight(int id, String code, Airplane airplane, LocalDateTime startOfUsingTheRunway,
@@ -26,6 +28,7 @@ public class Flight implements FlightInterface{
         this.user = user;
         this.gate = gate;
     }
+
     public int getId() {
         return id;
     }
@@ -60,7 +63,6 @@ public class Flight implements FlightInterface{
     }
 
 
-
     public Airplane getAirplane() {
         return airplane;
     }
@@ -68,7 +70,10 @@ public class Flight implements FlightInterface{
     public void setAirplane(Airplane airplane) {
         this.airplane = airplane;
     }
-    public String getAirlineName() { return airplane.getAirlineName(); }
+
+    public String getAirlineName() {
+        return airplane.getAirlineName();
+    }
 
     public FlightType getFlightType() {
         return flightType;
@@ -85,6 +90,7 @@ public class Flight implements FlightInterface{
     public void setUser(User user) {
         this.user = user;
     }
+
     public Gate getGate() {
         return gate;
     }
@@ -115,14 +121,16 @@ public class Flight implements FlightInterface{
     @Override
     public void informOfFlight1() {
         LocalDateTime beforeBoarding = LocalDateTime.now();
-        if(beforeBoarding.equals(getStartOfUsingTheRunway().toLocalTime().getMinute()-60))
-        System.out.println("Boarding starts!");
+        long minutes = ChronoUnit.MINUTES.between(beforeBoarding, getStartOfUsingTheRunway());
+        System.out.println(minutes);
+        if (minutes == 60)
+            System.out.println("Boarding starts!");
     }
 
     @Override
     public void informOfFlight2() {
         LocalDateTime beforeBoarding = LocalDateTime.now();
-        if(beforeBoarding.equals(getStartOfUsingTheRunway().toLocalTime().getMinute()-30))
+        if (beforeBoarding.equals(30 - getStartOfUsingTheRunway().toLocalTime().getMinute() - 30))
             System.out.println("Last call for boarding!");
     }
 }

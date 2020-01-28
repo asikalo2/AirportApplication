@@ -4,13 +4,12 @@ import javafx.application.Platform;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+import javafx.event.Event;
+import javafx.event.EventHandler;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
-import javafx.scene.control.Alert;
-import javafx.scene.control.ButtonType;
-import javafx.scene.control.TableColumn;
-import javafx.scene.control.TableView;
+import javafx.scene.control.*;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
 import javafx.stage.Stage;
@@ -22,6 +21,7 @@ import java.util.*;
 
 public class Controller implements Initializable {
 
+    public Tab flightsTab;
     private ResourceBundle bundle;
     public TableView tableAirline;
     public TableColumn idAirline;
@@ -118,6 +118,21 @@ public class Controller implements Initializable {
         fillTablePassengers();
         fillTableRoles();
         fillTableUsers();
+
+        flightsTab.setOnSelectionChanged(new EventHandler<Event>() {
+            @Override
+            public void handle(Event event) {
+                if (flightsTab.isSelected()) {
+                    ObservableList<Flight> listFlights = dao.getFlights();
+                    for (Flight flight: listFlights) {
+                        flight.informOfFlight1();
+                        flight.informOfFlight2();
+                    }
+                }
+            }
+        });
+
+
     }
 
     private void fillTableAirlines() {
