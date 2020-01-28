@@ -44,6 +44,9 @@ public class Main extends Application {
         stage.show();
     }
     public static void main(String[] args) {
+        Flight flight = new Flight();
+        flight.informOfFlight1();
+        flight.informOfFlight2();
         launch(args);
     }
 }

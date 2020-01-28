@@ -1,7 +1,5 @@
 package ba.unsa.etf.rpr.projekat;
 
-import javafx.scene.control.DatePicker;
-
 import java.time.LocalDateTime;
 
 public class Flight implements FlightInterface{
