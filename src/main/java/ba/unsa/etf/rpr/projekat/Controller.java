@@ -8,6 +8,7 @@ import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
+import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -142,16 +143,8 @@ public class Controller implements Initializable {
                 fillTableAirlines();
                 return;
             }
-            System.out.println("t1 = " + t1);
+            //System.out.println("t1 = " + t1);
             List<Airline> listA = dao.getAirlines();
-            /*List<Airline> listAirlines = listA.stream().filter(
-                    airline -> {
-                        if (airline.getName().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
-                                airline.getCode().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
-                                airline.getCountry().toUpperCase().indexOf(t1.toUpperCase()) != -1)
-                            return true;
-                        return false;
-                    }).collect(Collectors.toList());*/
             List<Airline> listAirlines = listA.stream().filter(
                     airline -> {
                         if (airline.getName().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||

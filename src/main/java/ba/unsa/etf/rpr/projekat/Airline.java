@@ -19,7 +19,9 @@ public class Airline {
     public Airline(int id, String name, String code) {
         this.id = id;
         this.name = name;
-        this.code = code;    }
+        this.code = code;
+        this.country = "";
+    }
 
     public int getId() {
         return id;
