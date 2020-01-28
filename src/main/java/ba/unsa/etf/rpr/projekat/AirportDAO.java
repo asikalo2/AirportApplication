@@ -54,10 +54,10 @@ public class AirportDAO {
     public ArrayList<Airline> getAirlines() {
         ArrayList<Airline> res = new ArrayList<>();
         try {
-            PreparedStatement stmt = conn.prepareStatement("SELECT id, name, code FROM airline_companies");
+            PreparedStatement stmt = conn.prepareStatement("SELECT id, name, code, country FROM airline_companies");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
-                Airline m = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3));
+                Airline m = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 res.add(m);
             }
             return res;

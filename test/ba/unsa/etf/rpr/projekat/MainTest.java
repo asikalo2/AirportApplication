@@ -547,6 +547,7 @@ public class MainTest {
         robot.write("NewName");
         Thread.sleep(1000);
         robot.clickOn("#role");
+        Thread.sleep(300);
         robot.lookup("Operator").tryQuery().isPresent();
         robot.clickOn("Operator");
         Thread.sleep(1000);

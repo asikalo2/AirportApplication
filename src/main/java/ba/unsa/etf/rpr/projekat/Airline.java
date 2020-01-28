@@ -13,7 +13,7 @@ public class Airline {
         this.id = id;
         this.name = name;
         this.code = code;
-        this.country=country;
+        this.country = country;
     }
 
     public Airline(int id, String name, String code) {
@@ -46,6 +46,8 @@ public class Airline {
     }
 
     public String getCountry() {
+        if (country == null)
+            return "";
         return country;
     }
 

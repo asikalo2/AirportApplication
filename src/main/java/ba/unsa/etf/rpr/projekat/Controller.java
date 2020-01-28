@@ -1,6 +1,8 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.application.Platform;
+import javafx.beans.value.ChangeListener;
+import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
@@ -18,10 +20,13 @@ import net.sf.jasperreports.engine.*;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
+import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
 
     public Tab flightsTab;
+    public TextField airlineSearch;
+    public TableColumn countryAirline;
     private ResourceBundle bundle;
     public TableView tableAirline;
     public TableColumn idAirline;
@@ -132,7 +137,37 @@ public class Controller implements Initializable {
             }
         });
 
+        airlineSearch.textProperty().addListener((observableValue, s, t1) -> {
+            if (t1.equals("")) {
+                fillTableAirlines();
+                return;
+            }
+            System.out.println("t1 = " + t1);
+            List<Airline> listA = dao.getAirlines();
+            /*List<Airline> listAirlines = listA.stream().filter(
+                    airline -> {
+                        if (airline.getName().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
+                                airline.getCode().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
+                                airline.getCountry().toUpperCase().indexOf(t1.toUpperCase()) != -1)
+                            return true;
+                        return false;
+                    }).collect(Collectors.toList());*/
+            List<Airline> listAirlines = listA.stream().filter(
+                    airline -> {
+                        if (airline.getName().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
+                            airline.getCode().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
+                            airline.getCountry().toUpperCase().indexOf(t1.toUpperCase()) != -1)
+                            return true;
+                        return false;
+                    }).collect(Collectors.toList());
 
+            idAirline.setCellValueFactory(new PropertyValueFactory("id"));
+            nameAirline.setCellValueFactory(new PropertyValueFactory("name"));
+            codeAirline.setCellValueFactory(new PropertyValueFactory("code"));
+            countryAirline.setCellValueFactory(new PropertyValueFactory("country"));
+            tableAirline.setItems(FXCollections.observableArrayList(listAirlines));
+
+        });
     }
 
     private void fillTableAirlines() {
@@ -141,6 +176,7 @@ public class Controller implements Initializable {
         idAirline.setCellValueFactory(new PropertyValueFactory("id"));
         nameAirline.setCellValueFactory(new PropertyValueFactory("name"));
         codeAirline.setCellValueFactory(new PropertyValueFactory("code"));
+        countryAirline.setCellValueFactory(new PropertyValueFactory("country"));
         tableAirline.setItems(FXCollections.observableArrayList(listAirlines));
     }
 
