@@ -13,18 +13,12 @@ import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
 import javafx.scene.control.cell.PropertyValueFactory;
 import javafx.scene.input.KeyEvent;
-import javafx.stage.FileChooser;
 import javafx.stage.Stage;
 import net.sf.jasperreports.engine.*;
-import net.sf.jasperreports.swing.JRViewer;
-import org.apache.commons.io.FilenameUtils;
 
-import org.apache.commons.io.FilenameUtils;
-import java.io.File;
 import java.io.IOException;
 import java.net.URL;
 import java.util.*;
-import java.util.stream.Collectors;
 
 public class Controller implements Initializable {
 
@@ -213,15 +207,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Airline");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -229,22 +222,21 @@ public class Controller implements Initializable {
     public void addFlightType(ActionEvent actionEvent) {
         try {
             FXMLLoader loader = new FXMLLoader();
-            FlightTypeController flightTypeController = new FlightTypeController(dao,null);
+            FlightTypeController flightTypeController = new FlightTypeController(dao, null);
             loader.setController(flightTypeController);
             loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
             stage.setTitle("Flight type");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableFlightType.setItems(dao.getFlightTypes());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableFlightType.setItems(dao.getFlightTypes());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -257,7 +249,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete an airline?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tableAirline.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -270,8 +262,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deleteAirline(airline);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting airline");
                 alertError.setContentText(ex.getMessage());
@@ -298,15 +289,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Airline");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -325,15 +315,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Flight type");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableFlightType.setItems(dao.getFlightTypes());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableFlightType.setItems(dao.getFlightTypes());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -348,15 +337,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Airplane");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableAirplanes.setItems(dao.getAirplanes());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableAirplanes.setItems(dao.getAirplanes());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -367,7 +355,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete an airplane?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tableAirplanes.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -380,8 +368,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deleteAirplane(airplane);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting airplane");
                 alertError.setContentText(ex.getMessage());
@@ -408,15 +395,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Airplane");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableAirplanes.setItems(dao.getAirplanes());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableAirplanes.setItems(dao.getAirplanes());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -427,7 +413,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete a flight?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tableFlights.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -440,8 +426,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deleteFlight(flight);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting airplane");
                 alertError.setContentText(ex.getMessage());
@@ -468,15 +453,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Flight");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableFlights.setItems(dao.getFlights());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableFlights.setItems(dao.getFlights());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -491,15 +475,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Flight");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableFlights.setItems(dao.getFlights());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableFlights.setItems(dao.getFlights());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -511,7 +494,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete a flight type?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tableFlightType.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -524,8 +507,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deleteFlightType(flightType);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting flight type.");
                 alertError.setContentText(ex.getMessage());
@@ -549,15 +531,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Luggage");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableLuggage.setItems(dao.getLuggages());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableLuggage.setItems(dao.getLuggages());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -569,7 +550,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete a luggage?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tableLuggage.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -582,8 +563,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deleteLuggage(luggage);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting luggage.");
                 alertError.setContentText(ex.getMessage());
@@ -610,15 +590,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Luggage");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableLuggage.setItems(dao.getLuggages());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableLuggage.setItems(dao.getLuggages());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -633,15 +612,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Passenger");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tablePassenger.setItems(dao.getPassengers());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tablePassenger.setItems(dao.getPassengers());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -653,7 +631,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete a passenger?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tablePassenger.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -666,8 +644,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deletePassenger(passenger);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting passenger.");
                 alertError.setContentText(ex.getMessage());
@@ -694,15 +671,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Passenger");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tablePassenger.setItems(dao.getPassengers());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tablePassenger.setItems(dao.getPassengers());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -717,15 +693,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("User");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableUsers.setItems(dao.getUsers());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableUsers.setItems(dao.getUsers());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -737,7 +712,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete an user?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tableUsers.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -750,8 +725,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deleteUser(user);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting user.");
                 alertError.setContentText(ex.getMessage());
@@ -778,15 +752,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("User");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableUsers.setItems(dao.getUsers());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableUsers.setItems(dao.getUsers());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -801,15 +774,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Role");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableRole.setItems(dao.getRoles());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableRole.setItems(dao.getRoles());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -821,7 +793,7 @@ public class Controller implements Initializable {
         alert.setContentText("Do you want to delete a role?");
 
         Optional<ButtonType> result = alert.showAndWait();
-        if (result.get() == ButtonType.OK){
+        if (result.get() == ButtonType.OK) {
             if (tableRole.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
                 alert.setHeaderText("Error!");
@@ -834,8 +806,7 @@ public class Controller implements Initializable {
 
             try {
                 dao.deleteRole(role);
-            }
-            catch (Exception ex) {
+            } catch (Exception ex) {
                 Alert alertError = new Alert(Alert.AlertType.ERROR);
                 alertError.setHeaderText("Deleting role.");
                 alertError.setContentText(ex.getMessage());
@@ -862,15 +833,14 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Role");
             stage.setScene(scene);
-            stage.setOnCloseRequest(event-> {
+            stage.setOnCloseRequest(event -> {
                 tableRole.setItems(dao.getRoles());
             });
-            stage.setOnHiding(event-> {
+            stage.setOnHiding(event -> {
                 tableRole.setItems(dao.getRoles());
             });
             stage.show();
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -893,8 +863,7 @@ public class Controller implements Initializable {
         ArrayList<User> users = new ArrayList<User>(dao.getUsers());
         try {
             usersReport.showReport(users);
-        }
-        catch (JRException ex) {
+        } catch (JRException ex) {
             ex.printStackTrace();
         }
     }
@@ -915,8 +884,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("bs", "BA"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -926,8 +894,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("en", "US"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -937,8 +904,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("de", "DE"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -949,8 +915,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("fr", "FR"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -960,8 +925,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("ar", "AR"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -971,8 +935,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("zh", "ZH"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -982,8 +945,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("ru", "RU"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -993,8 +955,7 @@ public class Controller implements Initializable {
         Locale.setDefault(new Locale("es", "ES"));
         try {
             Main.loadView(Locale.getDefault());
-        }
-        catch (IOException ex) {
+        } catch (IOException ex) {
             ex.printStackTrace();
         }
     }
@@ -1006,7 +967,7 @@ public class Controller implements Initializable {
             FXMLLoader fxmlLoader = new FXMLLoader();
             ResourceBundle bundle = ResourceBundle.getBundle("Translation");
             fxmlLoader.setResources(bundle);
-         //   fxmlLoader.setLocation(getClass().getResource("glavma.fxml"));
+            //   fxmlLoader.setLocation(getClass().getResource("glavma.fxml"));
             Scene scene = new Scene(fxmlLoader.load(), 600, 400);
             Stage stage = new Stage();
             stage.setTitle("New Window");
@@ -1034,13 +995,21 @@ public class Controller implements Initializable {
 
     }
 
-    public void searchAirplane(ActionEvent actionEvent) {
-        Map<Airline, Airplane> map = new HashMap<Airline, Airplane>();
+    public Map<Airline, List<Airplane>> searchAirplane() {
+        Map<Airline, List<Airplane>> map = new HashMap<>();
+        int j = 0;
+        int i = 0;
         List<Airplane> airplanes = dao.getAirplanes();
         List<Airline> airlines = dao.getAirlines();
-        for(int i = 0; i<airlines.size(); i++){
-            map.put(airlines.get(i), null);
+        List<Airplane> list = new ArrayList<>();
+        for (i = 0; i < airlines.size(); i++) {
+            map.put(airlines.get(i), list);
+            for (j = 0; j < map.size(); j++) {
+                if (map.containsKey(airplanes.get(j).getAirline())) {
+                    map.get(i).add(airplanes.get(j));
+                }
+            }
         }
-
+        return map;
     }
 }
