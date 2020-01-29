@@ -11,8 +11,6 @@ import javafx.scene.control.TextField;
 import javafx.stage.Stage;
 import javafx.util.StringConverter;
 
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
 
 public class UserController {
     public Label idLabel;
@@ -126,7 +124,6 @@ public class UserController {
                 dao.changeUser(currentUser);
             }
             Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }

@@ -75,10 +75,6 @@ public class GateController {
 
 
     }
-        public void stopFormBtn(ActionEvent actionEvent) {
-            Stage stage = (Stage) cancelButton.getScene().getWindow();
-            stage.close();
-        }
 
         public void okFormBtn(ActionEvent actionEvent) {
             if (isFormValid()) {
@@ -96,7 +92,6 @@ public class GateController {
                     dao.changeGate(currentGate);
                 }
                 Stage stage = (Stage) okButton.getScene().getWindow();
-                // do what you have to do
                 stage.close();
             }
         }

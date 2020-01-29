@@ -78,11 +78,6 @@ public class RoleController {
         });
     }
 
-    public void stopFormBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-    }
-
     public void okFormBtn(ActionEvent actionEvent) {
         if (isFormValid()) {
             boolean adding = currentRole == null;
@@ -99,7 +94,6 @@ public class RoleController {
                 dao.changeRole(currentRole);
             }
             Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }

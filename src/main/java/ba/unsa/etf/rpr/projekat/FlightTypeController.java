@@ -75,11 +75,6 @@ public class FlightTypeController {
         });
     }
 
-    public void stopFormBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
-    }
-
     public void okFormBtn(ActionEvent actionEvent) {
         if (isFormValid()) {
             boolean adding = currentFlightType == null;
@@ -96,7 +91,6 @@ public class FlightTypeController {
                 dao.changeFlightType(currentFlightType);
             }
             Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }

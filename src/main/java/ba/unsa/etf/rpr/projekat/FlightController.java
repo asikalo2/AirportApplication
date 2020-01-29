@@ -162,6 +162,11 @@ public class FlightController {
         startOfUsingTheRunwayProperty.setValue(currentFlight.getStartOfUsingTheRunway());
         endOfUsingTheRunwayProperty.setValue(currentFlight.getEndOfUsingTheRunway());
 
+        if(startOfUsingTheRunwayField.getDateTimeValue().isAfter(endOfUsingTheRunwayField.getDateTimeValue())){
+            throw new IllegalArgumentException("Date of start of using the runway cannot be after" +
+                    " the end of using the runway!");
+        }
+
         if(startOfUsingTheRunwayField!= null && endOfUsingTheRunwayField!=null) {
             startOfUsingTheRunwayField.setDateTimeValue(currentFlight.getStartOfUsingTheRunway());
             endOfUsingTheRunwayField.setDateTimeValue(currentFlight.getEndOfUsingTheRunway());
@@ -206,32 +211,6 @@ public class FlightController {
             }
         });
 
-        /*airplaneField.textProperty().addListener((observableValue, s, n) -> {
-            if (Validation.isStringTooLong(n)) {
-                airplaneField.getStyleClass().removeAll("notCorrect");
-                airplaneField.getStyleClass().add("correct");
-            }
-            else {
-                airplaneField.getStyleClass().removeAll("correct");
-                airplaneField.getStyleClass().add("notCorrect");
-            }
-        });
-
-        flightTypeField.textProperty().addListener((observableValue, s, n) -> {
-            if (Validation.validateNumber(n)) {
-                flightTypeField.getStyleClass().removeAll("notCorrect");
-                flightTypeField.getStyleClass().add("correct");
-            }
-            else {
-                flightTypeField.getStyleClass().removeAll("correct");
-                flightTypeField.getStyleClass().add("notCorrect");
-            }
-        });*/
-    }
-
-    public void stopFormBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
@@ -257,7 +236,6 @@ public class FlightController {
                 dao.changeFlight(currentFlight);
             }
             Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }

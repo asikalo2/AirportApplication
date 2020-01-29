@@ -123,7 +123,7 @@ public class AirplaneController {
         });
 
         numberOfSeatsField.textProperty().addListener((observableValue, s, n) -> {
-            if (Validation.validateNumber(n)) {
+            if (Validation.validateNumber(n) && Validation.validateNumberOfSeats(n)) {
                 numberOfSeatsField.getStyleClass().removeAll("notCorrect");
                 numberOfSeatsField.getStyleClass().add("correct");
             }
@@ -132,11 +132,6 @@ public class AirplaneController {
                 numberOfSeatsField.getStyleClass().add("notCorrect");
             }
         });
-    }
-
-    public void stopFormBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
     }
 
     public void okFormBtn(ActionEvent actionEvent) {

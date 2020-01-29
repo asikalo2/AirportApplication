@@ -68,34 +68,6 @@ public class Controller implements Initializable {
     public TableColumn nameRole;
     private AirportDAO dao;
 
-
-    /*public void saveAction(ActionEvent actionEvent) throws IOException {
-        FileChooser fileChooser = new FileChooser();
-
-        FileChooser.ExtensionFilter extFilter1 = new FileChooser.ExtensionFilter("PDF files (*.pdf)", "*.pdf");
-        FileChooser.ExtensionFilter extFilter2 = new FileChooser.ExtensionFilter("DOCX files (*.docx)", "*.docx");
-        FileChooser.ExtensionFilter extFilter3 = new FileChooser.ExtensionFilter("XML files (*.xml)", "*.xml");
-
-        fileChooser.getExtensionFilters().add(extFilter1);
-        fileChooser.getExtensionFilters().add(extFilter2);
-        fileChooser.getExtensionFilters().add(extFilter3);
-
-        File file = fileChooser.showSaveDialog(Main.getStage());
-
-        if (file != null) {
-            FlightsReport flightsReport = new FlightsReport();
-            try {
-                flightsReport.saveAs(FilenameUtils.getExtension(file.getCanonicalPath()).toUpperCase(),
-                        AirportDAO.getConn(),
-                        file.getCanonicalPath());
-            }
-            catch (JRException ex) {
-                ex.printStackTrace();
-            }
-
-        }
-    }*/
-
     public void exitAction(ActionEvent actionEvent) {
         Platform.exit();
     }
@@ -143,7 +115,6 @@ public class Controller implements Initializable {
                 fillTableAirlines();
                 return;
             }
-            //System.out.println("t1 = " + t1);
             List<Airline> listA = dao.getAirlines();
             List<Airline> listAirlines = listA.stream().filter(
                     airline -> {
@@ -313,8 +284,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
     }
@@ -419,8 +388,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tableAirplanes.setItems(dao.getAirplanes());
     }
@@ -477,8 +444,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tableFlights.setItems(dao.getFlights());
     }
@@ -558,8 +523,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tableFlightType.setItems(dao.getFlightTypes());
     }
@@ -614,8 +577,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tableLuggage.setItems(dao.getLuggages());
     }
@@ -695,8 +656,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tablePassenger.setItems(dao.getPassengers());
     }
@@ -776,8 +735,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tableUsers.setItems(dao.getUsers());
     }
@@ -857,8 +814,6 @@ public class Controller implements Initializable {
                 alertError.showAndWait();
                 return;
             }
-        } else {
-            // ... user chose CANCEL or closed the dialog
         }
         tableRole.setItems(dao.getRoles());
     }
@@ -924,7 +879,6 @@ public class Controller implements Initializable {
     }
 
     public void changeToBosnian(ActionEvent actionEvent) {
-        //postavljamo novi Locale, sa defaultom bosanskog jezika i zatim pomoccu loadView osvjezavamo formu s novim jezikom
         Locale.setDefault(new Locale("bs", "BA"));
         try {
             Main.loadView(Locale.getDefault());
@@ -1002,25 +956,6 @@ public class Controller implements Initializable {
         } catch (IOException ex) {
             ex.printStackTrace();
         }
-    }
-
-    public void viewReportCountryAction(ActionEvent actionEvent) {
-        //pozivamo novu formu za odabir drzave, i kada je odaberemo iz comboboxa, pritiskom na dugme se prikaze izvjestaj
-        //poziva se iz GeografijaDAO metoda drzave da napuni vrijednosti u comboboxu
-        try {
-            FXMLLoader fxmlLoader = new FXMLLoader();
-            ResourceBundle bundle = ResourceBundle.getBundle("Translation");
-            fxmlLoader.setResources(bundle);
-            //   fxmlLoader.setLocation(getClass().getResource("glavma.fxml"));
-            Scene scene = new Scene(fxmlLoader.load(), 600, 400);
-            Stage stage = new Stage();
-            stage.setTitle("New Window");
-            stage.setScene(scene);
-            stage.show();
-        } catch (IOException e) {
-            e.printStackTrace();
-        }
-
     }
 
     public void passengerListReport(ActionEvent actionEvent) {

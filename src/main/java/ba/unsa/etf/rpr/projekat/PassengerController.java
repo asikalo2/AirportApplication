@@ -20,9 +20,6 @@ public class PassengerController {
     public TextField idField;
     public Label nameLabel;
     public TextField nameField;
-    public Label flightLabel;
-    public TextField flightField;
-    public Label qrCodeLabel;
     public ComboBox<Flight> flight;
     public ImageView qrCodeView;
 
@@ -88,20 +85,16 @@ public class PassengerController {
         nameProperty.set(currentPassenger.getName());
         flightProperty.setValue(currentPassenger.getFlight());
         qrCodeProperty.set(currentPassenger.getQrCode());
-        //qrCodeView.setImage(currentPassenger.getQrCode());
         if (checkInToggle != null && currentPassenger.getCheckedIn() == "Yes") {
             checkInToggle.setSelected(true);
             checkInToggle.setText("Yes");
         }
-
-        //System.out.println(currentPassenger.getQrCode().getWidth());
     }
 
     private void initializeDataBinding() {
         idField.textProperty().bindBidirectional(idProperty);
         nameField.textProperty().bindBidirectional(nameProperty);
         flight.valueProperty().bindBidirectional(flightProperty);
-        //qrCodeField.textProperty().bindBidirectional(qrCodeProperty);
         qrCodeView.imageProperty().bindBidirectional(qrCodeProperty);
     }
 
@@ -127,22 +120,6 @@ public class PassengerController {
                 idField.getStyleClass().add("notCorrect");
             }
         });
-
-/*        flightField.textProperty().addListener((observableValue, s, n) -> {
-            if (Validation.isStringTooLong(n)) {
-                flightField.getStyleClass().removeAll("notCorrect");
-                flightField.getStyleClass().add("correct");
-            }
-            else {
-                flightField.getStyleClass().removeAll("correct");
-                flightField.getStyleClass().add("notCorrect");
-            }
-        });*/
-    }
-
-    public void stopFormBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
     }
 
     public boolean isAdding() {
@@ -181,7 +158,6 @@ public class PassengerController {
             }
 
             Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }
@@ -200,7 +176,6 @@ public class PassengerController {
                     WritableImage wr = Utils.generateQrCode(nameProperty.get(),
                             flightProperty.get().getAirlineName() + "|" + flightProperty.get().getCode());
 
-                    //qrCodeView.setImage(wr);
                     qrCodeProperty.set(wr);
                 }
             }
@@ -210,7 +185,6 @@ public class PassengerController {
         }
         else {
             checkInToggle.setText("No");
-            //qrCodeView.setImage(null);
             qrCodeProperty.set(null);
         }
 

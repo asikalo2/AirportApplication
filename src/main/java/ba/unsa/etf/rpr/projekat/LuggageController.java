@@ -88,7 +88,6 @@ public class LuggageController {
     }
 
     public void fillForm() {
-        //System.out.println(currentLuggage.getClass());
         idProperty.set(String.valueOf(currentLuggage.getId()));
         passengerProperty.setValue(currentLuggage.getPassenger());
         optionsLuggageProperty.setValue("Standard");
@@ -128,7 +127,6 @@ public class LuggageController {
             }
         });
         optionsLuggage.valueProperty().addListener((observableValue, s, t1) -> {
-            //System.out.println(t1);
             if (isHandLuggage(t1) || isAdditionalLuggage(t1)) {
                 weightLabel.setVisible(true);
                 weightField.setVisible(true);
@@ -149,11 +147,6 @@ public class LuggageController {
             }
         });
 
-    }
-
-    public void stopFormBtn(ActionEvent actionEvent) {
-        Stage stage = (Stage) cancelButton.getScene().getWindow();
-        stage.close();
     }
 
     public void okFormBtn(ActionEvent actionEvent) {
@@ -208,7 +201,6 @@ public class LuggageController {
                 dao.changeLuggage(currentLuggage);
             }
             Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }
