@@ -38,7 +38,7 @@
 
         <Label fx:id="roleLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="Role"/>
-        <ComboBox fx:id="role" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="true"
+        <ComboBox fx:id="role" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="false"
                   maxWidth="Infinity">
         </ComboBox>
 

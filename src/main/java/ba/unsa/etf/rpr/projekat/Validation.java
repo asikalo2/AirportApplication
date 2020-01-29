@@ -1,9 +1,5 @@
 package ba.unsa.etf.rpr.projekat;
 
-
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-
 public class Validation {
 
     public static boolean charCheck(char charx) {
@@ -83,12 +79,6 @@ public class Validation {
     public static boolean validateNumberOfSeats(String n) {
         int result = Integer.parseInt(n);
         if(result>300) return false;
-        return true;
-    }
-
-
-    public static boolean checkDate(LocalDateTime d1, LocalDateTime d2){
-        if(d1.isAfter(d2)) return false;
         return true;
     }
 }

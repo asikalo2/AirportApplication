@@ -248,24 +248,14 @@ public class MainTest {
         assertEquals(role.getId(), 3);
     }
 
-
-
-//    @Test
-//    public void testEditLuggage(FxRobot robot) {
-//
-//        ObservableList<Luggage> luggages = dao.getLuggages();
-//        robot.clickOn("#luggageTab");
-//        robot.clickOn("JP");
-//
-//        robot.clickOn("#tbEditLuggage");
-//        robot.lookup("#passenger").tryQuery().isPresent();
-//        robot.clickOn("#passenger");
-//   //   robot.clickOn();
-//
-//        robot.clickOn("#okButton");
-//        Luggage luggage = dao.getLuggages().get(0);
-//        assertEquals(luggage.getId(), "3");
-//    }
+    @Test
+    public void testAddRoleCancel(FxRobot robot) {
+        ObservableList<Role> roles = dao.getRoles();
+        robot.clickOn("#rolesTab");
+        robot.clickOn("#cancelButton");
+        ObservableList<Role> roles1 = dao.getRoles();
+        assertEquals(roles.size(),roles1.size());
+    }
 
     @Test
     public void testRemovePassenger(FxRobot robot) {
@@ -373,6 +363,17 @@ public class MainTest {
     }
 
     @Test
+    public void testAddUserCancel(FxRobot robot) {
+
+        ObservableList<User> users = dao.getUsers();
+        robot.clickOn("#userTab");
+        robot.clickOn("#tbAddUser");
+        robot.clickOn("#cancelButton");
+        ObservableList<User> users1 = dao.getUsers();
+        assertEquals(users.size(), users1.size());
+    }
+
+    @Test
     public void testAddAirlineWithExistingID(FxRobot robot) throws InterruptedException {
 
         ArrayList<Airline> airlines = dao.getAirlines();
@@ -429,6 +430,19 @@ public class MainTest {
     }
 
     @Test
+    public void testAddAirplaneCancel(FxRobot robot) {
+
+        ObservableList<Airplane> airplanes = dao.getAirplanes();
+        robot.clickOn("#airplanesTab");
+        robot.clickOn("#tbAddAirline");
+        robot.lookup("#cancelButton").tryQuery().isPresent();
+        robot.clickOn("cancelButton");
+
+        ObservableList<Airplane> airplanes1 = dao.getAirplanes();
+        assertEquals(airplanes.size(), airplanes1.size());
+    }
+
+    @Test
     public void testAddFlight(FxRobot robot) throws InterruptedException {
 
         ObservableList<Flight> flights = dao.getFlights();
@@ -468,6 +482,19 @@ public class MainTest {
     }
 
     @Test
+    public void testAddFlightCancel(FxRobot robot) {
+
+        ObservableList<Flight> flights = dao.getFlights();
+        robot.clickOn("#flightsTab");
+        robot.clickOn("#tbAddFlight");
+        robot.lookup("#cancelButton").tryQuery().isPresent();
+        robot.clickOn("#cancelButton");
+
+        ObservableList<Flight> flights1 = dao.getFlights();
+        assertEquals(flights.size(), flights1.size());
+    }
+
+    @Test
     public void testAddFlightTypeWithExistingID(FxRobot robot) throws InterruptedException {
 
         ObservableList<FlightType> flightTypes = dao.getFlightTypes();
@@ -485,10 +512,20 @@ public class MainTest {
         ObservableList<FlightType> flightTypes1 = dao.getFlightTypes();
         assertNotEquals(flightTypes.size(), flightTypes1.size()-1);
     }
+    @Test
+    public void testAddFlightTypeCancel(FxRobot robot) throws InterruptedException {
 
+        ObservableList<FlightType> flightTypes = dao.getFlightTypes();
+        robot.clickOn("#flightTypeTab");
+        robot.clickOn("#tbAddFlightType");
+        robot.lookup("#cancelButton").tryQuery().isPresent();
+        robot.clickOn("#cancelButton");
+
+        ObservableList<FlightType> flightTypes1 = dao.getFlightTypes();
+        assertEquals(flightTypes.size(), flightTypes1.size());
+    }
     @Test
     public void testAddFlightType(FxRobot robot) throws InterruptedException {
-
         ObservableList<FlightType> flightTypes = dao.getFlightTypes();
         robot.clickOn("#flightTypeTab");
         robot.clickOn("#tbAddFlightType");
@@ -534,6 +571,18 @@ public class MainTest {
     }
 
     @Test
+    public void testAddAirlineCancel(FxRobot robot){
+
+        ArrayList<Airline> airlines = dao.getAirlines();
+        robot.clickOn("#tableAirline");
+        robot.clickOn("#tbAddAirline");
+        robot.lookup("#cancelButton").tryQuery().isPresent();
+        robot.clickOn("#cancelButton");
+
+        ArrayList<Airline> airlines1 = dao.getAirlines();
+        assertEquals(airlines.size(), airlines1.size());
+    }
+    @Test
     public void testAddUser(FxRobot robot) throws InterruptedException {
         ObservableList<User> users = dao.getUsers();
         robot.clickOn("#userTab");
@@ -548,8 +597,8 @@ public class MainTest {
         Thread.sleep(1000);
         robot.clickOn("#role");
         Thread.sleep(300);
-        robot.lookup("Operator").tryQuery().isPresent();
-        robot.clickOn("Operator");
+        robot.lookup("Administrator").tryQuery().isPresent();
+        robot.clickOn("Administrator");
         Thread.sleep(1000);
         robot.clickOn("#okButton");
         ObservableList<User> users1 = dao.getUsers();
@@ -584,6 +633,17 @@ public class MainTest {
     }
 
     @Test
+    public void testAddLuggageCancel(FxRobot robot) {
+        ObservableList<Luggage> luggages = dao.getLuggages();
+        robot.clickOn("#luggageTab");
+        robot.clickOn("#tbAddLuggage");
+        robot.lookup("#cancelButton").tryQuery().isPresent();
+        robot.clickOn("#cancelButton");
+        ObservableList<Luggage> luggages1 = dao.getLuggages();
+        assertEquals(luggages.size(), luggages1.size());
+    }
+
+    @Test
     public void testAddLuggage2(FxRobot robot) throws InterruptedException {
         ObservableList<Luggage> luggages = dao.getLuggages();
         robot.clickOn("#luggageTab");
@@ -613,14 +673,5 @@ public class MainTest {
         ObservableList<Luggage> luggages1 = dao.getLuggages();
         assertEquals(luggages.size(), luggages1.size()-1);
     }
-//    @Test
-//    public void testGermanLanguage(FxRobot robot) {
-//
-//        ObservableList<Airline> airlines = dao.getAirlines();
-//        robot.clickOn("#clickView");
-//        robot.clickOn("#clickLanguages");
-//        robot.clickOn("#clickGerman");
-//      }
-
 
 }

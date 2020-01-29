@@ -96,6 +96,21 @@ public class LuggageTest {
     }
 
     @Test
+    public void gettingType11(){
+        Luggage luggage1 = new HandLuggage(5,new Passenger(),10,10);
+        assertEquals(luggage1.getLuggageType(), "Hand Luggage");
+    }
+
+    @Test
+    public void gettingType12(){
+        Luggage luggage1 = new AdditionalLuggage(5,new Passenger(),10,10, null);
+        luggage1.setAddLuggageType(AdditionalLuggage.Type.METAL);
+        assertEquals(luggage1.getAddLuggageType(), AdditionalLuggage.Type.METAL);
+    }
+
+
+
+    @Test
     public void gettingType8(){
         Luggage luggage1 = new Luggage(5,new Passenger());
         assertEquals(luggage1.getLuggageType(), "Standard");

@@ -98,7 +98,6 @@ public class RoleController {
         }
     }
 
-
     public void cancelFormBtn(ActionEvent actionEvent) {
         Stage stage = (Stage) cancelButton.getScene().getWindow();
         stage.close();

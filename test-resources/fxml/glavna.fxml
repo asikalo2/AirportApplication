@@ -65,14 +65,18 @@
                                 <Button fx:id="tbAddAirline" onAction="#addAirline" text="%add" minWidth="50" styleClass="first"/>
                                 <Button fx:id="tbRemoveAirline" onAction="#removeAirline" text="%remove" minWidth="50"/>
                                 <Button fx:id="tbEditAirline" onAction="#editAirline" text="%edit" minWidth="50" styleClass="last"/>
+
                             </HBox>
+                            <Pane HBox.hgrow="ALWAYS" />
+                            <TextField fx:id="airlineSearch"/>
                         </items>
                     </ToolBar>
                     <TableView fx:id="tableAirline" style="-fx-aligmnent: CENTER;">
                         <columns>
                             <TableColumn fx:id="idAirline" prefWidth="50.0" text="%id"/>
                             <TableColumn fx:id="nameAirline" prefWidth="180.0" text="%name"/>
-                            <TableColumn fx:id="codeAirline" prefWidth="200.0" text="%code"/>
+                            <TableColumn fx:id="codeAirline" prefWidth="50.0" text="%code"/>
+                            <TableColumn fx:id="countryAirline" prefWidth="180.0" text="%country"/>
                         </columns>
                     </TableView>
                 </VBox>

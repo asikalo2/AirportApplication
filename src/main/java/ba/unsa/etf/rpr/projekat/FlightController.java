@@ -15,18 +15,9 @@ import java.time.LocalDateTime;
 public class FlightController {
     public Label idLabel;
     public TextField idField;
-    public Label codeLabel;
     public TextField codeField;
-    public Label airplaneLabel;
-    public TextField airplaneField;
-    public Label startOfUsingTheRunwayLabel;
     public DateTimePicker startOfUsingTheRunwayField;
-    public Label endOfUsingTheRunwayLabel;
     public DateTimePicker endOfUsingTheRunwayField;
-    public Label flightTypeLabel;
-    public TextField flightTypeField;
-    public Label userLabel;
-    public TextField userField;
     public ComboBox<Airplane> airplane;
     public ComboBox<FlightType> flightType;
     public ComboBox<User> user;
@@ -62,8 +53,6 @@ public class FlightController {
         userProperty = new SimpleObjectProperty<>();
         gateProperty = new SimpleObjectProperty<>();
     }
-
-
 
     @FXML
     public void initialize() {
@@ -162,11 +151,6 @@ public class FlightController {
         startOfUsingTheRunwayProperty.setValue(currentFlight.getStartOfUsingTheRunway());
         endOfUsingTheRunwayProperty.setValue(currentFlight.getEndOfUsingTheRunway());
 
-        if(startOfUsingTheRunwayField.getDateTimeValue().isAfter(endOfUsingTheRunwayField.getDateTimeValue())){
-            throw new IllegalArgumentException("Date of start of using the runway cannot be after" +
-                    " the end of using the runway!");
-        }
-
         if(startOfUsingTheRunwayField!= null && endOfUsingTheRunwayField!=null) {
             startOfUsingTheRunwayField.setDateTimeValue(currentFlight.getStartOfUsingTheRunway());
             endOfUsingTheRunwayField.setDateTimeValue(currentFlight.getEndOfUsingTheRunway());
@@ -181,8 +165,6 @@ public class FlightController {
         idField.textProperty().bindBidirectional(idProperty);
         codeField.textProperty().bindBidirectional(codeProperty);
         airplane.valueProperty().bindBidirectional(airplaneProperty);
-        //startOfUsingTheRunwayField.valueProperty().bindBidirectional(startOfUsingTheRunwayProperty);
-        //endOfUsingTheRunwayField.valueProperty().bindBidirectional(endOfUsingTheRunwayProperty);
         flightType.valueProperty().bindBidirectional(flightTypeProperty);
         user.valueProperty().bindBidirectional(userProperty);
         gate.valueProperty().bindBidirectional(gateProperty);
