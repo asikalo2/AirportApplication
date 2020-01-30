@@ -196,7 +196,7 @@ public class AirlineController {
         // do what you have to do
         stage.close();
     }
-    
+
 
     private void setFlags() {
         /*if (Validation.isStringTooLong(nameField.getText())) {
