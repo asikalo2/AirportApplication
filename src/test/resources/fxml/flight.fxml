@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import java.lang.*?>
+<?import java.util.*?>
+<?import javafx.scene.*?>
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+
+<?import javafx.geometry.Insets?>
+<?import java.net.URL?>
+<?import tornadofx.control.DateTimePicker?>
+
+<GridPane alignment="CENTER" vgap="4" hgap="4"
+          xmlns="http://javafx.com/javafx"
+          xmlns:fx="http://javafx.com/fxml">
+
+    <stylesheets>
+        <URL value="@../../src/main/resources/css/style.css"/>
+    </stylesheets>
+    <padding>
+        <Insets top="10" right="10" bottom="10" left="10"/>
+    </padding>
+    <columnConstraints>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
+        <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
+    </columnConstraints>
+    <children>
+
+        <Label fx:id="idLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="ID"/>
+
+        <TextField fx:id="idField" GridPane.rowIndex="1" GridPane.columnIndex="1" maxWidth="Infinity"/>
+
+        <Label fx:id="codeLabel" GridPane.rowIndex="2" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Code"/>
+
+        <TextField fx:id="codeField" GridPane.rowIndex="2" GridPane.columnIndex="1" maxWidth="Infinity"/>
+
+
+        <Label fx:id="airplaneLabel" GridPane.rowIndex="3" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Airplane"/>
+
+        <ComboBox fx:id="airplane" GridPane.rowIndex="3" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
+
+        <Label fx:id="startOfUsingTheRunwayLabel" GridPane.rowIndex="4" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Start of using the runway"/>
+
+        <DateTimePicker fx:id="startOfUsingTheRunwayField" GridPane.rowIndex="4" GridPane.columnIndex="1"
+                            maxWidth="Infinity"/>
+
+        <Label fx:id="endOfUsingTheRunwayLabel" GridPane.rowIndex="5" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="End of using the runway"/>
+
+        <DateTimePicker fx:id="endOfUsingTheRunwayField" GridPane.rowIndex="5" GridPane.columnIndex="1"
+                        maxWidth="Infinity"/>
+
+
+        <Label fx:id="flightTypeLabel" GridPane.rowIndex="6" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Flight type"/>
+
+        <ComboBox fx:id="flightType" GridPane.rowIndex="6" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
+
+        <Label fx:id="userLabel" GridPane.rowIndex="7" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="User"/>
+
+        <ComboBox fx:id="user" GridPane.rowIndex="7" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
+
+        <Label fx:id="gateLabel" GridPane.rowIndex="8" GridPane.columnIndex="0"
+               maxHeight="Infinity" maxWidth="Infinity" text="Gate"/>
+
+        <ComboBox fx:id="gate" GridPane.rowIndex="8" GridPane.columnIndex="1" editable="false"
+                  maxWidth="Infinity">
+        </ComboBox>
+
+        <ButtonBar GridPane.rowIndex="10" GridPane.columnSpan="2">
+            <GridPane.margin>
+                <Insets top="25"/>
+            </GridPane.margin>
+            <buttons>
+                <Button text="OK" fx:id="okButton" ButtonBar.buttonData="RIGHT" onAction="#okFormBtn" />
+                <Button text="Cancel" fx:id="cancelButton" ButtonBar.buttonData="LEFT" onAction="#cancelFormBtn" />
+            </buttons>
+        </ButtonBar>
+
+    </children>
+
+</GridPane>
