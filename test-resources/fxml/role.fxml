@@ -13,7 +13,7 @@
           xmlns:fx="http://javafx.com/fxml">
 
     <stylesheets>
-        <URL value="@../css/style.css"/>
+        <URL value="@../../src/main/resources/css/style.css"/>
     </stylesheets>
     <padding>
         <Insets top="10" right="10" bottom="10" left="10"/>
@@ -22,9 +22,8 @@
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
         <ColumnConstraints halignment="CENTER" hgrow="ALWAYS" percentWidth="50"/>
     </columnConstraints>
+
     <children>
-
-
         <Label fx:id="idLabel" GridPane.rowIndex="1" GridPane.columnIndex="0"
                maxHeight="Infinity" maxWidth="Infinity" text="ID"/>
 
@@ -34,7 +33,6 @@
                maxHeight="Infinity" maxWidth="Infinity" text="Name"/>
 
         <TextField fx:id="nameField" GridPane.rowIndex="2" GridPane.columnIndex="1" maxWidth="Infinity"/>
-
 
         <ButtonBar GridPane.rowIndex="10" GridPane.columnSpan="2">
             <GridPane.margin>
@@ -46,6 +44,6 @@
             </buttons>
         </ButtonBar>
 
+    </children>
 
-        </children>
 </GridPane>
