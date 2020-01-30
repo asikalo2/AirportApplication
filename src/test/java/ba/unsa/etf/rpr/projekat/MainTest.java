@@ -455,24 +455,25 @@ public class MainTest {
         robot.lookup("#startOfUsingTheRunwayField").tryQuery().isPresent();
         robot.clickOn("#startOfUsingTheRunwayField");
         robot.write("2020-01-06 01:05");
-        Thread.sleep(1000);
         robot.lookup("#endOfUsingTheRunwayField").tryQuery().isPresent();
         robot.clickOn("#endOfUsingTheRunwayField");
         robot.write("2020-01-06 01:10");
-        Thread.sleep(1000);
         robot.clickOn("#flightType");
+        Thread.sleep(500);
         robot.lookup("Regular").tryQuery().isPresent();
         robot.clickOn("Regular");
-        Thread.sleep(1000);
         robot.clickOn("#airplane");
+        Thread.sleep(500);
         robot.lookup("Air Algerie").tryQuery().isPresent();
         robot.clickOn("Air Algerie");
         Thread.sleep(1000);
         robot.clickOn("#user");
+        Thread.sleep(500);
         robot.lookup("Amila Sikalo").tryQuery().isPresent();
         robot.clickOn("Amila Sikalo");
         Thread.sleep(1000);
         robot.clickOn("#gate");
+        Thread.sleep(500);
         robot.lookup("G01").tryQuery().isPresent();
         robot.clickOn("G01");
 
