@@ -222,6 +222,7 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Airline");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setOnCloseRequest(event -> {
                 tableAirline.setItems(FXCollections.observableArrayList(dao.getAirlines()));
             });
@@ -242,6 +243,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Flight type");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -300,6 +302,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/airline.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Airline");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -326,6 +329,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/flightType.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Flight type");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -348,6 +352,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/airplane.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Airplane");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -404,6 +409,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/airplane.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Airplane");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -462,6 +468,7 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Flight");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setOnCloseRequest(event -> {
                 tableFlights.setItems(dao.getFlights());
             });
@@ -484,6 +491,7 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Flight");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setOnCloseRequest(event -> {
                 tableFlights.setItems(dao.getFlights());
             });
@@ -536,6 +544,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/luggage.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Luggage");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -593,6 +602,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/luggage.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Luggage");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -615,6 +625,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/passenger.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Passenger");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -672,6 +683,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/passenger.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Passenger");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -696,6 +708,7 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("User");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setOnCloseRequest(event -> {
                 tableUsers.setItems(dao.getUsers());
             });
@@ -751,6 +764,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/user.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("User");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
@@ -775,6 +789,7 @@ public class Controller implements Initializable {
             Stage stage = new Stage();
             stage.setTitle("Role");
             stage.setScene(scene);
+            stage.setResizable(false);
             stage.setOnCloseRequest(event -> {
                 tableRole.setItems(dao.getRoles());
             });
@@ -830,6 +845,7 @@ public class Controller implements Initializable {
             loader.setLocation(getClass().getResource("/fxml/role.fxml"));
             Scene scene = new Scene(loader.load(), 600, 400);
             Stage stage = new Stage();
+            stage.setResizable(false);
             stage.setTitle("Role");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {

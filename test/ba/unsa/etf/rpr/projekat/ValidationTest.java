@@ -2,6 +2,9 @@ package ba.unsa.etf.rpr.projekat;
 
 import org.junit.jupiter.api.Test;
 
+import java.util.List;
+import java.util.Map;
+
 import static org.junit.jupiter.api.Assertions.assertEquals;
 
 public class ValidationTest {
@@ -11,6 +14,21 @@ public class ValidationTest {
         Validation unit = new Validation();
         Boolean result = unit.charCheck('S');
         assertEquals(false, result);
+    }
+
+
+    @Test
+    public void validateNumberOfSeats() {
+        Validation unit = new Validation();
+        Boolean result = unit.validateNumberOfSeats("301");
+        assertEquals(false, result);
+    }
+
+    @Test
+    public void validateNumberOfSeats2() {
+        Validation unit = new Validation();
+        Boolean result = unit.validateNumberOfSeats("300");
+        assertEquals(true, result);
     }
 
     @Test

@@ -44,8 +44,7 @@ public class GateTest {
 
     @Test
     public void gettingGateId3(){
-        Gate gate = new Gate();
-        gate.setId(5);
-        assertNotEquals(gate.getId(), "5");
+        Gate gate = new Gate(3,"H2");
+        assertEquals(gate.getId(), 3);
     }
 }
