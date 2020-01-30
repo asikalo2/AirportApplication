@@ -596,7 +596,6 @@ public class MainTest {
         robot.lookup("#nameField").tryQuery().isPresent();
         robot.clickOn("#nameField");
         robot.write("NewName");
-        Thread.sleep(1000);
         robot.clickOn("#role");
         Thread.sleep(300);
         robot.lookup("Administrator").tryQuery().isPresent();
