@@ -236,7 +236,8 @@ public class AirlineController {
     }
 
     private boolean isFormValid() {
-        return Validation.isValidName(nameProperty.get()) && Validation.isValidString(codeProperty.get());
+        return Validation.isValidName(nameProperty.get()) && Validation.isStringTooLong(codeProperty.get())
+                && Validation.validateNumber(idProperty.get());
     }
 }
 

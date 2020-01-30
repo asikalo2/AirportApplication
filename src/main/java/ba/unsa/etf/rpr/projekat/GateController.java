@@ -103,7 +103,8 @@ public class GateController {
         }
 
         private boolean isFormValid() {
-            return true;
+            return Validation.isValidString(nameProperty.get()) &&
+                    Validation.validateNumber(idProperty.get());
         }
 
     }

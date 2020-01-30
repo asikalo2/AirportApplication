@@ -229,7 +229,8 @@ public class FlightController {
     }
 
     private boolean isFormValid() {
-        return true;
+        return Validation.isValidString(codeProperty.get()) &&
+                Validation.validateNumber(idProperty.get());
     }
 
 }

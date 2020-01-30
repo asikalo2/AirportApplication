@@ -153,7 +153,6 @@ public class AirplaneController {
                 dao.changeAirplane(currentAirplane);
             }
             Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
             stage.close();
         }
     }
@@ -165,8 +164,11 @@ public class AirplaneController {
     }
 
     private boolean isFormValid() {
-        return Validation.isValidString(manufacturerField.getText());
+        return Validation.isValidString(manufacturerProperty.get()) &&
+                Validation.isStringTooLong(typeProperty.get()) &&
+                Validation.validateNumber(numberOfSeatsProperty.get()) &&
+                Validation.validateNumberOfSeats(numberOfSeatsProperty.get()) &&
+                Validation.validateNumber(idProperty.get());
     }
-
 
 }

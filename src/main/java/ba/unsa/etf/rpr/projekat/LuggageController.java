@@ -212,7 +212,7 @@ public class LuggageController {
     }
 
     private boolean isFormValid() {
-        return true;
+        return Validation.validateNumber(idProperty.get());
     }
 
     public boolean isHandLuggage(String test) {
