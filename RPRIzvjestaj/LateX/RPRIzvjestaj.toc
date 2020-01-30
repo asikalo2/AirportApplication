@@ -1,0 +1,23 @@
+\babel@toc {croatian}{}
+\thispagestyle {empty}
+\contentsline {chapter}{Popis slika}{ii}{chapter*.2}
+\contentsline {chapter}{\numberline {1}Opis aplikacije}{1}{chapter.1}
+\contentsline {chapter}{\numberline {2}Osnovne ideje pri implementaciji}{2}{chapter.2}
+\contentsline {chapter}{\numberline {3}Implementacija}{3}{chapter.3}
+\contentsline {section}{\numberline {3.1}Osnovni koncepi}{3}{section.3.1}
+\contentsline {section}{\numberline {3.2}Baza podataka}{3}{section.3.2}
+\contentsline {section}{\numberline {3.3}Koncepti objektno orjentiranog programiranja}{3}{section.3.3}
+\contentsline {section}{\numberline {3.4}Grafi\IeC {\v c}ki interfejs}{4}{section.3.4}
+\contentsline {section}{\numberline {3.5}Datoteke}{4}{section.3.5}
+\contentsline {section}{\numberline {3.6}Enumi}{4}{section.3.6}
+\contentsline {section}{\numberline {3.7}Interface}{4}{section.3.7}
+\contentsline {section}{\numberline {3.8}Generika}{4}{section.3.8}
+\contentsline {section}{\numberline {3.9}Mre\IeC {\v z}no programiranje i tredovi}{5}{section.3.9}
+\contentsline {section}{\numberline {3.10}Lokalizacija / Internacionalizacija}{5}{section.3.10}
+\contentsline {section}{\numberline {3.11}Funkcionalno programiranje}{5}{section.3.11}
+\contentsline {section}{\numberline {3.12}Izvje\IeC {\v s}taji}{5}{section.3.12}
+\contentsline {section}{\numberline {3.13}Maven}{5}{section.3.13}
+\contentsline {section}{\numberline {3.14}Testiranje}{5}{section.3.14}
+\contentsline {section}{\numberline {3.15}Vlastiti izuzeci}{6}{section.3.15}
+\contentsline {section}{\numberline {3.16}Pokretanje}{6}{section.3.16}
+\contentsline {chapter}{\numberline {4}Budu\IeC {\'c}e napredovanje}{7}{chapter.4}
