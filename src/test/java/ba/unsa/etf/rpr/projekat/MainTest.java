@@ -157,7 +157,7 @@ public class MainTest {
     }
 
     @Test
-    public void testEditFlight(FxRobot robot) {
+    public void testEditCancelFlight(FxRobot robot) {
 
         ObservableList<Flight> flights = dao.getFlights();
         robot.clickOn("#flightsTab");
@@ -166,11 +166,11 @@ public class MainTest {
         robot.clickOn("#tbEditFlight");
         robot.lookup("#codeField").tryQuery().isPresent();
         robot.clickOn("#codeField");
-        robot.write("HZTZ");
+        robot.write("AAW");
 
-        robot.clickOn("#okButton");
+        robot.clickOn("#cancelButton");
         Flight flight = dao.getFlights().get(0);
-        assertEquals(flight.getCode(), "LH 876HZTZ");
+        assertEquals(flight.getCode(), "LH 876");
     }
 
     @Test

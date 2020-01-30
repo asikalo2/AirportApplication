@@ -91,7 +91,7 @@ public class ValidationTest {
     @Test
     public void tooLongString3(){
         Validation unit = new Validation();
-        Boolean result = unit.isStringTooLong("JHGTF2");
+        Boolean result = unit.isStringTooLong("JHGTGH67HF2");
         assertEquals(false, result);
     }
     @Test

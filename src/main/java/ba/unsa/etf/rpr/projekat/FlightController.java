@@ -176,7 +176,7 @@ public class FlightController {
 
     private void addListeners() {
         codeField.textProperty().addListener((observableValue, s, n) -> {
-            if (Validation.isValidString(n)) {
+            if (Validation.isStringTooLong(n)) {
                 codeField.getStyleClass().removeAll("notCorrect");
                 codeField.getStyleClass().add("correct");
             }
@@ -234,7 +234,7 @@ public class FlightController {
     }
 
     private boolean isFormValid() {
-        return Validation.isValidString(codeProperty.get()) &&
+        return Validation.isStringTooLong(codeProperty.get()) &&
                 Validation.validateNumber(idProperty.get());
     }
 
