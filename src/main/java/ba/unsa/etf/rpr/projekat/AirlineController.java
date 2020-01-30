@@ -50,7 +50,7 @@ public class AirlineController {
         nameProperty = new SimpleStringProperty("");
         codeProperty = new SimpleStringProperty("");
         countryBoxProperty = new SimpleObjectProperty<>();
-        indicator = new ProgressIndicator();
+        //   indicator = new ProgressIndicator();
     }
 
     @FXML
