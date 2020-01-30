@@ -184,15 +184,19 @@ public class AirlineController {
             currentAirline.setCountry(countryBoxProperty.get());
 
             if (adding) {
+                boolean exists = dao.doesAirlineExist(currentAirline.getId());
+                if (exists)
+                    return;
                 dao.addAirline(currentAirline);
-            } else {
-                dao.changeAirline(currentAirline);
             }
-            Stage stage = (Stage) okButton.getScene().getWindow();
-            // do what you have to do
-            stage.close();
+        } else {
+            dao.changeAirline(currentAirline);
         }
+        Stage stage = (Stage) okButton.getScene().getWindow();
+        // do what you have to do
+        stage.close();
     }
+    
 
     private void setFlags() {
         /*if (Validation.isStringTooLong(nameField.getText())) {
