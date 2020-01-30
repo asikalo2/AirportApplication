@@ -13,7 +13,6 @@ import java.util.List;
 public class PassengerListReport extends JFrame {
     public void showReport( List<Passenger> passengerList, Flight flight) throws JRException {
         String reportSrcFile = getClass().getResource("/reports/PassengerReportList.jrxml").getFile();
-        String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
 
@@ -35,7 +34,6 @@ public class PassengerListReport extends JFrame {
 
     public void showReport( List<Passenger> passengerList) throws JRException {
         String reportSrcFile = getClass().getResource("/reports/PassengersReport.jrxml").getFile();
-        String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
 

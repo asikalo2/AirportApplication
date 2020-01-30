@@ -9,13 +9,14 @@ public class Luggage extends AbstractLuggage {
     }
 
     public String getLuggageType() {
-        if (this.getClass().equals(Luggage.class))
+        if (this.getClass().equals(Luggage.class)) {
             return "Standard";
-        else if (this.getClass().equals(HandLuggage.class)) {
+        } else if (this.getClass().equals(HandLuggage.class)) {
             return "Hand Luggage";
         }
-        else
+        else {
             return "Additional Luggage";
+        }
     }
 
     @Override

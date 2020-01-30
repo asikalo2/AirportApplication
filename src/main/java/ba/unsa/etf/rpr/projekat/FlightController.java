@@ -64,8 +64,9 @@ public class FlightController {
         airplane.setConverter(new StringConverter<Airplane>() {
             @Override
             public String toString(Airplane airplane) {
-                if (airplane == null)
+                if (airplane == null) {
                     return "";
+                }
                 return airplane.getAirlineName();
             }
 
@@ -88,8 +89,9 @@ public class FlightController {
         user.setConverter(new StringConverter<User>() {
             @Override
             public String toString(User user) {
-                if (user == null)
+                if (user == null) {
                     return "";
+                }
                 return user.getName();
             }
 
@@ -104,8 +106,9 @@ public class FlightController {
         gate.setConverter(new StringConverter<Gate>() {
             @Override
             public String toString(Gate gate) {
-                if (gate == null)
+                if (gate == null) {
                     return "N/A";
+                }
                 return gate.getName();
             }
 
@@ -119,8 +122,9 @@ public class FlightController {
         flightType.setConverter(new StringConverter<FlightType>() {
             @Override
             public String toString(FlightType flightType) {
-                if (flightType == null)
+                if (flightType == null) {
                     return "";
+                }
                 return flightType.getName();
             }
 
@@ -199,8 +203,9 @@ public class FlightController {
         if (isFormValid()) {
             boolean adding = currentFlight == null;
 
-            if (currentFlight == null)
+            if (currentFlight == null) {
                 currentFlight = new Flight();
+            }
 
             currentFlight.setId(Integer.valueOf((idProperty.get())));
             currentFlight.setCode(codeProperty.get());

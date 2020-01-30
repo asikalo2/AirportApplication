@@ -79,8 +79,9 @@ public class FlightTypeController {
         if (isFormValid()) {
             boolean adding = currentFlightType == null;
 
-            if (currentFlightType == null)
+            if (currentFlightType == null) {
                 currentFlightType = new FlightType();
+            }
 
             currentFlightType.setId(Integer.valueOf((idProperty.get())));
             currentFlightType.setName(nameProperty.get());

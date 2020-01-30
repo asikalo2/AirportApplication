@@ -56,9 +56,10 @@ public class Passenger {
     }
 
     public String getFlightName() {
-        if (flight != null)
+        if (flight != null) {
             return this.flight.getAirlineName() + "  |  " +
                     this.flight.getCode();
+        }
         return "";
     }
 

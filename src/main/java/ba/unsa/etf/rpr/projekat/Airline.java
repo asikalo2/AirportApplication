@@ -48,8 +48,9 @@ public class Airline {
     }
 
     public String getCountry() {
-        if (country == null)
+        if (country == null) {
             return "";
+        }
         return country;
     }
 

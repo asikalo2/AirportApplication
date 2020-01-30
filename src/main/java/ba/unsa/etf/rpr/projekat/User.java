@@ -40,8 +40,9 @@ public class User {
     }
 
     public String getRoleName() {
-        if (role == null)
+        if (role == null) {
             return "";
+        }
         return role.getName();
     }
 }

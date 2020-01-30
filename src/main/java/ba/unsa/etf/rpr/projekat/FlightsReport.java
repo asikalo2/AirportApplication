@@ -19,7 +19,6 @@ public class FlightsReport extends JFrame {
 
     public void showReport(List<Flight> flightList) throws JRException {
         String reportSrcFile = getClass().getResource("/reports/FlightsReport.jrxml").getFile();
-        String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
 

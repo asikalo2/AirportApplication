@@ -60,8 +60,9 @@ public class LuggageController {
         passenger.setConverter(new StringConverter<Passenger>() {
             @Override
             public String toString(Passenger passenger) {
-                if (passenger == null)
+                if (passenger == null) {
                     return "";
+                }
                 return passenger.getName();
             }
 

@@ -28,8 +28,9 @@ public abstract class AbstractLuggage {
     }
 
     public String getPassengerName() {
-        if (passenger == null)
+        if (passenger == null) {
             return "";
+        }
         return passenger.getName();
     }
 

@@ -37,7 +37,9 @@ public class AirportDAO {
     }
 
     public static AirportDAO getInstance() {
-        if (instance == null) initialize();
+        if (instance == null) {
+            initialize();
+        }
         return instance;
     }
 
@@ -60,6 +62,7 @@ public class AirportDAO {
                 Airline m = new Airline(rs.getInt(1), rs.getString(2), rs.getString(3), rs.getString(4));
                 res.add(m);
             }
+            rs.close();
             return res;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -67,7 +70,7 @@ public class AirportDAO {
         return null;
     }
 
-    public ObservableList<Role> getRoles() {
+    public ArrayList<Role> getRoles() {
         ArrayList<Role> res = new ArrayList<>();
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT id, name FROM roles");
@@ -76,7 +79,8 @@ public class AirportDAO {
                 Role m = new Role(rs.getInt(1), rs.getString(2));
                 res.add(m);
             }
-            return FXCollections.observableArrayList(res);
+            rs.close();
+            return res;
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -104,6 +108,7 @@ public class AirportDAO {
                 airplane.setType(rs.getString(4));
                 airplane.setNumberOfSeats(rs.getInt(5));
             }
+            rs.close();
             return airplane;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -129,6 +134,7 @@ public class AirportDAO {
                 user.setName(rs.getString(2));
                 user.setRole(role);
             }
+            rs.close();
             return user;
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -145,6 +151,7 @@ public class AirportDAO {
                 FlightType m = new FlightType(rs.getInt(1), rs.getString(2));
                 res.add(m);
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -161,6 +168,7 @@ public class AirportDAO {
                 Gate m = new Gate(rs.getInt(1), rs.getString(2));
                 res.add(m);
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -188,6 +196,7 @@ public class AirportDAO {
                 res.add(flight);
 
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -256,6 +265,7 @@ public class AirportDAO {
                 }
                 res.add(luggage);
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -274,6 +284,7 @@ public class AirportDAO {
                 User u = new User(rs.getInt(1), rs.getString(2), ro);
                 res.add(u);
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -293,6 +304,7 @@ public class AirportDAO {
                         rs.getString(4), rs.getInt(5));
                 res.add(airplane);
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException | IllegalNumberOfSeats ex) {
             ex.printStackTrace();
@@ -319,6 +331,7 @@ public class AirportDAO {
                 res.add(passenger);
 
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -346,6 +359,7 @@ public class AirportDAO {
                 res.add(passenger);
 
             }
+            rs.close();
             return FXCollections.observableArrayList(res);
         } catch (SQLException ex) {
             ex.printStackTrace();
@@ -360,6 +374,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -373,19 +388,21 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
         return -1;
     }
 
-    private int highestIdFlights() {
+    public int highestIdFlights() {
         try {
             PreparedStatement stmt = conn.prepareStatement("SELECT max(id) from flights");
             ResultSet rs = stmt.executeQuery();
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -399,6 +416,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -412,6 +430,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -425,6 +444,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -438,6 +458,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -451,6 +472,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -464,6 +486,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return rs.getInt(1);
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -478,6 +501,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -492,6 +516,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -506,6 +531,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -520,6 +546,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -534,6 +561,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -548,6 +576,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -562,6 +591,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }
@@ -576,6 +606,7 @@ public class AirportDAO {
             while (rs.next()) {
                 return true;
             }
+            rs.close();
         } catch (SQLException ex) {
             ex.printStackTrace();
         }

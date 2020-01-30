@@ -55,8 +55,9 @@ public class AirplaneController {
         airline.setConverter(new StringConverter<Airline>() {
             @Override
             public String toString(Airline airline) {
-                if (airline == null)
+                if (airline == null) {
                     return "";
+                }
                 return airline.getName();
             }
 
@@ -138,8 +139,9 @@ public class AirplaneController {
         if (isFormValid()) {
             boolean adding = currentAirplane == null;
 
-            if (currentAirplane == null)
+            if (currentAirplane == null) {
                 currentAirplane = new Airplane();
+            }
 
             currentAirplane.setId(Integer.valueOf((idProperty.get())));
             currentAirplane.setAirline(airlineProperty.get());

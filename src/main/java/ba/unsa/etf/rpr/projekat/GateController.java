@@ -80,8 +80,9 @@ public class GateController {
             if (isFormValid()) {
                 boolean adding = currentGate == null;
 
-                if (currentGate == null)
+                if (currentGate == null) {
                     currentGate = new Gate();
+                }
 
                 currentGate.setId(Integer.valueOf((idProperty.get())));
                 currentGate.setName(nameProperty.get());

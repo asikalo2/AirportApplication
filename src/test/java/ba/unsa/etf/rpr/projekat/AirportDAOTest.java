@@ -64,7 +64,7 @@ public class AirportDAOTest {
     @Test
     void getRoles() {
         dao = new AirportDAO();
-        ObservableList<Role> roles = dao.getRoles();
+        ArrayList<Role> roles = dao.getRoles();
         assertEquals(roles.size(), 2);
     }
 
@@ -133,10 +133,10 @@ public class AirportDAOTest {
         dao = new AirportDAO();
         Role role = new Role(3, "Security");
         dao.addRole(role);
-        ObservableList<Role> roles = dao.getRoles();
+        ArrayList<Role> roles = dao.getRoles();
         assertEquals(3, roles.size());
         dao.deleteRole(role);
-        ObservableList<Role> roles1 = dao.getRoles();
+        ArrayList<Role> roles1 = dao.getRoles();
         assertEquals(2, roles1.size());
 
     }

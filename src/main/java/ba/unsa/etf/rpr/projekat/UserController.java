@@ -2,6 +2,7 @@ package ba.unsa.etf.rpr.projekat;
 
 import javafx.beans.property.SimpleObjectProperty;
 import javafx.beans.property.SimpleStringProperty;
+import javafx.collections.FXCollections;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Button;
@@ -41,14 +42,15 @@ public class UserController {
 
     @FXML
     public void initialize() {
-        role.setItems(dao.getRoles());
+        role.setItems(FXCollections.observableArrayList(dao.getRoles()));
         initializeDataBinding();
 
         role.setConverter(new StringConverter<Role>() {
             @Override
             public String toString(Role role) {
-                if (role == null)
+                if (role == null) {
                     return "";
+                }
                 return role.getName();
             }
 
@@ -110,8 +112,9 @@ public class UserController {
         if (isFormValid()) {
             boolean adding = currentUser == null;
 
-            if (currentUser == null)
+            if (currentUser == null) {
                 currentUser = new User();
+            }
 
             currentUser.setId(Integer.valueOf((idProperty.get())));
             currentUser.setName(nameProperty.get());

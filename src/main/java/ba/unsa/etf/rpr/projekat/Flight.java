@@ -100,21 +100,24 @@ public class Flight implements FlightInterface {
     }
 
     public String getUserName() {
-        if (user == null)
+        if (user == null) {
             return "";
+        }
         return user.getName();
     }
 
     public String getAirplaneName() {
-        if (airplane == null)
+        if (airplane == null) {
             return "";
+        }
         return airplane.getManufacturer() + " " + airplane.getType();
 
     }
 
     public String getGateName() {
-        if (gate == null)
+        if (gate == null) {
             return "N/A";
+        }
         return gate.getName();
     }
 
@@ -122,15 +125,17 @@ public class Flight implements FlightInterface {
     public void informOfFlight1() {
         LocalDateTime beforeBoarding = LocalDateTime.now();
         long minutes = ChronoUnit.MINUTES.between(beforeBoarding, getStartOfUsingTheRunway());
-        System.out.println(minutes);
-        if (minutes == 60)
+        //System.out.println(minutes);
+        if (minutes == 60) {
             System.out.println("Boarding starts!");
+        }
     }
 
     @Override
     public void informOfFlight2() {
         LocalDateTime beforeBoarding = LocalDateTime.now();
-        if (beforeBoarding.equals(30 - getStartOfUsingTheRunway().toLocalTime().getMinute() - 30))
+        if (beforeBoarding.equals(30 - getStartOfUsingTheRunway().toLocalTime().getMinute() - 30)) {
             System.out.println("Last call for boarding!");
+        }
     }
 }

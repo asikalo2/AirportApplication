@@ -1,20 +1,13 @@
 package ba.unsa.etf.rpr.projekat;
 
-import javafx.application.Platform;
-import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.fxml.FXMLLoader;
-import javafx.scene.Node;
 import javafx.scene.Parent;
 import javafx.scene.Scene;
 import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
-import javafx.scene.control.ComboBox;
 import javafx.scene.control.DialogPane;
-import javafx.scene.input.KeyCode;
-import javafx.scene.layout.Pane;
 import javafx.stage.Stage;
-import org.assertj.core.api.Assert;
 import org.junit.jupiter.api.*;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.testfx.api.FxRobot;
@@ -235,7 +228,7 @@ public class MainTest {
 
         @Test
         public void testAddRole(FxRobot robot) {
-        ObservableList<Role> roles = dao.getRoles();
+        ArrayList<Role> roles = dao.getRoles();
         robot.clickOn("#rolesTab");
         robot.clickOn("#tbAddRole");
         robot.lookup("#idField").tryQuery().isPresent();
@@ -250,10 +243,10 @@ public class MainTest {
 
     @Test
     public void testAddRoleCancel(FxRobot robot) {
-        ObservableList<Role> roles = dao.getRoles();
+        ArrayList<Role> roles = dao.getRoles();
         robot.clickOn("#rolesTab");
         robot.clickOn("#cancelButton");
-        ObservableList<Role> roles1 = dao.getRoles();
+        ArrayList<Role> roles1 = dao.getRoles();
         assertEquals(roles.size(),roles1.size());
     }
 
@@ -295,7 +288,7 @@ public class MainTest {
     @Test
     public void testRemoveRole(FxRobot robot) {
 
-        ObservableList<Role> roles = dao.getRoles();
+        ArrayList<Role> roles = dao.getRoles();
         robot.clickOn("#rolesTab");
         robot.clickOn("JP");
 
@@ -306,14 +299,14 @@ public class MainTest {
         Button okButton = (Button) dialogPane.lookupButton(ButtonType.OK);
         robot.clickOn(okButton);
 
-        ObservableList<Role> roles1 = dao.getRoles();
+        ArrayList<Role> roles1 = dao.getRoles();
         assertEquals(roles.size() - 1, roles1.size());
     }
 
     @Test
     public void testEditRole(FxRobot robot) {
 
-        ObservableList<Role> roles = dao.getRoles();
+        ArrayList<Role> roles = dao.getRoles();
         robot.clickOn("#rolesTab");
         robot.clickOn("JP");
 

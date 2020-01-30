@@ -22,8 +22,9 @@ import java.io.IOException;
 public class Utils {
 
     public static byte[] getByteArrayFromImage(Image image) {
-        if (image == null)
+        if (image == null) {
             return null;
+        }
         int h = (int)image.getHeight();
         int w = (int)image.getWidth();
         byte[] buf = new byte[w * h * 4];
@@ -53,10 +54,11 @@ public class Utils {
         PixelWriter pw = img.getPixelWriter();
         for (int x = 0; x < width; x++) {
             for (int y = 0; y < height; y++) {
-                if (temp[x*width + y] == 0)
+                if (temp[x*width + y] == 0) {
                     pw.setColor(x, y, Color.WHITE);
-                else
+                } else {
                     pw.setColor(x,y, Color.BLACK);
+                }
             }
         }
 
@@ -78,21 +80,22 @@ public class Utils {
             PixelWriter pw = wr.getPixelWriter();
             for (int x = 0; x < width; x++) {
                 for (int y = 0; y < height; y++) {
-                    if (byteMatrix.get(x,y))
+                    if (byteMatrix.get(x,y)) {
                         pw.setColor(x, y, Color.BLACK);
+                    }
                 }
             }
         }
         return wr;
     }
 
-    public static void saveToFile(Image image) {
+    public static void saveToFile(Image image) throws ImageWritingException {
         File outputFile = new File("qrcode.png");
         BufferedImage bImage = SwingFXUtils.fromFXImage(image, null);
         try {
             ImageIO.write(bImage, "png", outputFile);
         } catch (IOException e) {
-            throw new RuntimeException(e);
+            throw new ImageWritingException("Image writing error!");
         }
     }
 

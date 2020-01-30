@@ -39,9 +39,6 @@ public class RoleController {
         if (currentRole != null) {
             fillForm();
         }
-        else {
-            System.out.println(currentRole);
-        }
     }
 
     public void fillForm() {
@@ -82,8 +79,9 @@ public class RoleController {
         if (isFormValid()) {
             boolean adding = currentRole == null;
 
-            if (currentRole == null)
+            if (currentRole == null) {
                 currentRole = new Role();
+            }
 
             currentRole.setId(Integer.valueOf((idProperty.get())));
             currentRole.setName(nameProperty.get());

@@ -75,7 +75,7 @@ public class AirlineController {
                     public void run() {
                         indicator.setVisible(false);
                         okButton.setDisable(false);
-                        System.out.println("Finished!");
+                        //System.out.println("Finished!");
                     }
                 });
 
@@ -106,7 +106,7 @@ public class AirlineController {
         conn.connect();
         String inline = "";
         int response = conn.getResponseCode();
-        System.out.println(response);
+        //System.out.println(response);
         if (response == 200) {
             ArrayList<String> names = new ArrayList<>();
             Scanner sc = new Scanner(link.openStream());
@@ -175,8 +175,9 @@ public class AirlineController {
         if (isFormValid()) {
             boolean adding = currentAirline == null;
 
-            if (currentAirline == null)
+            if (currentAirline == null) {
                 currentAirline = new Airline();
+            }
 
             currentAirline.setId(Integer.valueOf((idProperty.get())));
             currentAirline.setName(nameProperty.get());

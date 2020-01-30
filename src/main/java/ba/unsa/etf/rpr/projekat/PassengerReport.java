@@ -81,7 +81,7 @@ public class PassengerReport extends JFrame {
                 break;
 
             default:
-                System.out.println("Error!");
+                //System.out.println("Error!");
                 break;
         }
     }

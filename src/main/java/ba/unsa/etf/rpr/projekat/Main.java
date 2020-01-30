@@ -33,7 +33,6 @@ public class Main extends Application {
     }
 
     public static void loadView(Locale locale) throws IOException {
-        System.out.println("test");
         ResourceBundle bundle = ResourceBundle.getBundle("Translation", locale);
         Parent root = FXMLLoader.load(Main.class.getResource("/fxml/glavna.fxml"), bundle);
         stage.setTitle("Airlines");

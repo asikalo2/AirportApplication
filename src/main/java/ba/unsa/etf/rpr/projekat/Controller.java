@@ -1,14 +1,11 @@
 package ba.unsa.etf.rpr.projekat;
 
 import javafx.application.Platform;
-import javafx.beans.value.ChangeListener;
-import javafx.beans.value.ObservableValue;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
 import javafx.event.Event;
 import javafx.event.EventHandler;
-import javafx.fxml.FXML;
 import javafx.fxml.FXMLLoader;
 import javafx.fxml.Initializable;
 import javafx.scene.Scene;
@@ -118,11 +115,9 @@ public class Controller implements Initializable {
             List<Airline> listA = dao.getAirlines();
             List<Airline> listAirlines = listA.stream().filter(
                     airline -> {
-                        if (airline.getName().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
-                            airline.getCode().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
-                            airline.getCountry().toUpperCase().indexOf(t1.toUpperCase()) != -1)
-                            return true;
-                        return false;
+                        return airline.getName().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
+                                airline.getCode().toUpperCase().indexOf(t1.toUpperCase()) != -1 ||
+                                airline.getCountry().toUpperCase().indexOf(t1.toUpperCase()) != -1;
                     }).collect(Collectors.toList());
 
             idAirline.setCellValueFactory(new PropertyValueFactory("id"));
@@ -205,11 +200,11 @@ public class Controller implements Initializable {
     }
 
     private void fillTableRoles() {
-        ObservableList<Role> listRoles = dao.getRoles();
+        ArrayList<Role> listRoles = dao.getRoles();
 
         idRole.setCellValueFactory(new PropertyValueFactory("id"));
         nameRole.setCellValueFactory(new PropertyValueFactory("name"));
-        tableRole.setItems(listRoles);
+        tableRole.setItems(FXCollections.observableArrayList(listRoles));
     }
 
     public void addAirline(ActionEvent actionEvent) {
@@ -269,10 +264,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tableAirline.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             Airline airline = (Airline) tableAirline.getSelectionModel().getSelectedItem();
@@ -291,8 +286,9 @@ public class Controller implements Initializable {
     }
 
     public void editAirline(ActionEvent actionEvent) {
-        if (tableAirline.getSelectionModel().getSelectedItem() == null)
+        if (tableAirline.getSelectionModel().getSelectedItem() == null) {
             return;
+        }
         Airline airline = (Airline) tableAirline.getSelectionModel().getSelectedItem();
 
         try {
@@ -318,8 +314,9 @@ public class Controller implements Initializable {
     }
 
     public void editFlightType(ActionEvent actionEvent) {
-        if (tableFlightType.getSelectionModel().getSelectedItem() == null)
+        if (tableFlightType.getSelectionModel().getSelectedItem() == null) {
             return;
+        }
         FlightType flightType = (FlightType) tableFlightType.getSelectionModel().getSelectedItem();
 
         try {
@@ -376,10 +373,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tableAirplanes.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             Airplane airplane = (Airplane) tableAirplanes.getSelectionModel().getSelectedItem();
@@ -398,8 +395,9 @@ public class Controller implements Initializable {
     }
 
     public void editAirplane(ActionEvent actionEvent) {
-        if (tableAirplanes.getSelectionModel().getSelectedItems() == null)
+        if (tableAirplanes.getSelectionModel().getSelectedItems() == null) {
             return;
+        }
         Airplane airplane = (Airplane) tableAirplanes.getSelectionModel().getSelectedItem();
 
         try {
@@ -433,10 +431,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tableFlights.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             Flight flight = (Flight) tableFlights.getSelectionModel().getSelectedItem();
@@ -455,8 +453,9 @@ public class Controller implements Initializable {
     }
 
     public void editFlight(ActionEvent actionEvent) {
-        if (tableFlights.getSelectionModel().getSelectedItems() == null)
+        if (tableFlights.getSelectionModel().getSelectedItems() == null) {
             return;
+        }
         Flight flight = (Flight) tableFlights.getSelectionModel().getSelectedItem();
 
         try {
@@ -514,10 +513,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tableFlightType.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             FlightType flightType = (FlightType) tableFlightType.getSelectionModel().getSelectedItem();
@@ -569,10 +568,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tableLuggage.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             Luggage luggage = (Luggage) tableLuggage.getSelectionModel().getSelectedItem();
@@ -591,8 +590,9 @@ public class Controller implements Initializable {
     }
 
     public void editLuggage(ActionEvent actionEvent) {
-        if (tableLuggage.getSelectionModel().getSelectedItems() == null)
+        if (tableLuggage.getSelectionModel().getSelectedItems() == null) {
             return;
+        }
         Luggage luggage = (Luggage) tableLuggage.getSelectionModel().getSelectedItem();
 
         try {
@@ -650,10 +650,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tablePassenger.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             Passenger passenger = (Passenger) tablePassenger.getSelectionModel().getSelectedItem();
@@ -672,8 +672,9 @@ public class Controller implements Initializable {
     }
 
     public void editPassenger(ActionEvent actionEvent) {
-        if (tablePassenger.getSelectionModel().getSelectedItems() == null)
+        if (tablePassenger.getSelectionModel().getSelectedItems() == null) {
             return;
+        }
         Passenger passenger = (Passenger) tablePassenger.getSelectionModel().getSelectedItem();
 
         try {
@@ -731,10 +732,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tableUsers.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             User user = (User) tableUsers.getSelectionModel().getSelectedItem();
@@ -753,8 +754,9 @@ public class Controller implements Initializable {
     }
 
     public void editUser(ActionEvent actionEvent) {
-        if (tableUsers.getSelectionModel().getSelectedItems() == null)
+        if (tableUsers.getSelectionModel().getSelectedItems() == null) {
             return;
+        }
         User user = (User) tableUsers.getSelectionModel().getSelectedItem();
 
         try {
@@ -791,10 +793,10 @@ public class Controller implements Initializable {
             stage.setScene(scene);
             stage.setResizable(false);
             stage.setOnCloseRequest(event -> {
-                tableRole.setItems(dao.getRoles());
+                tableRole.setItems(FXCollections.observableArrayList(dao.getRoles()));
             });
             stage.setOnHiding(event -> {
-                tableRole.setItems(dao.getRoles());
+                tableRole.setItems(FXCollections.observableArrayList(dao.getRoles()));
             });
             stage.show();
         } catch (IOException ex) {
@@ -812,10 +814,10 @@ public class Controller implements Initializable {
         if (result.get() == ButtonType.OK) {
             if (tableRole.getSelectionModel().getSelectedItems().size() == 0) {
                 Alert alertNew = new Alert(Alert.AlertType.ERROR);
-                alert.setHeaderText("Error!");
-                alert.setContentText("Deleting is not possible!");
+                alertNew.setHeaderText("Error!");
+                alertNew.setContentText("Deleting is not possible!");
 
-                alert.showAndWait();
+                alertNew.showAndWait();
                 return;
             }
             Role role = (Role) tableRole.getSelectionModel().getSelectedItem();
@@ -830,14 +832,15 @@ public class Controller implements Initializable {
                 return;
             }
         }
-        tableRole.setItems(dao.getRoles());
+        tableRole.setItems(FXCollections.observableArrayList(dao.getRoles()));
     }
 
     public void editRole(ActionEvent actionEvent) {
 
         Role role = (Role) tableRole.getSelectionModel().getSelectedItem();
-        if (role == null)
+        if (role == null) {
             return;
+        }
         try {
             FXMLLoader loader = new FXMLLoader();
             RoleController roleController = new RoleController(dao, role);
@@ -849,10 +852,10 @@ public class Controller implements Initializable {
             stage.setTitle("Role");
             stage.setScene(scene);
             stage.setOnCloseRequest(event -> {
-                tableRole.setItems(dao.getRoles());
+                tableRole.setItems(FXCollections.observableArrayList(dao.getRoles()));
             });
             stage.setOnHiding(event -> {
-                tableRole.setItems(dao.getRoles());
+                tableRole.setItems(FXCollections.observableArrayList(dao.getRoles()));
             });
             stage.show();
         } catch (IOException ex) {
@@ -885,7 +888,7 @@ public class Controller implements Initializable {
 
     public void viewReportActionPassenger(ActionEvent actionEvent) {
         List<Passenger> passengerList = dao.getPassengers();
-        System.out.println(passengerList);
+        //System.out.println(passengerList);
         PassengerListReport report = new PassengerListReport();
         try {
             report.showReport(passengerList);
@@ -904,7 +907,7 @@ public class Controller implements Initializable {
     }
 
     public void changeToEnglish(ActionEvent actionEvent) {
-        System.out.println("to en_US");
+        //System.out.println("to en_US");
         Locale.setDefault(new Locale("en", "US"));
         try {
             Main.loadView(Locale.getDefault());
@@ -914,7 +917,7 @@ public class Controller implements Initializable {
     }
 
     public void changeToGerman(ActionEvent actionEvent) {
-        System.out.println("to de");
+        //System.out.println("to de");
         Locale.setDefault(new Locale("de", "DE"));
         try {
             Main.loadView(Locale.getDefault());
@@ -925,7 +928,7 @@ public class Controller implements Initializable {
 
 
     public void changeToFrench(ActionEvent actionEvent) {
-        System.out.println("to fr");
+        //System.out.println("to fr");
         Locale.setDefault(new Locale("fr", "FR"));
         try {
             Main.loadView(Locale.getDefault());
@@ -935,7 +938,7 @@ public class Controller implements Initializable {
     }
 
     public void changeToArabian(ActionEvent actionEvent) {
-        System.out.println("to ar");
+        //System.out.println("to ar");
         Locale.setDefault(new Locale("ar", "AR"));
         try {
             Main.loadView(Locale.getDefault());
@@ -945,7 +948,7 @@ public class Controller implements Initializable {
     }
 
     public void changeToChinese(ActionEvent actionEvent) {
-        System.out.println("to zh");
+        //System.out.println("to zh");
         Locale.setDefault(new Locale("zh", "ZH"));
         try {
             Main.loadView(Locale.getDefault());
@@ -955,7 +958,7 @@ public class Controller implements Initializable {
     }
 
     public void changeToRussian(ActionEvent actionEvent) {
-        System.out.println("to ru");
+        //System.out.println("to ru");
         Locale.setDefault(new Locale("ru", "RU"));
         try {
             Main.loadView(Locale.getDefault());
@@ -965,7 +968,7 @@ public class Controller implements Initializable {
     }
 
     public void changeToSpanish(ActionEvent actionEvent) {
-        System.out.println("to es");
+        //System.out.println("to es");
         Locale.setDefault(new Locale("es", "ES"));
         try {
             Main.loadView(Locale.getDefault());
@@ -976,11 +979,12 @@ public class Controller implements Initializable {
 
     public void passengerListReport(ActionEvent actionEvent) {
         Flight flight = (Flight) tableFlights.getSelectionModel().getSelectedItem();
-        if (flight == null)
+        if (flight == null) {
             return;
+        }
 
         List<Passenger> passengerList = dao.getPassengersByFlightId(flight.getId());
-        System.out.println(passengerList);
+        //System.out.println(passengerList);
         PassengerListReport report = new PassengerListReport();
         try {
             report.showReport(passengerList, flight);

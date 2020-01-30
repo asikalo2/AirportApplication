@@ -10,7 +10,9 @@ public class Airplane {
     public Airplane(){}
 
     public Airplane(int id, Airline airline, String manufacturer, String type, int numberOfSeats) throws IllegalNumberOfSeats {
-        if(numberOfSeats > 300) throw new IllegalNumberOfSeats("Illegal number of seats!");
+        if(numberOfSeats > 300) {
+            throw new IllegalNumberOfSeats("Illegal number of seats!");
+        }
         this.id = id;
         this.airline = airline;
         this.manufacturer = manufacturer;

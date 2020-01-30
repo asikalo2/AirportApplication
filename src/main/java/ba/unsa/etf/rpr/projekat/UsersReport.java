@@ -19,7 +19,6 @@ public class UsersReport extends JFrame {
 
     public void showReport(List<User> userList) throws JRException {
         String reportSrcFile = getClass().getResource("/reports/UsersReport.jrxml").getFile();
-        String reportsDir = getClass().getResource("/reports/").getFile();
 
         JasperReport jasperReport = JasperCompileManager.compileReport(reportSrcFile);
 

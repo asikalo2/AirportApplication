@@ -57,8 +57,9 @@ public class PassengerController {
         flight.setConverter(new StringConverter<Flight>() {
             @Override
             public String toString(Flight flight) {
-                if (flight == null)
+                if (flight == null) {
                     return "";
+                }
                 return flight.getCode();
             }
 
@@ -130,8 +131,9 @@ public class PassengerController {
         if (isFormValid()) {
             boolean adding = isAdding();
 
-            if (currentPassenger == null)
+            if (currentPassenger == null) {
                 currentPassenger = new Passenger();
+            }
 
             currentPassenger.setId(Integer.valueOf((idProperty.get())));
             currentPassenger.setName(nameProperty.get());
@@ -143,8 +145,13 @@ public class PassengerController {
             } else {
                 dao.changePassenger(currentPassenger);
             }
-            if (currentPassenger.getQrCode() != null)
-                Utils.saveToFile(currentPassenger.getQrCode());
+            if (currentPassenger.getQrCode() != null) {
+                try {
+                    Utils.saveToFile(currentPassenger.getQrCode());
+                } catch (ImageWritingException e) {
+                    System.out.println(e.getMessage());
+                }
+            }
             Reports reports = new Reports();
             try {
                 String boardingTime = currentPassenger.getFlight().getStartOfUsingTheRunway().
